@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "B1E1758F67049E7891918114F985453E3A6E92A2",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "B1E1758F67049E7891918114F985453E3A6E92A2" : 9223372036854775807,
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "6965CC26-806B-4F2D-844E-1802CA947CEC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B1E1758F67049E7891918114F985453E3A6E92A2" : "CMPT276\/",
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ACTIVESFU",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ACTIVESFU\/ACTIVESFU\/ACTIVESFU.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bronwynbiro\/Time-Tracker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/csil-git1.cs.surrey.sfu.ca\/bbiro\/CMPT276Assn1.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1E1758F67049E7891918114F985453E3A6E92A2"
+    }
+  ]
+}
