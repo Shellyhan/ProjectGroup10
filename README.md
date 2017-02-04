@@ -1,6 +1,6 @@
-# ActiveSFU: CMPT276 Group 10
+# ACTIVE SFU: CMPT276 Group 10
 
-Repository for CMPT276 Group 10. ActiveSFU is an iOS app aimed at promoting healthy living within the SFU community by allowing users to find new friends to do sports, fitness and health related activities with.
+Repository for CMPT276 Group 10. ACTIVE SFU strives to assist in the creation of a healthy campus community where users can build connections and maintain a healthy lifestyle - together. 
 
 ## Getting Started
 
@@ -25,3 +25,7 @@ Bronwyn Biro, Carber Zhang, Nathan Cheung, Ryan Brown, Xue (Shelly) Han.
 ## License
 
 This project is licensed under the MIT License.
+
+## Website 
+
+View our website [here](https://bronwynbiro.github.io//CMPT276Group10/)
