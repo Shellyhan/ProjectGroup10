@@ -25,6 +25,15 @@ class LoginViewController: UIViewController {
     }
     
 
+    //MARK: Actions
+    @IBAction func createAccountButton(_ sender: UIButton) {
+        print("Create account was pressed")
+    }
+    @IBAction func loginButton(_ sender: UIButton) {
+        print("Login was pressed")
+    }
+    
+    
     /*
     // MARK: - Navigation
 
