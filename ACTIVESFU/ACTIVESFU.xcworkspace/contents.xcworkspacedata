@@ -1,6 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:images"
+      name = "images">
+      <FileRef
+         location = "group:bgsfu.png">
+      </FileRef>
+      <FileRef
+         location = "group:buddies.png">
+      </FileRef>
+      <FileRef
+         location = "group:Calendar-invite.png">
+      </FileRef>
+      <FileRef
+         location = "group:chat2.png">
+      </FileRef>
+      <FileRef
+         location = "group:contacts.png">
+      </FileRef>
+      <FileRef
+         location = "group:days-week.png">
+      </FileRef>
+      <FileRef
+         location = "group:days1.png">
+      </FileRef>
+      <FileRef
+         location = "group:days2.png">
+      </FileRef>
+      <FileRef
+         location = "group:event chat.png">
+      </FileRef>
+      <FileRef
+         location = "group:exp1.png">
+      </FileRef>
+      <FileRef
+         location = "group:find buddy message w: dates.png">
+      </FileRef>
+      <FileRef
+         location = "group:find buddy with times.png">
+      </FileRef>
+      <FileRef
+         location = "group:friends blue.png">
+      </FileRef>
+      <FileRef
+         location = "group:Friends to edit.png">
+      </FileRef>
+      <FileRef
+         location = "group:friends.png">
+      </FileRef>
+      <FileRef
+         location = "group:interests.png">
+      </FileRef>
+      <FileRef
+         location = "group:join calendar.png">
+      </FileRef>
+      <FileRef
+         location = "group:Lock screen@2x.png">
+      </FileRef>
+      <FileRef
+         location = "group:Map@2x.png">
+      </FileRef>
+      <FileRef
+         location = "group:Menu-less.png">
+      </FileRef>
+      <FileRef
+         location = "group:menu.png">
+      </FileRef>
+      <FileRef
+         location = "group:nav bg.png">
+      </FileRef>
+      <FileRef
+         location = "group:navbar.png">
+      </FileRef>
+      <FileRef
+         location = "group:nearby event.png">
+      </FileRef>
+      <FileRef
+         location = "group:nearbyevent.png">
+      </FileRef>
+      <FileRef
+         location = "group:newmatch.png">
+      </FileRef>
+      <FileRef
+         location = "group:questionnaire.png">
+      </FileRef>
+      <FileRef
+         location = "group:sffu2.png">
+      </FileRef>
+      <FileRef
+         location = "group:sfu-bg.png">
+      </FileRef>
+      <FileRef
+         location = "group:time-day.png">
+      </FileRef>
+      <FileRef
+         location = "group:Tinder Chat.png">
+      </FileRef>
+      <FileRef
+         location = "group:Tinder Like-me.png">
+      </FileRef>
+      <FileRef
+         location = "group:Tinder Like.png">
+      </FileRef>
+      <FileRef
+         location = "group:tinder-chat goodsize.png">
+      </FileRef>
+      <FileRef
+         location = "group:Tinder-me.png">
+      </FileRef>
+      <FileRef
+         location = "group:wechat.png">
+      </FileRef>
+      <FileRef
+         location = "group:x-icon.og.png">
+      </FileRef>
+      <FileRef
+         location = "group:x-icon.png">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:ACTIVESFU.xcodeproj">
    </FileRef>
