@@ -63,7 +63,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bgsfu.png" translatesAutoresizingMaskIntoConstraints="NO" id="A3m-Bl-U9O">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="sfu-bg" translatesAutoresizingMaskIntoConstraints="NO" id="8Bw-Mp-pJG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -312,10 +312,10 @@
     </scenes>
     <resources>
         <image name="Line.png" width="288" height="1"/>
-        <image name="bgsfu.png" width="375" height="667"/>
         <image name="login-button.png" width="228" height="40"/>
-        <image name="menu.png" width="22" height="19"/>
+        <image name="menu.png" width="42" height="34"/>
         <image name="pass-icon.png" width="21" height="20"/>
+        <image name="sfu-bg" width="375" height="667"/>
         <image name="sfu-bg.png" width="375" height="667"/>
         <image name="user-icon.png" width="23" height="20"/>
         <image name="x-icon.png" width="19" height="19"/>
