@@ -16,7 +16,6 @@
 		95107B111E451F43004F8461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95107B0F1E451F43004F8461 /* LaunchScreen.storyboard */; };
 		95107B1C1E451F44004F8461 /* ACTIVESFUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B1B1E451F44004F8461 /* ACTIVESFUTests.swift */; };
 		95107B271E451F44004F8461 /* ACTIVESFUUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */; };
-		954533411E611D4500D2D892 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 954533401E611D4500D2D892 /* bg.png */; };
 		954533431E611D8200D2D892 /* bgsfu.png in Resources */ = {isa = PBXBuildFile; fileRef = 954533421E611D8200D2D892 /* bgsfu.png */; };
 		954533451E611FA600D2D892 /* x-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 954533441E611FA600D2D892 /* x-icon.png */; };
 		954533471E61211000D2D892 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 954533461E61211000D2D892 /* menu.png */; };
@@ -71,7 +70,6 @@
 		95107B221E451F44004F8461 /* ACTIVESFUUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACTIVESFUUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTIVESFUUITests.swift; sourceTree = "<group>"; };
 		95107B281E451F44004F8461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		954533401E611D4500D2D892 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bg.png; path = ../../../images/bg.png; sourceTree = "<group>"; };
 		954533421E611D8200D2D892 /* bgsfu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bgsfu.png; path = ../../../images/bgsfu.png; sourceTree = "<group>"; };
 		954533441E611FA600D2D892 /* x-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "x-icon.png"; path = "../../../images/x-icon.png"; sourceTree = "<group>"; };
 		954533461E61211000D2D892 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = ../../../images/menu.png; sourceTree = "<group>"; };
@@ -175,7 +173,6 @@
 				954533461E61211000D2D892 /* menu.png */,
 				954533441E611FA600D2D892 /* x-icon.png */,
 				954533421E611D8200D2D892 /* bgsfu.png */,
-				954533401E611D4500D2D892 /* bg.png */,
 				95107B0F1E451F43004F8461 /* LaunchScreen.storyboard */,
 				95107B121E451F43004F8461 /* Info.plist */,
 			);
@@ -340,7 +337,6 @@
 				95EFB3931E653F6A006E8115 /* Line.png in Resources */,
 				95107B0E1E451F43004F8461 /* Assets.xcassets in Resources */,
 				95EFB3901E653EBC006E8115 /* pass-icon.png in Resources */,
-				954533411E611D4500D2D892 /* bg.png in Resources */,
 				95EFB38B1E653BCC006E8115 /* shake-phone.png in Resources */,
 				95EF99A81E679CCB00F0D57C /* GoogleService-Info-3.plist in Resources */,
 				954533471E61211000D2D892 /* menu.png in Resources */,
