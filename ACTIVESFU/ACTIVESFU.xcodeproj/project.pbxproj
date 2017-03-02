@@ -16,6 +16,7 @@
 		95107B111E451F43004F8461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95107B0F1E451F43004F8461 /* LaunchScreen.storyboard */; };
 		95107B1C1E451F44004F8461 /* ACTIVESFUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B1B1E451F44004F8461 /* ACTIVESFUTests.swift */; };
 		95107B271E451F44004F8461 /* ACTIVESFUUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */; };
+		95E3FCDF1E6805C600539F08 /* user-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95E3FCDE1E6805C600539F08 /* user-icon.png */; };
 		95EF99A81E679CCB00F0D57C /* GoogleService-Info-3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 95EF99A71E679CCB00F0D57C /* GoogleService-Info-3.plist */; };
 		95EFB3991E654377006E8115 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFB3981E654377006E8115 /* CalendarViewController.swift */; };
 		95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFB39A1E654389006E8115 /* LoginViewController.swift */; };
@@ -59,6 +60,7 @@
 		95107B221E451F44004F8461 /* ACTIVESFUUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACTIVESFUUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTIVESFUUITests.swift; sourceTree = "<group>"; };
 		95107B281E451F44004F8461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95E3FCDE1E6805C600539F08 /* user-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon.png"; sourceTree = "<group>"; };
 		95EF99A71E679CCB00F0D57C /* GoogleService-Info-3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-3.plist"; sourceTree = "<group>"; };
 		95EFB3981E654377006E8115 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		95EFB39A1E654389006E8115 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				95EFB39A1E654389006E8115 /* LoginViewController.swift */,
 				95107B0A1E451F43004F8461 /* Main.storyboard */,
 				95107B0D1E451F43004F8461 /* Assets.xcassets */,
+				95E3FCDE1E6805C600539F08 /* user-icon.png */,
 				95107B0F1E451F43004F8461 /* LaunchScreen.storyboard */,
 				95107B121E451F43004F8461 /* Info.plist */,
 			);
@@ -298,6 +301,7 @@
 				95107B111E451F43004F8461 /* LaunchScreen.storyboard in Resources */,
 				95107B0E1E451F43004F8461 /* Assets.xcassets in Resources */,
 				95EF99A81E679CCB00F0D57C /* GoogleService-Info-3.plist in Resources */,
+				95E3FCDF1E6805C600539F08 /* user-icon.png in Resources */,
 				95107B0C1E451F43004F8461 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
