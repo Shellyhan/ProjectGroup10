@@ -26,7 +26,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.50980392159999999" green="0.62352941179999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <barButtonItem image="menu.png" id="eNj-QE-41t">
+                                    <barButtonItem image="menu" id="eNj-QE-41t">
                                         <color key="tintColor" red="1" green="0.98401636820000005" blue="0.93968591960000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="pTr-PA-EUS" kind="showDetail" animates="NO" id="gbl-Am-tMF"/>
@@ -108,13 +108,12 @@
                                     <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GW-Or-Xdn">
-                                <rect key="frame" x="166" y="603" width="42" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="x-icon.png"/>
-                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="x-icon" translatesAutoresizingMaskIntoConstraints="NO" id="01E-Vb-6gq">
+                                <rect key="frame" x="178" y="616" width="19" height="19"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6A-11-UDO">
-                                <rect key="frame" x="123" y="548" width="129" height="47"/>
+                                <rect key="frame" x="142" y="542" width="90" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Settings">
@@ -146,7 +145,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.50980392159999999" green="0.62352941179999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <barButtonItem image="menu.png" id="e1V-Im-aW2">
+                                    <barButtonItem image="menu" id="e1V-Im-aW2">
                                         <color key="tintColor" red="1" green="0.98401636820000005" blue="0.93968591960000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="pTr-PA-EUS" kind="show" animates="NO" id="Q7e-41-6ph"/>
@@ -274,7 +273,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.50980392156862742" green="0.62352941176470589" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <barButtonItem image="menu.png" id="dcw-SC-Q6k">
+                                    <barButtonItem image="menu" id="dcw-SC-Q6k">
                                         <color key="tintColor" red="1" green="0.9840163682201003" blue="0.93968591958205372" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <segue destination="pTr-PA-EUS" kind="showDetail" animates="NO" id="xSK-WE-cb1"/>
@@ -303,11 +302,12 @@
     <resources>
         <image name="Line" width="288" height="1"/>
         <image name="login-button" width="228" height="40"/>
+        <image name="menu" width="22" height="19"/>
         <image name="menu.png" width="42" height="34"/>
         <image name="pass-icon" width="21" height="20"/>
         <image name="sfu-bg" width="375" height="667"/>
         <image name="user-icon.png" width="23" height="20"/>
-        <image name="x-icon.png" width="19" height="19"/>
+        <image name="x-icon" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Q7e-41-6ph"/>
