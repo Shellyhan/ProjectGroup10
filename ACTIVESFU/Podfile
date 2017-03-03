@@ -7,8 +7,8 @@ target 'ACTIVESFU' do
 
   # Pods for ACTIVESFU
   pod 'Firebase/Core'
-  pod ‘Firebase/Auth’
-  pod ‘Firebase/Database’
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
   target 'ACTIVESFUTests' do
     inherit! :search_paths
