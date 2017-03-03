@@ -13,11 +13,12 @@ Repository for CMPT276 Group 10. ACTIVE SFU strives to assist in the creation of
 
 ```
 git clone https://github.com/SFU-2017-1-cmpt276/ProjectGroup10.git
+cd ProjectGroup10-master
 cd ACTIVESFU
+open ACTIVESFU.xcworkspace
 ```
 
-Then open ACTIVESFU.xcworkspace in XCode. NOTE: You must open ACTIVESFU.xcworkspace, not ACTIVESFU.xcodeproj, due to a CocoaPods dependency.
-
+NOTE: You must open ACTIVESFU.xcworkspace, not ACTIVESFU.xcodeproj, due to a CocoaPods dependency.
 
 ## Authors
 
