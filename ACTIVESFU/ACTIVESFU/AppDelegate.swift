@@ -15,9 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     //Configure firebase
-    func application(application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?)
-            -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
                 FIRApp.configure()
                 return true
         }
