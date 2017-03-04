@@ -192,7 +192,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="login-button"/>
                                 <connections>
-                                    <action selector="loginButton:" destination="Zre-zV-1I7" eventType="touchUpInside" id="uWb-7e-NSp"/>
+                                    <action selector="loginButton:" destination="Zre-zV-1I7" eventType="touchUpInside" id="5eg-ri-vg0"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LOGIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xm6-UG-zqQ">
@@ -219,7 +219,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="createAccountButton" image="login-button"/>
                                 <connections>
-                                    <action selector="createAccountButton:" destination="Zre-zV-1I7" eventType="touchUpInside" id="fS0-Yh-0U8"/>
+                                    <action selector="accountButton:" destination="Zre-zV-1I7" eventType="touchUpInside" id="tFn-TM-Cex"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CREATE ACCOUNT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNJ-ri-Y4a">
@@ -233,9 +233,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="loginButton" destination="bsO-G8-ZtX" id="0Eo-O4-lWc"/>
-                        <outlet property="passwordTextField" destination="Jw8-M7-6bM" id="xrv-0y-z8i"/>
-                        <outlet property="usernameTextField" destination="5xY-nD-0GC" id="ac2-me-LEK"/>
+                        <outlet property="emailTextField" destination="5xY-nD-0GC" id="gzu-2e-d3K"/>
+                        <outlet property="passwordTextField" destination="Jw8-M7-6bM" id="aMK-GF-yXB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bVs-MY-CS1" userLabel="First Responder" sceneMemberID="firstResponder"/>
