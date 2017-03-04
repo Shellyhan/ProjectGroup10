@@ -16,6 +16,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
        override func viewDidLoad() {
         super.viewDidLoad()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -24,7 +26,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textField.returnKeyType = UIReturnKeyType.done
+        self.emailTextField.keyboardType = UIKeyboardType.emailAddress
+        return true
+    }
   
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
     @IBAction func loginButton(_ sender: UIButton) {
         if (self.emailTextField.text=="" || self.passwordTextField.text==""){
             let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
