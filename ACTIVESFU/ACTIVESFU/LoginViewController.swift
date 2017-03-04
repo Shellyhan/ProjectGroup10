@@ -33,53 +33,63 @@ class LoginViewController: UIViewController {
     @IBAction func createAccountButton(_ sender: UIButton) {
         print("Create account was pressed")
         
-        //looking for entering:
-        //let email = emailTextField.text
-        //let passward  = passwardTextField.text
-        //let username = nameTextField.text
-        let email: String = "111@gmail.com"
-        let passward: String = "123456"
-        let username: String = "Shelly"
+        func handleRegister() {
+            //wait for user input
+            // guard let email = usernameTextField.text, let password = passwordTextField.text, let name = usernameTextField.text else {
+            let email:String = "333@gmail.com"
+            let password:String = "123456"
+            let name:String = "shelly"
+            let friends:Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
         
-        //Create new authentication and insert to DB:
-        FIRAuth.auth()?.createUser(withEmail: email, password: passward, completion: { (user: FIRUser?, error) in
-            if error != nil {
-            print("error")
-            return
-            }
-            guard let uid = user?.uid else{return}
-            
-            //refernece to this user
-            self.ref = FIRDatabase.database().reference()
-            let UsersRef = self.ref.child("Users").child(uid)
-            
-            //insert user
-            UsersRef.updateChildValues(["user": username, "email": email], withCompletionBlock: { (err, ref) in
-                if err != nil {
-                    print("error")
+            FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error) in
+                if error != nil {
+                    print(error!)
                     return
                 }
+                guard let uid = user?.uid else{return}
+            
+            //refernece to this user
+                self.ref = FIRDatabase.database().reference()
+                let UsersRef = self.ref.child("Users").child(uid)
+            
+            //insert user
+                UsersRef.updateChildValues(["user": name, "email": email, "contact": friends], withCompletionBlock: { (err, ref) in
+                    if err != nil {
+                        print(err!)
+                        return
+                    }
+                })
             })
-        })
+        }
+        
+        handleRegister()
         
     }
     @IBAction func loginButton(_ sender: UIButton) {
         print("Login was pressed")
         
-        //looking for entering:
-        //let email = emailTextField.text
-        //let passward  = passwardTextField.text
-        //let username = nameTextField.text
-        let email: String = "111@gmail.com"
-        let passward: String = "123456"
-        
-        //checking the authentication:
-        FIRAuth.auth()?.signIn(withEmail: email, password: passward, completion: { (user, error) in
-            if error != nil {
-                print("error")
-                return
-            }
-        })
+        func handleLogin() {
+            //wait for user input
+            let email: String = "333@gmail.com"
+            let password: String = "123456"
+            
+            //checking the authentication:
+            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+            })
+        //show the user info
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            self.ref = FIRDatabase.database().reference()
+            let UsersRef = self.ref.child("Users").child(uid!)
+            UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                print(snapshot)
+            }, withCancel: nil)
+        }
+
+        handleLogin()
     }
     
     
