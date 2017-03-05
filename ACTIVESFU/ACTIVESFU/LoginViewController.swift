@@ -13,11 +13,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    var ref: FIRDatabaseReference!
+    
+    
        override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        ref = FIRDatabase.database().reference()
 
         // Do any additional setup after loading the view.
     }
@@ -39,6 +42,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginButton(_ sender: UIButton) {
         if (self.emailTextField.text=="" || self.passwordTextField.text==""){
+            //shelly's code
+            print("Login was pressed")
+            
+            
+            //carber's code
             let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
             let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(defaulAction)
@@ -47,30 +55,47 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         else
         {
-            FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user,error) in
-                if error == nil
-                    
-                {
-                    self.emailTextField.text=""
-                    self.passwordTextField.text=""
-                }
-                else
-                {
-                    let alertController = UIAlertController(title: "Oops!", message: error?.localizedDescription, preferredStyle: .alert)
-                    let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaulAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
-                    
-                }
-            })
+            func handleLogin() {
+                //wait for user input
+                //                let email: String = "333@gmail.com"
+                //                let password: String = "123456"
+                
+                //checking the authentication:
+                FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
+                    if error != nil {
+                        print(error!)
+                        return
+                    }
+                    else{
+                        print("login successful")
+                        let loggedInScene = self.navigationController?.storyboard?.instantiateViewController(withIdentifier: "mainmenuVC_ID") as! MainViewController
+                        self.navigationController?.pushViewController(loggedInScene, animated: true)
+                    }
+                })
+                //show the user info
+                let uid = FIRAuth.auth()?.currentUser?.uid
+                self.ref = FIRDatabase.database().reference()
+                let UsersRef = self.ref.child("Users").child(uid!)
+                UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                    print(snapshot)
+                }, withCancel: nil)
+                
+                
+            }
+            
+            handleLogin()
             
         }
         
         
-<<<<<<< HEAD
-        
     }
+    
+    
+    
+    
+    
+    
+    
     @IBAction func accountButton(_ sender: UIButton) {
         if (self.emailTextField.text=="" || self.passwordTextField.text==""){
             let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
@@ -81,48 +106,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.present(alertController, animated: true, completion: nil)
         }
         else {
-            FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user,error) in
-                
-                if error == nil
-                    
-                {
-                    self.emailTextField.text=""
-                    self.passwordTextField.text=""
-                }
-                else
-                {
-                    let alertController = UIAlertController(title: "Oops!", message: error?.localizedDescription, preferredStyle: .alert)
-                    let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                    alertController.addAction(defaulAction)
-                    
-                    self.present(alertController, animated: true, completion: nil)
-                }
-            })
-        }
-        
-    }
-=======
-        func handleRegister() {
             //wait for user input
             // guard let email = usernameTextField.text, let password = passwordTextField.text, let name = usernameTextField.text else {
-            let email:String = "333@gmail.com"
-            let password:String = "123456"
+//            let email:String = "333@gmail.com"
+//            let password:String = "123456"
+            func handleRegister() {
             let name:String = "shelly"
             let friends:Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
-        
-            FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error) in
+            
+            FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
                 if error != nil {
                     print(error!)
                     return
                 }
                 guard let uid = user?.uid else{return}
-            
-            //refernece to this user
+                
+                //refernece to this user
                 self.ref = FIRDatabase.database().reference()
                 let UsersRef = self.ref.child("Users").child(uid)
-            
-            //insert user
-                UsersRef.updateChildValues(["user": name, "email": email, "contact": friends], withCompletionBlock: { (err, ref) in
+                
+                //insert user
+                UsersRef.updateChildValues(["user": name, "email": self.emailTextField.text!, "contact": friends], withCompletionBlock: { (err, ref) in
                     if err != nil {
                         print(err!)
                         return
@@ -132,34 +136,41 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
         handleRegister()
+        }
         
     }
-    @IBAction func loginButton(_ sender: UIButton) {
-        print("Login was pressed")
-        
-        func handleLogin() {
-            //wait for user input
-            let email: String = "333@gmail.com"
-            let password: String = "123456"
-            
-            //checking the authentication:
-            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
-                if error != nil {
-                    print(error!)
-                    return
-                }
-            })
-        //show the user info
-            let uid = FIRAuth.auth()?.currentUser?.uid
-            self.ref = FIRDatabase.database().reference()
-            let UsersRef = self.ref.child("Users").child(uid!)
-            UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                print(snapshot)
-            }, withCancel: nil)
-        }
 
-        handleLogin()
->>>>>>> master
+//        func handleRegister() {
+//            //wait for user input
+//            // guard let email = usernameTextField.text, let password = passwordTextField.text, let name = usernameTextField.text else {
+//            let email:String = "333@gmail.com"
+//            let password:String = "123456"
+//            let name:String = "shelly"
+//            let friends:Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
+//            
+//            FIRAuth.auth()?.createUser(withEmail: email, password: password, completion: { (user: FIRUser?, error) in
+//                if error != nil {
+//                    print(error!)
+//                    return
+//                }
+//                guard let uid = user?.uid else{return}
+//                
+//                //refernece to this user
+//                self.ref = FIRDatabase.database().reference()
+//                let UsersRef = self.ref.child("Users").child(uid)
+//                
+//                //insert user
+//                UsersRef.updateChildValues(["user": name, "email": email, "contact": friends], withCompletionBlock: { (err, ref) in
+//                    if err != nil {
+//                        print(err!)
+//                        return
+//                    }
+//                })
+//            })
+//    }
+//    
+//    handleRegister()
+    
     }
     
 
