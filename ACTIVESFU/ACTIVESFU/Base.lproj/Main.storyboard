@@ -345,6 +345,8 @@
                     <size key="freeformSize" width="375" height="600"/>
                     <connections>
                         <outlet property="calendarView" destination="VYT-bK-pO3" id="6fg-7x-7P2"/>
+                        <outlet property="monthLabel" destination="YBC-KV-FlG" id="z99-Sc-Qhw"/>
+                        <segue destination="tS1-Cq-RBn" kind="show" identifier="seguetoEvent" id="pmI-a6-CHf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4H7-z8-eeh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -360,16 +362,9 @@
                         <viewControllerLayoutGuide type="bottom" id="3Bt-tz-RfS"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qjt-j5-kAz">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create event for (pass date data) " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgB-OY-Lll">
-                                <rect key="frame" x="45" y="56" width="285" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oHD-zV-zY6">
                                 <rect key="frame" x="16" y="222" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -386,6 +381,13 @@
                                     <action selector="createEventButton:" destination="tS1-Cq-RBn" eventType="touchUpInside" id="kV8-0X-18u"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Create event for (pass date data) " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SgB-OY-Lll">
+                                <rect key="frame" x="16" y="100" width="343" height="23"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -396,7 +398,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J49-H2-aik" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128.8" y="1175.2623688155923"/>
+            <point key="canvasLocation" x="1128.8" y="1174.8125937031484"/>
         </scene>
     </scenes>
     <resources>
