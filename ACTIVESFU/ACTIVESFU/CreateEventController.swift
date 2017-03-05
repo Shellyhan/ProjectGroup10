@@ -12,12 +12,17 @@ class CreateEventController: UIViewController {
 
     @IBOutlet weak var eventTextField: UITextField!
     
-    //var datename: String = "date here"
+    var dateID: Date!
+    var monthName = ""
+    var yearname = ""
     
     @IBOutlet weak var dateLabel: UILabel!
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //dateLabel.text = datename/
+        dateLabel.text = monthName
+        print(dateID)
 
         // Do any additional setup after loading the view.
     }
