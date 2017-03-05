@@ -87,6 +87,52 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         } 
    }
+
+     @IBAction func accountButton(_ sender: UIButton) {
+        if (self.emailTextField.text=="" || self.passwordTextField.text==""){
+            let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
+            let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(defaulAction)
+            
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        else {
+            //wait for user input
+            // guard let email = usernameTextField.text, let password = passwordTextField.text, let name = usernameTextField.text else {
+//            let email:String = "333@gmail.com"
+//            let password:String = "123456"
+            func handleRegister() {
+            let name:String = "shelly"
+            let friends:Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
+            
+            FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                guard let uid = user?.uid else{return}
+                
+                //refernece to this user
+                self.ref = FIRDatabase.database().reference()
+                let UsersRef = self.ref.child("Users").child(uid)
+                
+                //insert user
+                UsersRef.updateChildValues(["user": name, "email": self.emailTextField.text!, "contact": friends], withCompletionBlock: { (err, ref) in
+                    if err != nil {
+                        print(err!)
+                        return
+                    }
+                   print("Create account successful")                                                                                                                      
+                })
+            })
+        }
+        
+        handleRegister()
+        }
+        
+   }
+
 }
     
 
