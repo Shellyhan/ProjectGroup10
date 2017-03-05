@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateEventController: UIViewController {
 
@@ -18,7 +19,6 @@ class CreateEventController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //dateLabel.text = datename/
-
         // Do any additional setup after loading the view.
     }
 
@@ -29,6 +29,90 @@ class CreateEventController: UIViewController {
     
 
     @IBAction func createEventButton(_ sender: UIButton) {
+        
+        
+        //hardcoded user info:
+        let email: String = "test99@gmail.com"
+        let password: String = "123456"
+        
+        //login to user account:
+            //checking the authentication:
+            FIRAuth.auth()?.signIn(withEmail: email, password: password, completion: { (user, error) in
+                if error != nil {
+                    print(error!)
+                    return
+                }
+                else{
+                    print("login successful")
+                }
+            })
+            //get the user info
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            let ref = FIRDatabase.database().reference()
+            let UsersRef = ref.child("Users").child(uid!)
+            UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                //print(snapshot)
+            }, withCancel: nil)
+            
+            
+            //create event
+            let EventRef = ref.child("Events")
+            let EventKey = EventRef.childByAutoId().key
+            ////looking for entering:
+            //let owner = uid
+            //var title = titleTextField.text
+            //var time  = timeTextField.text
+            //var date = dateTextField.text
+            //var location = locationTextField.text
+            //var privacy = privacyTextField.text
+            //var description  = descriptionTextField.text
+            //var classification = classificationTextField.text
+            //var participants = [buddies]?????
+            
+            let owner = uid
+            let title = eventTextField.text!
+            let time  = "10:30"
+            let date = "jan 1 2016"
+            let location = "gym"
+            let privacy = "1" //1 = open to all, 0 = owner
+            let description  = "work out in gym"
+            let classification = "1" // not sure yet
+            let participants = [1,2,3] // fetched from buddies
+            
+            
+            //insert event:
+            let eventContent = ["uid": owner,
+                                "title": title,
+                                "time": time,
+                                "date": date,
+                                "location": location,
+                                "privacy": privacy,
+                                "description": description,
+                                "classification": classification,
+                                "participants": participants] as [String : Any]
+            
+            let eventUpdates = ["\(EventKey)": eventContent]
+            EventRef.updateChildValues(eventUpdates)
+            
+            //display event info:
+            EventRef.child(EventKey).observeSingleEvent(of: .value, with: { (snapshot) in
+                print("----------event info--------------")
+                print(snapshot)
+            }, withCancel: nil)
+        
+        
+            /*
+         //update event:
+         //example: update location and provacy:
+         let location1 = "swimming pool"
+         let privacy1 = "0" //1 = open to all, 0 = owner
+         let eventUpateContent = [
+         "location": location1,
+         "privacy": privacy1]
+         EventRef.child(EventKey).updateChildValues(eventUpateContent)
+ */
+        
+       
     }
     /*
     // MARK: - Navigation
