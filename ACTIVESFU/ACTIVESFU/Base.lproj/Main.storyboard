@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Zre-zV-1I7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZSi-ZB-6ud">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -49,12 +49,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TeV-Qr-JwK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="-278"/>
+            <point key="canvasLocation" x="1928.8" y="-278.41079460269867"/>
         </scene>
         <!--MenuViewController-->
         <scene sceneID="4EH-KY-XJ8">
             <objects>
-                <viewController id="pTr-PA-EUS" userLabel="MenuViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainmenuVC_ID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pTr-PA-EUS" userLabel="MenuViewController" customClass="MainViewController" customModule="ACTIVESFU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QxS-jw-PxO"/>
                         <viewControllerLayoutGuide type="bottom" id="bVY-MP-fM9"/>
@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUw-SF-4WX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="125.59999999999999" y="-277.51124437781112"/>
+            <point key="canvasLocation" x="1064.8" y="-277.51124437781112"/>
         </scene>
         <!--LoginViewController-->
         <scene sceneID="NWl-im-ZZJ">
@@ -147,9 +147,6 @@
                                 <items>
                                     <barButtonItem image="menu" id="e1V-Im-aW2">
                                         <color key="tintColor" red="1" green="0.98401636820000005" blue="0.93968591960000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="pTr-PA-EUS" kind="show" animates="NO" id="Q7e-41-6ph"/>
-                                        </connections>
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -168,7 +165,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="textColor" red="1" green="0.98401636820000005" blue="0.93968591960000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                         <color key="value" red="0.96112454362516653" green="0.98133454464604863" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -192,7 +189,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="login-button"/>
                                 <connections>
-                                    <action selector="loginButton:" destination="Zre-zV-1I7" eventType="touchUpInside" id="uWb-7e-NSp"/>
+                                    <action selector="loginButton:" destination="Zre-zV-1I7" eventType="touchUpInside" id="5eg-ri-vg0"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LOGIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xm6-UG-zqQ">
@@ -219,7 +216,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="createAccountButton" image="login-button"/>
                                 <connections>
-                                    <action selector="createAccountButton:" destination="Zre-zV-1I7" eventType="touchUpInside" id="fS0-Yh-0U8"/>
+                                    <action selector="accountButton:" destination="Zre-zV-1I7" eventType="touchUpInside" id="tFn-TM-Cex"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CREATE ACCOUNT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNJ-ri-Y4a">
@@ -232,15 +229,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ljb-cg-W4C"/>
                     <connections>
-                        <outlet property="loginButton" destination="bsO-G8-ZtX" id="0Eo-O4-lWc"/>
-                        <outlet property="passwordTextField" destination="Jw8-M7-6bM" id="xrv-0y-z8i"/>
-                        <outlet property="usernameTextField" destination="5xY-nD-0GC" id="ac2-me-LEK"/>
+                        <outlet property="emailTextField" destination="5xY-nD-0GC" id="gzu-2e-d3K"/>
+                        <outlet property="passwordTextField" destination="Jw8-M7-6bM" id="aMK-GF-yXB"/>
+                        <segue destination="pTr-PA-EUS" kind="show" id="Gxl-1G-Z0W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bVs-MY-CS1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-884" y="-327.88605697151428"/>
+            <point key="canvasLocation" x="55.200000000000003" y="-327.88605697151428"/>
         </scene>
         <!--CalendarViewController-->
         <scene sceneID="XpY-0j-KMJ">
@@ -326,6 +324,24 @@
             </objects>
             <point key="canvasLocation" x="126" y="482"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="TCk-DL-5jB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZSi-ZB-6ud" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jqK-tQ-2mQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Zre-zV-1I7" kind="relationship" relationship="rootViewController" id="sL4-UP-lz7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9pO-tE-ol2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-884" y="-327.88605697151428"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Line" width="288" height="1"/>
@@ -338,7 +354,7 @@
         <image name="x-icon" width="19" height="19"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Q7e-41-6ph"/>
+        <segue reference="Gxl-1G-Z0W"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.50980392159999999" green="0.62352941179999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>
