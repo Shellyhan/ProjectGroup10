@@ -87,6 +87,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             
         } 
    }
+
      @IBAction func accountButton(_ sender: UIButton) {
         if (self.emailTextField.text=="" || self.passwordTextField.text==""){
             let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
@@ -130,7 +131,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         handleRegister()
         }
         
-}
+   }
+
 }
     
 
