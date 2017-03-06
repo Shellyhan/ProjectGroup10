@@ -6,6 +6,8 @@
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 //  Bronwyn, Shelly
 
+//TODO: Implement Maps integration, select location
+
 import UIKit
 import Firebase
 
@@ -80,7 +82,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let owner = uid
             let title = eventTextField.text!
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMMM dd, yyyy"
+            dateFormatter.dateFormat = "MMMM dd, yyyy at hh:mm"
             let date = datePicker.date as NSDate!
             var dateString = dateFormatter.string(from: date as! Date)
             print("date:", date)
