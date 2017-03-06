@@ -8,7 +8,9 @@ target 'ACTIVESFU' do
   # Pods for ACTIVESFU
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
   pod 'Firebase/Database'
+  pod 'JTAppleCalendar', '~> 6.0'
 
   target 'ACTIVESFUTests' do
     inherit! :search_paths
