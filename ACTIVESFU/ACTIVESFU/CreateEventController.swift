@@ -80,7 +80,10 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             let owner = uid
             let title = eventTextField.text!
             let dateFormatter = DateFormatter()
-            let date = dateFormatter.string(from: datePicker.date)
+            dateFormatter.dateFormat = "MMMM dd, yyyy"
+            let date = datePicker.date as NSDate!
+            var dateString = dateFormatter.string(from: date as! Date)
+            print("date:", date)
             let location = "gym"
             let privacy = selected
         
@@ -89,7 +92,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             //insert event:
             let eventContent = ["uid": owner,
                                 "title": title,
-                                "date": date,
+                                "date": dateString,
                                 "location": location,
                                 "privacy": privacy] as [String : Any]
         
