@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:ACTIVESFU/Base.lproj/Main.storyboard">
+   </FileRef>
+   <FileRef
       location = "group:ACTIVESFU.xcodeproj">
    </FileRef>
    <FileRef
