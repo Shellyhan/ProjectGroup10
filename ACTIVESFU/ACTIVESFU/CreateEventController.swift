@@ -4,22 +4,25 @@
 //
 //  Created by CoolMac on 2017-03-05.
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
-//
+//  Bronwyn, Shelly
 
 import UIKit
 import Firebase
 
-class CreateEventController: UIViewController {
+class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var eventTextField: UITextField!
-    
-    //var datename: String = "date here"
-    
-    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var privacyPicker: UIPickerView!
+
+    let options = ["Private", "Public"]
+    var selected = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //dateLabel.text = datename/
-        // Do any additional setup after loading the view.
+        self.privacyPicker.dataSource = self
+        self.privacyPicker.delegate = self
+        selected = options[0]
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,10 +30,25 @@ class CreateEventController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: UIPicker methods
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return options.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return options[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selected = options[row] as! String
+    }
+    
 
     @IBAction func createEventButton(_ sender: UIButton) {
-        
-        
         //hardcoded user info:
         let email: String = "test99@gmail.com"
         let password: String = "123456"
@@ -58,38 +76,23 @@ class CreateEventController: UIViewController {
             //create event
             let EventRef = ref.child("Events")
             let EventKey = EventRef.childByAutoId().key
-            ////looking for entering:
-            //let owner = uid
-            //var title = titleTextField.text
-            //var time  = timeTextField.text
-            //var date = dateTextField.text
-            //var location = locationTextField.text
-            //var privacy = privacyTextField.text
-            //var description  = descriptionTextField.text
-            //var classification = classificationTextField.text
-            //var participants = [buddies]?????
-            
+        
             let owner = uid
             let title = eventTextField.text!
-            let time  = "10:30"
-            let date = "jan 1 2016"
+            let dateFormatter = DateFormatter()
+            let date = dateFormatter.string(from: datePicker.date)
             let location = "gym"
-            let privacy = "1" //1 = open to all, 0 = owner
-            let description  = "work out in gym"
-            let classification = "1" // not sure yet
-            let participants = [1,2,3] // fetched from buddies
+            let privacy = selected
+        
             
             
             //insert event:
             let eventContent = ["uid": owner,
                                 "title": title,
-                                "time": time,
                                 "date": date,
                                 "location": location,
-                                "privacy": privacy,
-                                "description": description,
-                                "classification": classification,
-                                "participants": participants] as [String : Any]
+                                "privacy": privacy] as [String : Any]
+        
             
             let eventUpdates = ["\(EventKey)": eventContent]
             EventRef.updateChildValues(eventUpdates)

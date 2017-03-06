@@ -23,7 +23,6 @@
 		95107B111E451F43004F8461 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95107B0F1E451F43004F8461 /* LaunchScreen.storyboard */; };
 		95107B1C1E451F44004F8461 /* ACTIVESFUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B1B1E451F44004F8461 /* ACTIVESFUTests.swift */; };
 		95107B271E451F44004F8461 /* ACTIVESFUUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */; };
-		95E3FCDF1E6805C600539F08 /* user-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 95E3FCDE1E6805C600539F08 /* user-icon.png */; };
 		95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFB39A1E654389006E8115 /* LoginViewController.swift */; };
 		C08F8B652CE35E3F87647066 /* Pods_ACTIVESFUTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7C2D6A3A6DB5CBA8FF7790 /* Pods_ACTIVESFUTests.framework */; };
 		E7A8A8D5F2E08EEE0771226B /* Pods_ACTIVESFU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B23321FF8C63E1687FC1317 /* Pods_ACTIVESFU.framework */; };
@@ -73,7 +72,6 @@
 		95107B221E451F44004F8461 /* ACTIVESFUUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ACTIVESFUUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTIVESFUUITests.swift; sourceTree = "<group>"; };
 		95107B281E451F44004F8461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		95E3FCDE1E6805C600539F08 /* user-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-icon.png"; sourceTree = "<group>"; };
 		95EFB39A1E654389006E8115 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AD7C2D6A3A6DB5CBA8FF7790 /* Pods_ACTIVESFUTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACTIVESFUTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D7DEB50C172A2C05546CBB /* Pods-ACTIVESFUUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACTIVESFUUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACTIVESFUUITests/Pods-ACTIVESFUUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -159,7 +157,6 @@
 				95107B0A1E451F43004F8461 /* Main.storyboard */,
 				3EE2D21A1E6C012800070465 /* CreateEventController.swift */,
 				95107B0D1E451F43004F8461 /* Assets.xcassets */,
-				95E3FCDE1E6805C600539F08 /* user-icon.png */,
 				95107B0F1E451F43004F8461 /* LaunchScreen.storyboard */,
 				95107B121E451F43004F8461 /* Info.plist */,
 			);
@@ -323,7 +320,6 @@
 			files = (
 				95107B111E451F43004F8461 /* LaunchScreen.storyboard in Resources */,
 				95107B0E1E451F43004F8461 /* Assets.xcassets in Resources */,
-				95E3FCDF1E6805C600539F08 /* user-icon.png in Resources */,
 				3EE2D2181E6BE73300070465 /* CellView.xib in Resources */,
 				95107B0C1E451F43004F8461 /* Main.storyboard in Resources */,
 				3EE8328D1E6AC690001DA398 /* Default-568h@2x.png in Resources */,

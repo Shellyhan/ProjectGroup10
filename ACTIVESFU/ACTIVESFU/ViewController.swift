@@ -9,14 +9,22 @@
 import UIKit
 import JTAppleCalendar
 
+class headerView: JTAppleHeaderView {
+    @IBOutlet var title: UILabel!
+}
+
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var calendarView: JTAppleCalendarView!
+    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var calendarHeaderLabel: UILabel!
+
     
     let white = UIColor(colorWithHexValue: 0xECEAED)
     let darkPurple = UIColor(colorWithHexValue: 0x3A284C)
     let dimPurple = UIColor(colorWithHexValue: 0x574865)
+    let currCalendar = Calendar.current
     
     
     override func viewDidLoad() {
@@ -63,7 +71,19 @@ class ViewController: UIViewController {
         }
     }
     
+    func setupViewsOfCalendar(from visibleDates: DateSegmentInfo) {
+        guard let startDate = visibleDates.monthDates.first else {
+            return
+        }
+        let month = currCalendar.dateComponents([.month], from: startDate).month!
+        
+        let monthName = DateFormatter().monthSymbols[(month-1) % 12] //GetHumanDate(month: month)
+        
+        let year = currCalendar.component(.year, from: startDate)
+        calendarHeaderLabel.text = monthName + ", " + String(year)
+    }
     
+
 }
 
 extension ViewController: JTAppleCalendarViewDataSource, JTAppleCalendarViewDelegate {
@@ -106,6 +126,13 @@ extension ViewController: JTAppleCalendarViewDataSource, JTAppleCalendarViewDele
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)
+    }
+    
+    func calendar(_ calendar: JTAppleCalendarView, willDisplaySectionHeader header: JTAppleHeaderView, range: (start: Date, end: Date), identifier: String) {
+        let headerCell = (header as? headerView)
+        let monthFormatter = DateFormatter()
+        monthFormatter.dateFormat = "MMMM yyyy"
+        headerCell?.title.text = monthFormatter.string(from: range.start)
     }
     
     
