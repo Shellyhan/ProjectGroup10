@@ -1,0 +1,56 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "93CB4C547D6905AB3D356E239A078308A49AEBDD",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+<<<<<<< HEAD
+    "B1E1758F67049E7891918114F985453E3A6E92A2" : 9223372036854775807,
+    "93CB4C547D6905AB3D356E239A078308A49AEBDD" : 9223372036854775807,
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : 9223372036854775807,
+    "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "63E9E613-EDD2-48BA-BF58-D541BEE981C1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "B1E1758F67049E7891918114F985453E3A6E92A2" : "",
+    "93CB4C547D6905AB3D356E239A078308A49AEBDD" : "ProjectGroup10\/",
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : "..",
+    "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD" : "CalendarTutorial\/"
+=======
+    "93CB4C547D6905AB3D356E239A078308A49AEBDD" : 9223372036854775807,
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : 9223372036854775807,
+    "B1E1758F67049E7891918114F985453E3A6E92A2" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "63E9E613-EDD2-48BA-BF58-D541BEE981C1",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "93CB4C547D6905AB3D356E239A078308A49AEBDD" : "ProjectGroup10\/",
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : "..",
+    "B1E1758F67049E7891918114F985453E3A6E92A2" : ""
+>>>>>>> master
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ACTIVESFU",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ACTIVESFU\/ACTIVESFU.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bronwynbiro\/Time-Tracker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SFU-2017-1-cmpt276\/ProjectGroup10.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "93CB4C547D6905AB3D356E239A078308A49AEBDD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/csil-git1.cs.surrey.sfu.ca\/bbiro\/CMPT276Assn1.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1E1758F67049E7891918114F985453E3A6E92A2"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/patchthecode\/CalendarTutorial.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD"
+    }
+  ]
+}
