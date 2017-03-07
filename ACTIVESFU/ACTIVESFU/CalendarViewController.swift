@@ -143,7 +143,7 @@ extension ViewController: JTAppleCalendarViewDataSource, JTAppleCalendarViewDele
         handleCellSelection(view: cell, cellState: cellState)
     }
     
-    //User selects a date then can create an event
+    //ChatUser selects a date then can create an event
     func calendar(_ calendar: JTAppleCalendarView, didSelectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
         handleCellSelection(view: cell, cellState: cellState)
         handleCellTextColor(view: cell, cellState: cellState)

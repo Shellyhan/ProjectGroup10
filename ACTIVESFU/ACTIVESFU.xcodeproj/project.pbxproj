@@ -12,7 +12,6 @@
 		3EE2D2171E6BE73300070465 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE2D2141E6BE73300070465 /* CellView.swift */; };
 		3EE2D2181E6BE73300070465 /* CellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EE2D2151E6BE73300070465 /* CellView.xib */; };
 		3EE2D2191E6BE73300070465 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE2D2161E6BE73300070465 /* CalendarViewController.swift */; };
-		3EE2D21B1E6C012800070465 /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE2D21A1E6C012800070465 /* CreateEventController.swift */; };
 		3EE33E111E6CF92500C3379F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE33E101E6CF92500C3379F /* User.swift */; };
 		3EE8328D1E6AC690001DA398 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8328C1E6AC690001DA398 /* Default-568h@2x.png */; };
 		4AEBE68A29AE4C4A956EA6CD /* Pods_ACTIVESFUUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70012F85D869216C2314ED26 /* Pods_ACTIVESFUUITests.framework */; };
@@ -24,6 +23,13 @@
 		95107B1C1E451F44004F8461 /* ACTIVESFUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B1B1E451F44004F8461 /* ACTIVESFUTests.swift */; };
 		95107B271E451F44004F8461 /* ACTIVESFUUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */; };
 		9526A6441E6D54FF00B7CC7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9526A6421E6D54FF00B7CC7B /* Main.storyboard */; };
+		95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */; };
+		95D894C91E6E6B9200E11F82 /* ChatClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C81E6E6B9200E11F82 /* ChatClasses.swift */; };
+		95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */; };
+		95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */; };
+		95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894D01E6E6D8900E11F82 /* ChatLogController.swift */; };
+		95D894D31E6E6DE400E11F82 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894D21E6E6DE400E11F82 /* NewMessageController.swift */; };
+		95D894D51E6E6E7000E11F82 /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894D41E6E6E7000E11F82 /* CreateEventController.swift */; };
 		95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFB39A1E654389006E8115 /* LoginViewController.swift */; };
 		C08F8B652CE35E3F87647066 /* Pods_ACTIVESFUTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7C2D6A3A6DB5CBA8FF7790 /* Pods_ACTIVESFUTests.framework */; };
 		E7A8A8D5F2E08EEE0771226B /* Pods_ACTIVESFU.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B23321FF8C63E1687FC1317 /* Pods_ACTIVESFU.framework */; };
@@ -56,7 +62,6 @@
 		3EE2D2141E6BE73300070465 /* CellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		3EE2D2151E6BE73300070465 /* CellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CellView.xib; sourceTree = "<group>"; };
 		3EE2D2161E6BE73300070465 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		3EE2D21A1E6C012800070465 /* CreateEventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
 		3EE33E101E6CF92500C3379F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		3EE8328C1E6AC690001DA398 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		70012F85D869216C2314ED26 /* Pods_ACTIVESFUUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACTIVESFUUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +79,13 @@
 		95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTIVESFUUITests.swift; sourceTree = "<group>"; };
 		95107B281E451F44004F8461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9526A6431E6D54FF00B7CC7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUserCell.swift; sourceTree = "<group>"; };
+		95D894C81E6E6B9200E11F82 /* ChatClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatClasses.swift; path = Models/ChatClasses.swift; sourceTree = "<group>"; };
+		95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInputContainer.swift; sourceTree = "<group>"; };
+		95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageController.swift; path = Models/ChatMessageController.swift; sourceTree = "<group>"; };
+		95D894D01E6E6D8900E11F82 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
+		95D894D21E6E6DE400E11F82 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		95D894D41E6E6E7000E11F82 /* CreateEventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
 		95EFB39A1E654389006E8115 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AD7C2D6A3A6DB5CBA8FF7790 /* Pods_ACTIVESFUTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACTIVESFUTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1D7DEB50C172A2C05546CBB /* Pods-ACTIVESFUUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ACTIVESFUUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ACTIVESFUUITests/Pods-ACTIVESFUUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -114,6 +126,9 @@
 			isa = PBXGroup;
 			children = (
 				3EE33E101E6CF92500C3379F /* User.swift */,
+				95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */,
+				95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */,
+				95D894C81E6E6B9200E11F82 /* ChatClasses.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -160,13 +175,16 @@
 				95107B041E451F42004F8461 /* AppDelegate.swift */,
 				95107B061E451F42004F8461 /* FindABuddyViewController.swift */,
 				95107B081E451F42004F8461 /* BuddiesViewController.swift */,
+				95D894D21E6E6DE400E11F82 /* NewMessageController.swift */,
 				9526A6421E6D54FF00B7CC7B /* Main.storyboard */,
-				3EE33E121E6CF94800C3379F /* Models */,
 				95EFB39A1E654389006E8115 /* LoginViewController.swift */,
-				3EE2D2141E6BE73300070465 /* CellView.swift */,
-				3EE2D2151E6BE73300070465 /* CellView.xib */,
 				3EE2D2161E6BE73300070465 /* CalendarViewController.swift */,
-				3EE2D21A1E6C012800070465 /* CreateEventController.swift */,
+				95D894D41E6E6E7000E11F82 /* CreateEventController.swift */,
+				95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */,
+				3EE2D2141E6BE73300070465 /* CellView.swift */,
+				95D894D01E6E6D8900E11F82 /* ChatLogController.swift */,
+				3EE33E121E6CF94800C3379F /* Models */,
+				3EE2D2151E6BE73300070465 /* CellView.xib */,
 				95107B0D1E451F43004F8461 /* Assets.xcassets */,
 				95107B0F1E451F43004F8461 /* LaunchScreen.storyboard */,
 				95107B121E451F43004F8461 /* Info.plist */,
@@ -497,13 +515,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EE2D21B1E6C012800070465 /* CreateEventController.swift in Sources */,
+				95D894D51E6E6E7000E11F82 /* CreateEventController.swift in Sources */,
 				95107B091E451F42004F8461 /* BuddiesViewController.swift in Sources */,
 				95107B051E451F42004F8461 /* AppDelegate.swift in Sources */,
+				95D894C91E6E6B9200E11F82 /* ChatClasses.swift in Sources */,
 				3EE2D2171E6BE73300070465 /* CellView.swift in Sources */,
 				3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */,
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
+				95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */,
+				95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */,
 				3EE2D2191E6BE73300070465 /* CalendarViewController.swift in Sources */,
+				95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */,
+				95D894D31E6E6DE400E11F82 /* NewMessageController.swift in Sources */,
+				95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */,
 				95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */,
 				95107B071E451F42004F8461 /* FindABuddyViewController.swift in Sources */,
 			);

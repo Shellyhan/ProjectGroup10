@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  ChatUser.swift
 //  ACTIVESFU
 //
 //  Created by CoolMac on 2017-03-05.

@@ -5,6 +5,7 @@
 //  Created by Bronwyn Biro on 2017-02-27.
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 //
+// Worked on by: Shelly, Carber
 
 import UIKit
 import Firebase
@@ -14,7 +15,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var ref: FIRDatabaseReference!
-    
     
        override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,7 +79,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
                     print(snapshot)
                 }, withCancel: nil)
-                
+            
                 
             }
             
@@ -116,6 +116,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 //refernece to this user
                 self.ref = FIRDatabase.database().reference()
                 let UsersRef = self.ref.child("Users").child(uid)
+
                 
                 //insert user
                 UsersRef.updateChildValues(["user": name, "email": self.emailTextField.text!, "contact": friends], withCompletionBlock: { (err, ref) in

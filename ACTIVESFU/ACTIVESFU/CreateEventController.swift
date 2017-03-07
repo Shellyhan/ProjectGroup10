@@ -69,8 +69,8 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             //get the user info
             let uid = FIRAuth.auth()?.currentUser?.uid
             let ref = FIRDatabase.database().reference()
-            let UsersRef = ref.child("Users").child(uid!)
-            UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            let ChatUsersRef = ref.child("ChatUsers").child(uid!)
+            ChatUsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 //print(snapshot)
             }, withCancel: nil)
 
