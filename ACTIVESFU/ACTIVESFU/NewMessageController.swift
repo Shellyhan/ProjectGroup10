@@ -6,7 +6,7 @@
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 //
 // Worked on by: Bronwyn
-
+/*
 import UIKit
 import Firebase
 
@@ -80,4 +80,5 @@ class NewMessageController: UITableViewController {
     }
     
 }
+ */
 

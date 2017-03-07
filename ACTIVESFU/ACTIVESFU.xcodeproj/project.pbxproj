@@ -28,7 +28,6 @@
 		95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */; };
 		95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */; };
 		95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894D01E6E6D8900E11F82 /* ChatLogController.swift */; };
-		95D894D31E6E6DE400E11F82 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894D21E6E6DE400E11F82 /* NewMessageController.swift */; };
 		95D894D51E6E6E7000E11F82 /* CreateEventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894D41E6E6E7000E11F82 /* CreateEventController.swift */; };
 		95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFB39A1E654389006E8115 /* LoginViewController.swift */; };
 		C08F8B652CE35E3F87647066 /* Pods_ACTIVESFUTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD7C2D6A3A6DB5CBA8FF7790 /* Pods_ACTIVESFUTests.framework */; };
@@ -84,7 +83,6 @@
 		95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInputContainer.swift; sourceTree = "<group>"; };
 		95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageController.swift; path = Models/ChatMessageController.swift; sourceTree = "<group>"; };
 		95D894D01E6E6D8900E11F82 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
-		95D894D21E6E6DE400E11F82 /* NewMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
 		95D894D41E6E6E7000E11F82 /* CreateEventController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventController.swift; sourceTree = "<group>"; };
 		95EFB39A1E654389006E8115 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		AD7C2D6A3A6DB5CBA8FF7790 /* Pods_ACTIVESFUTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ACTIVESFUTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,7 +173,6 @@
 				95107B041E451F42004F8461 /* AppDelegate.swift */,
 				95107B061E451F42004F8461 /* FindABuddyViewController.swift */,
 				95107B081E451F42004F8461 /* BuddiesViewController.swift */,
-				95D894D21E6E6DE400E11F82 /* NewMessageController.swift */,
 				9526A6421E6D54FF00B7CC7B /* Main.storyboard */,
 				95EFB39A1E654389006E8115 /* LoginViewController.swift */,
 				3EE2D2161E6BE73300070465 /* CalendarViewController.swift */,
@@ -526,7 +523,6 @@
 				95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */,
 				3EE2D2191E6BE73300070465 /* CalendarViewController.swift in Sources */,
 				95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */,
-				95D894D31E6E6DE400E11F82 /* NewMessageController.swift in Sources */,
 				95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */,
 				95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */,
 				95107B071E451F42004F8461 /* FindABuddyViewController.swift in Sources */,

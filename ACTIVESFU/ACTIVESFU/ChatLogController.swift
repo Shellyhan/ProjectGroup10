@@ -14,9 +14,9 @@ import AVFoundation
 
 class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout,  UINavigationControllerDelegate {
     
-    var user: ChatUser? {
+    var user: User? {
         didSet {
-            navigationItem.title = user?.name
+            navigationItem.title = user?.user
             
             observeMessages()
         }
@@ -91,9 +91,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     func setupKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         
-        //                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+   // NotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         //
-        //                NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+   // NotificationCenter.defaultCenter().addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func handleKeyboardDidShow() {
