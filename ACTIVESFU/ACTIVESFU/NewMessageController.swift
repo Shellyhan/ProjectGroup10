@@ -75,7 +75,7 @@ class NewMessageController: UITableViewController {
         dismiss(animated: true) {
             print("Dismiss completed")
             let user = self.users[indexPath.row]
-            self.buddiesViewController?.showChatControllerForChatUser(user)
+            self.buddiesViewController?.showChatControllerForUser(user)
         }
     }
     
