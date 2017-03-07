@@ -24,6 +24,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     var messages = [Message]()
     
+    //let toId = user.id
     func observeMessages() {
         guard let uid = FIRAuth.auth()?.currentUser?.uid, let toId = user?.id else {
             return
@@ -208,8 +209,12 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     fileprivate func sendMessageWithProperties(_ properties: [String: AnyObject]) {
         let ref = FIRDatabase.database().reference().child("messages")
         let childRef = ref.childByAutoId()
-        let toId = user!.id!
+        //let toId = user?.email
+    
+        let toId = user!.id
+        print("toId", toId)
         let fromId = FIRAuth.auth()!.currentUser!.uid
+        print("from ID", fromId)
         let timestamp: NSNumber = NSNumber.init(value: Date().timeIntervalSince1970);
         
         var values: [String: AnyObject] = ["toId": toId as AnyObject, "fromId": fromId as AnyObject, "timestamp": timestamp]
