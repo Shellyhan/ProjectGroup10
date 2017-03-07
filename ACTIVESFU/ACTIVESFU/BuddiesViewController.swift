@@ -18,7 +18,6 @@ class BuddiesViewController: UITableViewController{
     
     
     //MARK: Internal
-    
     var cellID = "cellID"
     var userFormatInDatabase = [User]()
     
@@ -27,17 +26,15 @@ class BuddiesViewController: UITableViewController{
         dismiss(animated: true, completion: nil)
     }
     
-    
     func fetchAllBuddiesInDatabase() {
-        
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: String] {
                 let singleUserInDatabase = User()
+                singleUserInDatabase.id = snapshot.key
                 
                 // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
                 singleUserInDatabase.setValuesForKeys(dictionary)
-                
                 self.userFormatInDatabase.append(singleUserInDatabase)
                 
                 // This will crash because of background thread, so the dispatch fixes it
@@ -52,38 +49,36 @@ class BuddiesViewController: UITableViewController{
         
         dismiss(animated: true, completion: nil)
     }
- 
     
 
     func viewUsernameInDatabase() {
-        
+        /*
         let UID = FIRAuth.auth()?.currentUser?.uid
+        print("current user UID..", UID)
         FIRDatabase.database().reference().child("Users").child(UID!).observeSingleEvent(of: .value, with: { (snapshot) in
             
             if let dictionary = snapshot.value as? [String: Any] {
                 self.navigationItem.title = dictionary["user"] as? String
             }
-        }, withCancel: nil)
-    }
  
+        }, withCancel: nil)
+  */
+    }
+
     
+
     
     //MARK: UITableViewController
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+    
         viewUsernameInDatabase()
         fetchAllBuddiesInDatabase()
-   
-            
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
-            
-       // fetchChatUser()
         
       
     }
@@ -93,7 +88,6 @@ class BuddiesViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let userInDatabase = userFormatInDatabase[indexPath.row]
         
@@ -102,15 +96,6 @@ class BuddiesViewController: UITableViewController{
         
         return tableCell
         
-            /*
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatUserCell
-            
-            let user = userFormatInDatabase[indexPath.row]
-            cell.textLabel?.text = user.name
-            cell.detailTextLabel?.text = user.email
-            
-            return cell
-         */
     }
     
     
@@ -131,11 +116,11 @@ class BuddiesViewController: UITableViewController{
         }
     }
     
-func showChatControllerForUser(_ user: User) {
-    let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
-    chatLogController.user = user
-    navigationController?.pushViewController(chatLogController, animated: true)
-}
+    func showChatControllerForUser(_ user: User) {
+        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
+        chatLogController.user = user
+        navigationController?.pushViewController(chatLogController, animated: true)
+    }
     
     
     func handleCancel() {
@@ -149,16 +134,11 @@ func showChatControllerForUser(_ user: User) {
     
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       // dismiss(animated: true) {
         var user = self.userFormatInDatabase[indexPath.row]
         let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
         chatLogController.user = user
         navigationController?.pushViewController(chatLogController, animated: true)
-    
-        
-            //self.showChatControllerForUser(user)
-       // }
     }
-    }
+}
     
 

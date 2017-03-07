@@ -103,7 +103,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 //            let email:String = "333@gmail.com"
 //            let password:String = "123456"
             func handleRegister() {
-            let name:String = "shelly"
+            let name:String = "Bob"
             let friends:Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
             
             FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
@@ -124,7 +124,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         print(err!)
                         return
                     }
-                   print("Create account successful")                                                                                                                      
+                    let values = ["user": name, "email": self.emailTextField.text!]
+                    
+                    self.registerUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
+                   print("Create account successful")
                 })
             })
         }
@@ -133,6 +136,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         
    }
+    
+    fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
+        let ref = FIRDatabase.database().reference()
+        let usersReference = ref.child("users").child(uid)
+        
+        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+            
+            if err != nil {
+                print(err!)
+                return
+            }
+            
+            let user = User()
+            //this setter potentially crashes if keys don't match
+            user.setValuesForKeys(values)
+            self.dismiss(animated: true, completion: nil)
+        })
+    }
 
 }
     

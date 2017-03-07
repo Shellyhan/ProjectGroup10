@@ -24,11 +24,19 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     var messages = [Message]()
     
-    //let toId = user.id
     func observeMessages() {
+        //let email = user!.email
+       // var emailID = email.replacingOccurrences(of: ".", with: "")
+        guard let uid = FIRAuth.auth()?.currentUser?.uid, var toId = user?.id  else {
+            return
+        }
+        
+        /*
+         //TODO: implement with uid, dont remove
         guard let uid = FIRAuth.auth()?.currentUser?.uid, let toId = user?.id else {
             return
         }
+         */
         
         let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(uid).child(toId)
         userMessagesRef.observe(.childAdded, with: { (snapshot) in
@@ -210,8 +218,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         let ref = FIRDatabase.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         //let toId = user?.email
-    
-        let toId = user!.id
+        let toId = user?.id
         print("toId", toId)
         let fromId = FIRAuth.auth()!.currentUser!.uid
         print("from ID", fromId)
@@ -229,12 +236,12 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             
             self.inputContainerView.inputTextField.text = nil
             
-            let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId).child(toId)
+            let userMessagesRef = FIRDatabase.database().reference().child("user-messages").child(fromId).child(toId!)
             
             let messageId = childRef.key
             userMessagesRef.updateChildValues([messageId: 1])
             
-            let recipientChatUserMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toId).child(fromId)
+            let recipientChatUserMessagesRef = FIRDatabase.database().reference().child("user-messages").child(toId!).child(fromId)
             recipientChatUserMessagesRef.updateChildValues([messageId: 1])
         }
     }
