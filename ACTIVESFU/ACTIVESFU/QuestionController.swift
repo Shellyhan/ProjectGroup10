@@ -10,12 +10,12 @@
 //
 //  Bugs:
 //  users are able to choose more than one choice on questions that are supposed to be only one selection
-//
+//  Sometimes the survey will open then immediately close
 //
 //  Changes:
-//
-//
-//
+//  Changed header color
+//  Allowed multiple selections
+//  Register survey 'data' into firebase
 //
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
