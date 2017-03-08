@@ -2,11 +2,16 @@
 //  ChatClasses.swift
 //  ACTIVESFU
 //
+//  Initializes the classes for the chat feature. Includes the messaging aspect as well as grabbing user data in Firebase
+//
+//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
+//
 //  Created by Bronwyn Biro on 2017-03-06.
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 //
 
 import UIKit
+
 import Firebase
 
 class Message: NSObject {
@@ -23,10 +28,12 @@ class Message: NSObject {
     var videoUrl: String?
     
     func chatPartnerId() -> String? {
+        
         return fromId == FIRAuth.auth()?.currentUser?.uid ? toId : fromId
     }
     
     init(dictionary: [String: AnyObject]) {
+        
         super.init()
         
         fromId = dictionary["fromId"] as? String
@@ -44,6 +51,7 @@ class Message: NSObject {
 
 
 class User: NSObject {
+    
     var id: String?
     var name: String?
     var email: String?
