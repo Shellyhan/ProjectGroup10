@@ -8,6 +8,7 @@ Repository for CMPT276 Group 10. ACTIVE SFU strives to assist in the creation of
 
 - XCode 8.2
 - Swift 3
+- CocoaPods 
 
 ### Installing
 
@@ -15,6 +16,16 @@ Repository for CMPT276 Group 10. ACTIVE SFU strives to assist in the creation of
 git clone https://github.com/SFU-2017-1-cmpt276/ProjectGroup10.git
 cd ProjectGroup10-master
 cd ACTIVESFU
+```
+If you don't have CocoaPods installed, run: 
+```
+sudo gem install cocoapods
+``` 
+If you have problems installing CocoaPods, check [here](https://guides.cocoapods.org/using/troubleshooting#installing-cocoapods) for solutions.  
+Then, run:
+
+```
+pod install
 open ACTIVESFU.xcworkspace
 ```
 
