@@ -23,9 +23,7 @@
 import UIKit
 import Firebase
 
-
 //MARK: MainViewController
-
 
 class MainViewController: UIViewController {
     
