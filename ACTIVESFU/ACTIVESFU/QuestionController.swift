@@ -32,7 +32,6 @@ import Firebase
 
 class QuestionController: UITableViewController {
     
-    
     var surveyScore = 0
     
     let cellID = "cmpt276"
