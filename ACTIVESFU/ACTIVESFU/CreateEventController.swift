@@ -34,13 +34,16 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var privacyPicker: UIPickerView!
    
+    @IBOutlet weak var locationPicker: UIPickerView!
     //date passed from calendar:
     
     var dateIDCreate: String!
     var monthName = ""
     var yearname = ""
     let options = ["Private", "Public"]
-    var selected = ""
+    let locations = ["Gym", "Aquatics centre", "Field"]
+    var selectedLocation = ""
+    var selectedPrivacy = ""
     
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         
@@ -55,7 +58,13 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         eventTextField.delegate = self
         self.privacyPicker.dataSource = self
         self.privacyPicker.delegate = self
-        selected = options[0]
+        
+        self.locationPicker.dataSource = self
+        self.locationPicker.delegate = self
+        locationPicker.tag = 0
+        privacyPicker.tag = 1
+        
+        //selected = options[0]
         print("------------have it \(dateIDCreate)") 
     }
 
@@ -86,18 +95,26 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
+        if (pickerView.tag == 0){
+            return locations.count
+        }
         return options.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
+        if (pickerView.tag == 0){
+            return locations[row]
+        }
         return options[row]
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        selected = options[row] as! String
+        if (pickerView.tag == 0){
+            selectedLocation = locations[row] as! String
+        }
+        else {
+        selectedPrivacy = options[row] as! String
+    }
     }
    
     @IBAction func createEventButton(_ sender: UIButton) {
@@ -121,8 +138,8 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let date = datePicker.date as NSDate!
         var dateString = dateFormatter.string(from: date as! Date)
         print("date:", date)
-        let location = "SFU"
-        let privacy = selected
+        let location = selectedLocation
+        let privacy = selectedPrivacy
         
         //insert event:
         
