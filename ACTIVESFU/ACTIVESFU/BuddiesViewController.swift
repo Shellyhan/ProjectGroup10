@@ -16,6 +16,10 @@ import FirebaseAuth
 
 class BuddiesViewController: UITableViewController{
     
+    @IBAction func backButton(_ sender: UIBarButtonItem) {
+        
+        dismiss(animated: true, completion: nil)
+    }
     
     //MARK: Internal
     var cellID = "cellID"
@@ -117,9 +121,12 @@ class BuddiesViewController: UITableViewController{
     }
     
     func showChatControllerForUser(_ user: User) {
-        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
-        chatLogController.user = user
-        navigationController?.pushViewController(chatLogController, animated: true)
+        
+       if let chatLogSegue = self.storyboard?.instantiateViewController(withIdentifier: "chatLogID") as? ChatLogController {
+            chatLogSegue.user = user
+            let navController = UINavigationController(rootViewController: chatLogSegue)
+            present(navController, animated: true, completion: nil)
+        }
     }
     
     
@@ -131,14 +138,9 @@ class BuddiesViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 72
     }
-    
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var user = self.userFormatInDatabase[indexPath.row]
-        let chatLogController = ChatLogController(collectionViewLayout: UICollectionViewFlowLayout())
-        chatLogController.user = user
-        navigationController?.pushViewController(chatLogController, animated: true)
+        showChatControllerForUser(user)
     }
 }
-    
-
