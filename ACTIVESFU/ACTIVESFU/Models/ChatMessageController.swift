@@ -1,6 +1,7 @@
 //
 //  ChatMessageController.swift
-//  ACTIVESFU
+//
+//  Handles the messaging in the chat feature
 //
 //  Created by Bronwyn Biro on 2017-03-06.
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
@@ -11,13 +12,22 @@ import Foundation
 import UIKit
 import AVFoundation
 
+
+//MARK: ChatMessageCell
+
+
 class ChatMessageCell: UICollectionViewCell {
     
     var message: Message?
     
     var chatLogController: ChatLogController?
     
+    var bubbleWidthAnchor: NSLayoutConstraint?
+    var bubbleViewRightAnchor: NSLayoutConstraint?
+    var bubbleViewLeftAnchor: NSLayoutConstraint?
+    
     let activityIndicatorView: UIActivityIndicatorView = {
+        
         let aiv = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         aiv.translatesAutoresizingMaskIntoConstraints = false
         aiv.hidesWhenStopped = true
@@ -25,11 +35,8 @@ class ChatMessageCell: UICollectionViewCell {
     }()
     
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-    }
-    
     let textView: UITextView = {
+        
         let tv = UITextView()
         tv.text = "test"
         tv.font = UIFont.systemFont(ofSize: 16)
@@ -51,12 +58,14 @@ class ChatMessageCell: UICollectionViewCell {
         return view
     }()
     
+    override func prepareForReuse() {
+        
+        super.prepareForReuse()
+    }
     
-    var bubbleWidthAnchor: NSLayoutConstraint?
-    var bubbleViewRightAnchor: NSLayoutConstraint?
-    var bubbleViewLeftAnchor: NSLayoutConstraint?
     
     override init(frame: CGRect) {
+        
         super.init(frame: frame)
         
         addSubview(bubbleView)
@@ -78,10 +87,9 @@ class ChatMessageCell: UICollectionViewCell {
         textView.rightAnchor.constraint(equalTo: bubbleView.rightAnchor).isActive = true
         textView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
     }
-    
     //Required for UIView
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

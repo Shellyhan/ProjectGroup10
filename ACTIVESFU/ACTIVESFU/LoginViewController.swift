@@ -27,6 +27,7 @@ import Firebase
 
 //MARK: LoginViewController
 
+
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
     
@@ -75,6 +76,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func segueToSurvey(){
+        
         UINavigationBar.appearance().barTintColor = UIColor.purple
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 
@@ -113,10 +115,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             guard let userUID = user?.uid
-                
-                else {
-                    
-                    return
+            else {
+                return
             }
             
             self.firebaseReference = FIRDatabase.database().reference()
@@ -169,46 +169,39 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
 
 fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
-        let ref = FIRDatabase.database().reference()
-        let usersReference = ref.child("users").child(uid)
-
+    
+    let referenceToDatabase = FIRDatabase.database().reference()
+    let usersReference = referenceToDatabase.child("users").child(uid)
+    let userUsername: String = "shelly"
+        //let userFriends: Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
         
-        let userUsername: String = "shelly"
-        let userFriends: Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
-        
-        FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
-            if error != nil {
+    FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
+        if error != nil {
                 
-                print(error!)
-                return
-            }
-            guard let userUID = user?.uid
-                
-                else {
+            print(error!)
+            return
+        }
+        guard let userUID = user?.uid
+        else {
                     
-                    return
-            }
+        return
+        }
             
-            self.firebaseReference = FIRDatabase.database().reference()
-            let userReferenceInDatabase = self.firebaseReference.child("Users").child(userUID)
+    self.firebaseReference = FIRDatabase.database().reference()
+    let userReferenceInDatabase = self.firebaseReference.child("Users").child(userUID)
             
-            //insert user
-            userReferenceInDatabase.updateChildValues(["user": userUsername, "email": self.emailTextField.text!, "contact": userFriends], withCompletionBlock: { (err, ref) in
-                if err != nil {
+    //insert user
+    userReferenceInDatabase.updateChildValues(["user": userUsername, "email": self.emailTextField.text!], withCompletionBlock: { (err, ref) in
+        if err != nil {
                     
-                    print(err!)
-                    return
-                }
-                print("Create account successful")
-                self.segueToSurvey()
-            })
-        })
-    }
-    
-    
-    
-    //MARK: UITextFieldDelegate
-    
+            print(err!)
+            return
+        }
+        print("Create account successful")
+        self.segueToSurvey()
+    })
+    })
+}
 }
 
     

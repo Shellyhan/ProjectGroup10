@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+
 import Firebase
 
 class Message: NSObject {
@@ -19,10 +20,12 @@ class Message: NSObject {
     var toId: String?
     
     func chatBuddyId() -> String? {
+        
         return fromId == FIRAuth.auth()?.currentUser?.uid ? toId : fromId
     }
     
     init(dictionary: [String: AnyObject]) {
+        
         super.init()
         
         fromId = dictionary["fromId"] as? String
@@ -31,7 +34,6 @@ class Message: NSObject {
         toId = dictionary["toId"] as? String
     }
 }
-
 /*
 class ChatUser: NSObject {
     var id: String?
@@ -39,4 +41,3 @@ class ChatUser: NSObject {
     var email: String?
 }
  */
-

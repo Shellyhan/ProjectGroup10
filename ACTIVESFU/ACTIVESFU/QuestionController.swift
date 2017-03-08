@@ -32,10 +32,11 @@ import Firebase
 
 class QuestionController: UITableViewController {
     
-    let cellID = "cmpt276"
-    let headerId = "headerId"
     
     var surveyScore = 0
+    
+    let cellID = "cmpt276"
+    let headerId = "headerId"
     
     func userClickedContinue() {
         
@@ -95,8 +96,10 @@ class QuestionController: UITableViewController {
         
         // This is for accessing the desired question
         if let questionIndex = navigationController?.viewControllers.index(of: self) {
+            
             let surveyQuestion = questionsList[questionIndex]
             if let count = surveyQuestion.answers?.count {
+                
                 return count
             }
         }
@@ -113,6 +116,7 @@ class QuestionController: UITableViewController {
         tableCell.selectionStyle = .none
         
         if let questionIndex = navigationController?.viewControllers.index(of: self) {
+            
             let surveyQuestion = questionsList[questionIndex]
             tableCell.nameLabel.text = surveyQuestion.answers?[indexPath.row]
         }
@@ -126,6 +130,7 @@ class QuestionController: UITableViewController {
             as! QuestionHeader
         
         if let index = navigationController?.viewControllers.index(of: self) {
+            
             let question = questionsList[index]
             questionHeader.nameLabel.text = question.questionString
         }
@@ -156,7 +161,6 @@ class QuestionController: UITableViewController {
 class ResultsController: UIViewController {
     
     var surveyScore = 0
-    
     var currentSurveyQuestion: Question? {
         
         didSet {
@@ -268,6 +272,7 @@ class AnswerCell: UITableViewCell {
     
     // Create and set label properties
     let nameLabel: UILabel = {
+        
         let answerLabel = UILabel()
         answerLabel.font = UIFont.systemFont(ofSize: 14)
         answerLabel.text = "Answers"

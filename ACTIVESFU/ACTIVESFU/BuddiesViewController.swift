@@ -1,11 +1,23 @@
 //
-//  SecondViewController.swift
-//  ACTIVESFU
+//  BuddiesViewController.swift
+//  Developed by Ryan Brown, Nathan Cheung, Bronwyn Biro
 //
-//  Created by Bronwyn Biro on 2017-02-03.
+//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
+//
+//  Allows the user to view previous buddies he or she has matched with throughout the app's use.
+//  this also branches into the chat function where users can chat with matched buddies
+//
+//  Bugs:
+//  Users in the table are all users in the database, not the ones matched to the current user.
+//
+//
+//  Changes:
+//  Added segue to chat
+//  Save snapshot for user ID
+//
+//
+//
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
-//
-// Worked on by: Ryan, Nathan, Bronwyn
 
 import UIKit
 import Firebase

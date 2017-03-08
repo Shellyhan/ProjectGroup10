@@ -2,6 +2,8 @@
 //  ChatInputContainer.swift
 //  ACTIVESFU
 //
+//  Creates where the user will type when using the chat feature.
+//
 //  Created by Bronwyn Biro on 2017-03-06.
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 //
@@ -12,19 +14,23 @@ import UIKit
 
 class ChatInputContainerView: UIView, UITextFieldDelegate {
     
-    weak var chatLogController: ChatLogController? {
-        didSet {
-            sendButton.addTarget(chatLogController, action: #selector(ChatLogController.handleSend), for: .touchUpInside)
-        }
-    }
-    
     lazy var inputTextField: UITextField = {
+        
         let textField = UITextField()
         textField.placeholder = "Send a message..."
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
         return textField
     }()
+    
+    weak var chatLogController: ChatLogController? {
+        
+        didSet {
+            
+            sendButton.addTarget(chatLogController, action: #selector(ChatLogController.handleSend), for: .touchUpInside)
+        }
+    }
+    
     
     let sendButton = UIButton(type: .system)
     
@@ -62,14 +68,14 @@ class ChatInputContainerView: UIView, UITextFieldDelegate {
     
     //Required method, UIView won't compile without this
     required init?(coder aDecoder: NSCoder) {
+        
         fatalError("init(coder:) has not been implemented")
     }
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         chatLogController?.handleSend()
         return true
     }
-    
-    
 }

@@ -37,14 +37,9 @@ class ViewCalendarController: UIViewController {
     //MARK: Internal
     
     
-    
     @IBOutlet weak var monthLabel: UILabel!
     @IBOutlet weak var calendarView: JTAppleCalendarView!
     
-    @IBAction func backButton(_ sender: UIBarButtonItem) {
-        
-        dismiss(animated: true, completion: nil)
-    }
     //set variables for the calendar
     let date = Date()
     let numberOfRows = 6
@@ -59,8 +54,80 @@ class ViewCalendarController: UIViewController {
     let darkPurple = UIColor(colorWithHexValue: 0x3A284C)
     let dimPurple = UIColor(colorWithHexValue: 0x574865)
     
+    @IBAction func backButton(_ sender: UIBarButtonItem) {
+        
+        dismiss(animated: true, completion: nil)
+    }
     
+    @IBAction func menuButton(_ sender: UIBarButtonItem) {
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func backToMenu(){
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func setupViewsOfCalendar(from visibleDates: DateSegmentInfo) { //setup display of month and year
+        
+        guard let startDate = visibleDates.monthDates.first else {
+            
+            return
+        }
+        
+        let month = testCalendar.dateComponents([.month], from: startDate).month!
+        let monthName = DateFormatter().monthSymbols[(month-1) % 12]
+        //0 indexed array
+        let year = testCalendar.component(.year, from: startDate)
+        
+        monthLabel.text = monthName + " " + String(year)
+    }
+    
+    func handleCellTextColor(view: JTAppleDayCellView?, cellState: CellState) { //configure celltextcolor
+        
+        guard let myCustomCell = view as? CellView  else {
+            
+            return
+        }
+        
+        if cellState.isSelected {
+            
+            myCustomCell.dayLabel.textColor = darkPurple
+        }
+        else {
+            
+            if cellState.dateBelongsTo == .thisMonth {
+                
+                myCustomCell.dayLabel.textColor = white
+            }
+            else {
+                
+                myCustomCell.dayLabel.textColor = dimPurple
+            }
+        }
+    }
+ 
+    // Function to handle the calendar selection
+    func handleCellSelection(view: JTAppleDayCellView?, cellState: CellState) {
+        
+        guard let myCustomCell = view as? CellView  else {
+            
+            return
+        }
+        if cellState.isSelected {
+            
+            myCustomCell.selectedView.layer.cornerRadius =  25
+            myCustomCell.selectedView.isHidden = false
+        }
+        else {
+            
+            myCustomCell.selectedView.isHidden = true
+        }
+    }
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         formatter.dateFormat = "dd.MM.yyyy"
@@ -80,74 +147,7 @@ class ViewCalendarController: UIViewController {
     }
     
 
-    @IBAction func menuButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-
-    }
-    
-    func backToMenu(){
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func setupViewsOfCalendar(from visibleDates: DateSegmentInfo) { //setup display of month and year
-        
-        guard let startDate = visibleDates.monthDates.first else {
-            return
-        }
-        
-        let month = testCalendar.dateComponents([.month], from: startDate).month!
-        let monthName = DateFormatter().monthSymbols[(month-1) % 12]
-        //0 indexed array
-        let year = testCalendar.component(.year, from: startDate)
-        
-        monthLabel.text = monthName + " " + String(year)
-
-    }
-    
-    func handleCellTextColor(view: JTAppleDayCellView?, cellState: CellState) { //configure celltextcolor
-        
-        guard let myCustomCell = view as? CellView  else {
-            return
-        }
-        
-        if cellState.isSelected {
-            
-            myCustomCell.dayLabel.textColor = darkPurple
-        }
-        else {
-            
-            if cellState.dateBelongsTo == .thisMonth {
-                myCustomCell.dayLabel.textColor = white
-            }
-            else {
-                
-                myCustomCell.dayLabel.textColor = dimPurple
-            }
-        }
-    }
-    
-    // Function to handle the calendar selection
-    func handleCellSelection(view: JTAppleDayCellView?, cellState: CellState) {
-        
-        guard let myCustomCell = view as? CellView  else {
-            
-            return
-        }
-        if cellState.isSelected {
-            
-            myCustomCell.selectedView.layer.cornerRadius =  25
-            myCustomCell.selectedView.isHidden = false
-        }
-        else {
-            
-            myCustomCell.selectedView.isHidden = true
-        }
-    }
-    
-    
     //MARK: UIViewController
-    
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -183,6 +183,7 @@ extension ViewCalendarController: JTAppleCalendarViewDataSource, JTAppleCalendar
     func calendar(_ calendar: JTAppleCalendarView, willDisplayCell cell: JTAppleDayCellView, date: Date, cellState: CellState) {
         
         let myCustomCell = cell as! CellView
+        
         
         // Setup Cell text
         myCustomCell.dayLabel.text = cellState.text
@@ -223,8 +224,6 @@ extension ViewCalendarController: JTAppleCalendarViewDataSource, JTAppleCalendar
         print(dateString)
         
         present(segueEvent, animated: true, completion: nil)
-        
-        
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
