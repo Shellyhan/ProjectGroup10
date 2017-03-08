@@ -21,9 +21,7 @@
 //TODO: Implement Maps integration, select location
 
 import UIKit
-
 import Firebase
-
 
 class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
@@ -32,55 +30,51 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         dismiss(animated: true, completion: nil)
     }
 
-    
     @IBOutlet weak var eventTextField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var privacyPicker: UIPickerView!
-    
-
+   
     //date passed from calendar:
+    
     var dateIDCreate: String!
     var monthName = ""
     var yearname = ""
-    
     let options = ["Private", "Public"]
     var selected = ""
     
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
+        
         dismiss(animated: true, completion: nil)
     }
-    
-    
     
     //MARK: UIViewController
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         eventTextField.delegate = self
         self.privacyPicker.dataSource = self
         self.privacyPicker.delegate = self
         selected = options[0]
-        
-        print("------------have it \(dateIDCreate)")
-        
+        print("------------have it \(dateIDCreate)") 
     }
-    
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
+        
         // Dispose of any resources that can be recreated.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.returnKeyType = UIReturnKeyType.done
         
+        textField.returnKeyType = UIReturnKeyType.done
         return true
     }
     
@@ -105,22 +99,21 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         selected = options[row] as! String
     }
-    
-    
-
+   
     @IBAction func createEventButton(_ sender: UIButton) {
+        
         //get the user info
+        
         let uid = FIRAuth.auth()?.currentUser?.uid
         let ref = FIRDatabase.database().reference()
         let UsersRef = ref.child("Users").child(uid!)
-        UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
-            //print(snapshot)
+        UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in //print(snapshot)
         }, withCancel: nil)
         
         //create event
+        
         let EventRef = ref.child("Events")
         let EventKey = EventRef.childByAutoId().key
-        
         let owner = uid
         let title = eventTextField.text!
         let dateFormatter = DateFormatter()
@@ -131,34 +124,27 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let location = "SFU"
         let privacy = selected
         
-        
-        
         //insert event:
+        
         let eventContent = ["uid": owner,
                             "title": title,
                             "date": dateIDCreate,
                             "location": location,
                             "privacy": privacy] as [String : Any]
-        
-        
         let eventUpdates = ["\(EventKey)": eventContent]
         EventRef.updateChildValues(eventUpdates)
         
         //display event info:
+        
         EventRef.child(EventKey).observeSingleEvent(of: .value, with: { (snapshot) in
             print("----------event info--------------")
             print(snapshot)
             }, withCancel: nil)
-        
         let alertController = UIAlertController(title: "Create New Event", message: "Successfully created a new event", preferredStyle: .alert)
-        
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(defaultAction)
-        
         present(alertController, animated: true, completion: nil)
-        
-        
-        
+       
         /*
          //update event:
          //example: update location and provacy:
@@ -169,10 +155,8 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
          "privacy": privacy1]
          EventRef.child(EventKey).updateChildValues(eventUpateContent)
          */
-        
-        
     }
-
+    
     /*
      // MARK: - Navigation
      
@@ -181,6 +165,5 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
      // Get the new view controller using segue.destinationViewController.
      // Pass the selected object to the new view controller.
      }
-     */
-    
+     */    
 }
