@@ -46,15 +46,8 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func calendarSegue(_ sender: UIButton) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        let calendarController = storyboard?.instantiateViewController(withIdentifier: "calendarViewID") as! ViewController
-=======
+
         let calendarController = storyboard?.instantiateViewController(withIdentifier: "calendarViewID") as! ViewCalendarController
->>>>>>> origin/pls
-=======
-        let calendarController = storyboard?.instantiateViewController(withIdentifier: "calendarViewID") as! ViewCalendarController
->>>>>>> origin/pls
         present(calendarController, animated: true, completion: nil)
     }
     

@@ -1,7 +1,6 @@
 //
 //  CalendarViewController.swift
 //  Developed by Nathan Cheung, Xue (Shelly) Han
-
 //
 //  Inspired by Jeron Thomas (JTAppleCalendar): github.com/patchthecode/JTAppleCalendar
 //
@@ -16,32 +15,6 @@
 //
 //
 //  Changes:
-
-//
-//
-//
-//
-//
-
-//
-//  Inspired by Jeron Thomas (JTAppleCalendar): github.com/patchthecode/JTAppleCalendar
-//
-//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
-//
-//  View controller when the user wants to see the calendar to find or create an event.
-//  A calendar will show up and the user will be able to select a date and choose to either
-//  view events on that day, or create one.
-//
-//  Bugs:
-//
-//
-//
-//  Changes:
-//
-//
-//
-//
-//
 //
 //
 //
@@ -53,7 +26,6 @@ import UIKit
 import Foundation
 
 import JTAppleCalendar
-
 
 //MARK: VewCalendarController
 
@@ -105,11 +77,14 @@ class ViewCalendarController: UIViewController {
             self.setupViewsOfCalendar(from: visibleDates)
         }
         
-=======
+
     @IBAction func menuButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
->>>>>>> origin/pls
-=======
+
+    @IBAction func menuButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+
+    
     @IBAction func menuButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
 
@@ -130,15 +105,7 @@ class ViewCalendarController: UIViewController {
         let monthName = DateFormatter().monthSymbols[(month-1) % 12]
         //0 indexed array
         let year = testCalendar.component(.year, from: startDate)
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-        monthLabel.text = monthName + " " + String(year)
-        
-=======
->>>>>>> origin/pls
-=======
->>>>>>> origin/pls
+
         
         monthLabel.text = monthName + " " + String(year)
     }
@@ -263,8 +230,7 @@ extension ViewCalendarController: JTAppleCalendarViewDataSource, JTAppleCalendar
         handleCellTextColor(view: cell, cellState: cellState)
         
         //navigate to create event
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         //let segueEvent = storyboard?.instantiateViewController(withIdentifier: "CreateEvent_ID") as! CreateEventController
         
         let segueEvent = storyboard?.instantiateViewController(withIdentifier: "SelectDate_ID") as! SelectDateViewController
@@ -280,16 +246,7 @@ extension ViewCalendarController: JTAppleCalendarViewDataSource, JTAppleCalendar
         print(dateString)
         
         present(segueEvent, animated: true, completion: nil)
-        
-        
-=======
-        let createEventController = storyboard?.instantiateViewController(withIdentifier: "CreateEvent_ID") as! CreateEventController
-        present(createEventController, animated: true, completion: nil)
->>>>>>> origin/pls
-=======
-        let createEventController = storyboard?.instantiateViewController(withIdentifier: "CreateEvent_ID") as! CreateEventController
-        present(createEventController, animated: true, completion: nil)
->>>>>>> origin/pls
+
     }
     
     func calendar(_ calendar: JTAppleCalendarView, didDeselectDate date: Date, cell: JTAppleDayCellView?, cellState: CellState) {
@@ -322,3 +279,4 @@ extension UIColor {
         )
     }
 }
+

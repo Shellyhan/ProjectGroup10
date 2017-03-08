@@ -24,6 +24,7 @@ import UIKit
 
 import Firebase
 
+
 class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
     @IBAction func backButton(_ sender: UIBarButtonItem) {
@@ -31,20 +32,13 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         dismiss(animated: true, completion: nil)
     }
 
-
 //MARK: CreateEventController
 
->>>>>>> origin/pls
 
-class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    
-    //MARK: Internal
-
-    
     @IBOutlet weak var eventTextField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var privacyPicker: UIPickerView!
+
 
     //date passed from calendar:
     var dateIDCreate: String!
@@ -53,14 +47,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     let options = ["Private", "Public"]
     var selected = ""
-    
-    let options = ["Private", "Public"]
-    var selected = ""
-    
 
-    let options = ["Private", "Public"]
-    var selected = ""
-    
 
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
@@ -151,6 +138,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
 
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -168,6 +156,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     //MARK: UIPicker methods
+
 
     
     //MARK: UIPickerDelegate
@@ -195,6 +184,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     
+
 
     @IBAction func createEventButton(_ sender: UIButton) {
         //get the user info

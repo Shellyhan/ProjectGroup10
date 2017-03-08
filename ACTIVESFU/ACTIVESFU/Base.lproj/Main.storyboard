@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Yp3-on-Mxn">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZSi-ZB-6ud">
+>>>>>>> origin/pls
 =======
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZSi-ZB-6ud">
 >>>>>>> origin/pls
@@ -55,7 +59,11 @@
                                 <connections>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                     <action selector="calendarSegue:" destination="pTr-PA-EUS" eventType="touchUpInside" id="VsW-nC-Idt"/>
+=======
+                                    <segue destination="Fdb-rD-UKc" kind="show" identifier="calendarViewID" id="tev-Um-a3d"/>
+>>>>>>> origin/pls
 =======
                                     <segue destination="Fdb-rD-UKc" kind="show" identifier="calendarViewID" id="tev-Um-a3d"/>
 >>>>>>> origin/pls
