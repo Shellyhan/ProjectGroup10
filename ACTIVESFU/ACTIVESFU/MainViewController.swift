@@ -21,7 +21,6 @@
 
 
 import UIKit
-
 import Firebase
 
 
@@ -29,7 +28,6 @@ import Firebase
 
 
 class MainViewController: UIViewController {
-    
     
     //MARK: Internal
     
@@ -39,7 +37,6 @@ class MainViewController: UIViewController {
         present(buddiesController, animated: true, completion: nil)
     }
     
-    
     @IBAction func logoutButton(_ sender: UIButton) {
         
         handleLogout()
@@ -48,7 +45,6 @@ class MainViewController: UIViewController {
     @IBAction func calendarSegue(_ sender: UIButton) {
 
         let calendarController = storyboard?.instantiateViewController(withIdentifier: "calendarViewID") as! ViewCalendarController
-
         present(calendarController, animated: true, completion: nil)
     }
     
@@ -63,24 +59,19 @@ class MainViewController: UIViewController {
             print("User is logged in")
         }
     }
-    
-    
-    
+     
     func handleLogout() {
         
         do {
             
             try FIRAuth.auth()?.signOut()
         } catch let logoutError { print(logoutError) }
-        
         let loginController = storyboard?.instantiateViewController(withIdentifier: "LoginViewID") as! LoginViewController
         present(loginController, animated: true, completion: nil)
     }
-    
-    
+   
     //MARK: UIViewController
-    
-    
+   
     override func viewDidLoad() {
         
         super.viewDidLoad()
