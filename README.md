@@ -30,6 +30,7 @@ open ACTIVESFU.xcworkspace
 ```
 
 NOTE: You must open ACTIVESFU.xcworkspace, not ACTIVESFU.xcodeproj, due to a CocoaPods dependency.
+NOTE: The user interface is best viewed as an iPhone 6.
 
 ## Authors
 
