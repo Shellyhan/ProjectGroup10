@@ -21,37 +21,98 @@
 //TODO: Implement Maps integration, select location
 
 import UIKit
+
 import Firebase
 
 class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
-    @IBAction func backButton(_ sender: UIBarButtonItem) {
-        
-        dismiss(animated: true, completion: nil)
-    }
 
     @IBOutlet weak var eventTextField: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var privacyPicker: UIPickerView!
-   
     @IBOutlet weak var locationPicker: UIPickerView!
     //date passed from calendar:
     
     var dateIDCreate: String!
     var monthName = ""
     var yearname = ""
-    let options = ["Private", "Public"]
-    let locations = ["Gym", "Aquatics centre", "Field"]
     var selectedLocation = ""
     var selectedPrivacy = ""
+    
+    let options = ["Private", "Public"]
+    let locations = ["Gym", "Aquatics centre", "Field"]
+    
+    @IBAction func backButton(_ sender: UIBarButtonItem) {
+        
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func cancelButton(_ sender: UIBarButtonItem) {
         
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func createEventButton(_ sender: UIButton) {
+        
+        //get the user info
+        
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        let ref = FIRDatabase.database().reference()
+        let UsersRef = ref.child("Users").child(uid!)
+        UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in //print(snapshot)
+            }, withCancel: nil)
+        
+        //create event
+        
+        let EventRef = ref.child("Events")
+        let EventKey = EventRef.childByAutoId().key
+        let owner = uid
+        let title = eventTextField.text!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM dd, yyyy"
+        let date = datePicker.date as NSDate!
+        var dateString = dateFormatter.string(from: date as! Date)
+        print("date:", date)
+        let location = selectedLocation
+        let privacy = selectedPrivacy
+        
+        //insert event:
+        
+        let eventContent = ["uid": owner,
+                            "title": title,
+                            "date": dateIDCreate,
+                            "location": location,
+                            "privacy": privacy] as [String : Any]
+        let eventUpdates = ["\(EventKey)": eventContent]
+        EventRef.updateChildValues(eventUpdates)
+        
+        //display event info:
+        
+        EventRef.child(EventKey).observeSingleEvent(of: .value, with: { (snapshot) in
+            print("----------event info--------------")
+            print(snapshot)
+            }, withCancel: nil)
+        let alertController = UIAlertController(title: "Create New Event", message: "Successfully created a new event", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        present(alertController, animated: true, completion: nil)
+        
+        /*
+         //update event:
+         //example: update location and provacy:
+         let location1 = "swimming pool"
+         let privacy1 = "0" //1 = open to all, 0 = owner
+         let eventUpateContent = [
+         "location": location1,
+         "privacy": privacy1]
+         EventRef.child(EventKey).updateChildValues(eventUpateContent)
+         */
+    }
+    
+    
     //MARK: UIViewController
 
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -65,7 +126,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         privacyPicker.tag = 1
         
         //selected = options[0]
-        print("------------have it \(dateIDCreate)") 
+        print("------------have it \(dateIDCreate)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -117,62 +178,6 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     }
    
-    @IBAction func createEventButton(_ sender: UIButton) {
-        
-        //get the user info
-        
-        let uid = FIRAuth.auth()?.currentUser?.uid
-        let ref = FIRDatabase.database().reference()
-        let UsersRef = ref.child("Users").child(uid!)
-        UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in //print(snapshot)
-        }, withCancel: nil)
-        
-        //create event
-        
-        let EventRef = ref.child("Events")
-        let EventKey = EventRef.childByAutoId().key
-        let owner = uid
-        let title = eventTextField.text!
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMMM dd, yyyy"
-        let date = datePicker.date as NSDate!
-        var dateString = dateFormatter.string(from: date as! Date)
-        print("date:", date)
-        let location = selectedLocation
-        let privacy = selectedPrivacy
-        
-        //insert event:
-        
-        let eventContent = ["uid": owner,
-                            "title": title,
-                            "date": dateIDCreate,
-                            "location": location,
-                            "privacy": privacy] as [String : Any]
-        let eventUpdates = ["\(EventKey)": eventContent]
-        EventRef.updateChildValues(eventUpdates)
-        
-        //display event info:
-        
-        EventRef.child(EventKey).observeSingleEvent(of: .value, with: { (snapshot) in
-            print("----------event info--------------")
-            print(snapshot)
-            }, withCancel: nil)
-        let alertController = UIAlertController(title: "Create New Event", message: "Successfully created a new event", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        present(alertController, animated: true, completion: nil)
-       
-        /*
-         //update event:
-         //example: update location and provacy:
-         let location1 = "swimming pool"
-         let privacy1 = "0" //1 = open to all, 0 = owner
-         let eventUpateContent = [
-         "location": location1,
-         "privacy": privacy1]
-         EventRef.child(EventKey).updateChildValues(eventUpateContent)
-         */
-    }
     
     /*
      // MARK: - Navigation

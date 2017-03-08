@@ -20,6 +20,7 @@
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
 import UIKit
+
 import Firebase
 import FirebaseAuth
 
@@ -27,15 +28,17 @@ import FirebaseAuth
 
 class BuddiesViewController: UITableViewController{
     
+    
+    //MARK: Internal
+    
+    
+    var cellID = "cellID"
+    var userFormatInDatabase = [User]()
+    
     @IBAction func backButton(_ sender: UIBarButtonItem) {
         
         dismiss(animated: true, completion: nil)
     }
-    
-    //MARK: Internal
-    
-    var cellID = "cellID"
-    var userFormatInDatabase = [User]()
     
     @IBAction func backMenu(_ sender: UIBarButtonItem) {
         
@@ -86,7 +89,9 @@ class BuddiesViewController: UITableViewController{
   */
     }
 
+    
     //MARK: UITableViewController
+    
     
     override func viewDidLoad() {
         
@@ -110,8 +115,10 @@ class BuddiesViewController: UITableViewController{
         tableCell.detailTextLabel?.text = userInDatabase.email // Comment this out if we don't want to display the email
         return tableCell 
     }
-      
+    
+    
     //MARK: UserCell
+    
     
     class UserCell: UITableViewCell {
         

@@ -1,10 +1,20 @@
+//  SelectDateViewController.swift
+//  Developed by Xue (Shelly) Han
 //
-//  SelectCreateViewController.swift
-//  ACTIVESFU
+//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
-//  Created by CoolMac on 2017-03-07.
+//  Allows the user to select if they would like to view events or create event on the day they have chosen
+//  In the previous calendar page.
+//
+//  Bugs:
+//
+//
+//
+//  Changes:
+//
+//
+//
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
-//
 
 import UIKit
 
