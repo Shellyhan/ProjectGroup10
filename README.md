@@ -14,7 +14,7 @@ Repository for CMPT276 Group 10. ACTIVE SFU strives to assist in the creation of
 
 ```
 git clone https://github.com/SFU-2017-1-cmpt276/ProjectGroup10.git
-cd ProjectGroup10-master
+cd ProjectGroup10
 cd ACTIVESFU
 ```
 If you don't have CocoaPods installed, run: 
