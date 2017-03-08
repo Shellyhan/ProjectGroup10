@@ -1,143 +1,171 @@
 //
 //  LoginViewController.swift
-//  ACTIVESFU
+//  Developed by Carber Zhang, Nathan Cheung
 //
-//  Created by Bronwyn Biro on 2017-02-27.
+//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
+//
+//  The view controller the user sees when he is not logged into his account or starts the app
+//  for the first time. User is able to register using email and a password and data will be saved
+//  in Firebase.
+//
+//  Bugs:
+//
+//
+//
+//  Changes:
+//  Allowed keyboard to be dismissed when pressing 'done'
+//  Changed transition from navigate to dismiss
+//
+//
+//
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
-//
-// Worked on by: Shelly, Carber
-
 import UIKit
+
 import Firebase
+
+
+//MARK: LoginViewController
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
+    
+    //MARK: Internal
+    
+    
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    var ref: FIRDatabaseReference!
     
-       override func viewDidLoad() {
-        super.viewDidLoad()
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        ref = FIRDatabase.database().reference()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textField.returnKeyType = UIReturnKeyType.done
-        self.emailTextField.keyboardType = UIKeyboardType.emailAddress
-        return true
-    }
-  
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
+    var firebaseReference: FIRDatabaseReference!
     
     @IBAction func loginButton(_ sender: UIButton) {
-        if (self.emailTextField.text=="" || self.passwordTextField.text==""){
-            //shelly's code
+        
+        if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
+            
             print("Login was pressed")
             
-            
-            //carber's code
             let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
             let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(defaulAction)
-            
-            self.present(alertController, animated: true, completion: nil)
-        }
-        else
-        {
-            func handleLogin() {
-                //wait for user input
-                //                let email: String = "333@gmail.com"
-                //                let password: String = "123456"
-                
-                //checking the authentication:
-                FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
-                    if error != nil {
-                        print(error!)
-                        return
-                    }
-                    else{
-                        print("login successful")
-                        let loggedInScene = self.navigationController?.storyboard?.instantiateViewController(withIdentifier: "mainmenuVC_ID") as! MainViewController
-                        self.navigationController?.pushViewController(loggedInScene, animated: true)
-                    }
-                })
-                //show the user info
-                let uid = FIRAuth.auth()?.currentUser?.uid
-                self.ref = FIRDatabase.database().reference()
-                let UsersRef = self.ref.child("Users").child(uid!)
-                UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in
-                    print(snapshot)
-                }, withCancel: nil)
-            
-                
-            }
-            
-            handleLogin()
-            
-        } 
-   }
-
-     @IBAction func accountButton(_ sender: UIButton) {
-        if (self.emailTextField.text=="" || self.passwordTextField.text==""){
-            let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
-            let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-            alertController.addAction(defaulAction)
-            
             
             self.present(alertController, animated: true, completion: nil)
         }
         else {
-            //wait for user input
-            // guard let email = usernameTextField.text, let password = passwordTextField.text, let name = usernameTextField.text else {
-//            let email:String = "333@gmail.com"
-//            let password:String = "123456"
-            func handleRegister() {
-            let name:String = "Bob"
-            let friends:Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
             
-            FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
-                if error != nil {
-                    print(error!)
+            handleLogin()
+        }
+    }
+    
+    @IBAction func accountButton(_ sender: UIButton) {
+        
+        if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
+            
+            let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
+            let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            
+            alertController.addAction(defaulAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+        else {
+            
+            handleRegister()
+        }
+    }
+    
+    func segueToSurvey(){
+        UINavigationBar.appearance().barTintColor = UIColor.purple
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        
+        let surveyController = QuestionController()
+        let navController = UINavigationController(rootViewController: surveyController)
+        self.present(navController, animated: true, completion: nil)
+    }
+    
+    func handleLogin() {
+        
+        //checking the authentication:
+        FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
+            if error != nil {
+                
+                print(error!)
+                return
+            }
+            else{
+                
+                print("login successful")
+                self.dismiss(animated: true, completion: nil)
+            }
+        })
+    }
+    
+    func handleRegister() {
+        
+        let userUsername: String = "shelly"
+        let userFriends: Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
+        
+        FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
+            if error != nil {
+                
+                print(error!)
+                return
+            }
+            guard let userUID = user?.uid
+                
+                else {
+                    
+                    return
+            }
+            
+            self.firebaseReference = FIRDatabase.database().reference()
+            let userReferenceInDatabase = self.firebaseReference.child("Users").child(userUID)
+            
+            //insert user
+            userReferenceInDatabase.updateChildValues(["user": userUsername, "email": self.emailTextField.text!, "contact": userFriends], withCompletionBlock: { (err, ref) in
+                if err != nil {
+                    
+                    print(err!)
                     return
                 }
-                guard let uid = user?.uid else{return}
+                print("Create account successful")
+                let values = ["user": userUsername, "email": self.emailTextField.text!]
                 
-                //refernece to this user
-                self.ref = FIRDatabase.database().reference()
-                let UsersRef = self.ref.child("Users").child(uid)
-
-                
-                //insert user
-                UsersRef.updateChildValues(["user": name, "email": self.emailTextField.text!, "contact": friends], withCompletionBlock: { (err, ref) in
-                    if err != nil {
-                        print(err!)
-                        return
-                    }
-                    let values = ["user": name, "email": self.emailTextField.text!]
-                    
-                    self.registerUserIntoDatabaseWithUID(uid, values: values as [String : AnyObject])
-                   print("Create account successful")
-                })
+                self.registerUserIntoDatabaseWithUID(userUID, values: values as [String : AnyObject])
+                print("Create account successful")
+                self.segueToSurvey()
             })
-        }
-        
-        handleRegister()
-        }
-        
-   }
+        })
+    }
     
-    fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
+    
+    //MARK: UIViewController
+    
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        firebaseReference = FIRDatabase.database().reference()
+    }
+    
+    
+    //MARK: UITextFieldDelegate
+    
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        textField.returnKeyType = UIReturnKeyType.done
+        self.emailTextField.keyboardType = UIKeyboardType.emailAddress
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+
+fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
         let ref = FIRDatabase.database().reference()
         let usersReference = ref.child("users").child(uid)
         

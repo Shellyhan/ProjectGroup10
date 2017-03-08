@@ -23,6 +23,7 @@
 		95107B1C1E451F44004F8461 /* ACTIVESFUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B1B1E451F44004F8461 /* ACTIVESFUTests.swift */; };
 		95107B271E451F44004F8461 /* ACTIVESFUUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */; };
 		9526A6441E6D54FF00B7CC7B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9526A6421E6D54FF00B7CC7B /* Main.storyboard */; };
+		9554304A1E6FB9270052ABBC /* SurveyQuestionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955430491E6FB9270052ABBC /* SurveyQuestionController.swift */; };
 		95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */; };
 		95D894C91E6E6B9200E11F82 /* ChatClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C81E6E6B9200E11F82 /* ChatClasses.swift */; };
 		95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */; };
@@ -78,6 +79,7 @@
 		95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTIVESFUUITests.swift; sourceTree = "<group>"; };
 		95107B281E451F44004F8461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9526A6431E6D54FF00B7CC7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		955430491E6FB9270052ABBC /* SurveyQuestionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SurveyQuestionController.swift; sourceTree = "<group>"; };
 		95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUserCell.swift; sourceTree = "<group>"; };
 		95D894C81E6E6B9200E11F82 /* ChatClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatClasses.swift; path = Models/ChatClasses.swift; sourceTree = "<group>"; };
 		95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInputContainer.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */,
 				3EDD26691E6B8EDF00729365 /* MainViewController.swift */,
+				955430491E6FB9270052ABBC /* SurveyQuestionController.swift */,
 				95107B041E451F42004F8461 /* AppDelegate.swift */,
 				95107B061E451F42004F8461 /* FindABuddyViewController.swift */,
 				95107B081E451F42004F8461 /* BuddiesViewController.swift */,
@@ -519,6 +522,7 @@
 				3EE2D2171E6BE73300070465 /* CellView.swift in Sources */,
 				3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */,
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
+				9554304A1E6FB9270052ABBC /* SurveyQuestionController.swift in Sources */,
 				95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */,
 				95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */,
 				3EE2D2191E6BE73300070465 /* CalendarViewController.swift in Sources */,
