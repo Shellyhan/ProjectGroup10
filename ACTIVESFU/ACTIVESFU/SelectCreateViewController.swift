@@ -10,14 +10,12 @@ import UIKit
 
 class SelectDateViewController: UIViewController {
 
-    
     //var dateID: Date! //put this in database
-    var dateID: String!
     
+    var dateID: String!
     var monthName = ""
     var yearname = ""
 
-    
     @IBAction func backButton(_ sender: UIBarButtonItem) {
         
         dismiss(animated: true, completion: nil)
@@ -25,9 +23,10 @@ class SelectDateViewController: UIViewController {
     
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view.    
     }
 
     @IBAction func viewEventSegue(_ sender: UIButton) {
@@ -38,14 +37,11 @@ class SelectDateViewController: UIViewController {
         
     }
     
-    
-    
     @IBAction func createEventSegue(_ sender: UIButton) {
    
         let segueEventCreate = storyboard?.instantiateViewController(withIdentifier: "CreateEvent_ID") as! CreateEventController
         segueEventCreate.dateIDCreate = dateID
-        present(segueEventCreate, animated: true, completion: nil)
-        
+        present(segueEventCreate, animated: true, completion: nil)  
     }
 
     /*
@@ -57,5 +53,4 @@ class SelectDateViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
