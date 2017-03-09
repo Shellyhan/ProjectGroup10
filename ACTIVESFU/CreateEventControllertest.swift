@@ -10,24 +10,34 @@ import XCTest
 
 class CreateEventControllertest: XCTestCase {
     
+    let app = XCUIApplication()
+    
     override func setUp() {
         super.setUp()
-        let storyboard = UIStoryboard(name: "CreateEventController", bundle: NSBundle.mainBundle())
-        vc = storyboard.instantiateInitialViewController() as! ViewController
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        continueAfterFailure = false
+        app.launch()
     }
-    
     
     
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        app.terminate()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testNavigateToCreate(){
+        let nav = app.buttons["Calendar"]
+        nav.press(forDuration: 0.5)
     }
+    /*
+    func testExample() {
+        
+        let eventTextField = app.textFields["eventTextField"]
+        eventTextField.tap()
+        eventTextField.typeText("Gym test")
+ 
+    }
+   */
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
