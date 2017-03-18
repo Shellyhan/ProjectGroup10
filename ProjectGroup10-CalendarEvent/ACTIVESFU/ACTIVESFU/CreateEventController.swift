@@ -61,6 +61,33 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     @IBOutlet weak var createEventButtonText: UIButton!
     
+    @IBAction func bookFacilityButton(_ sender: UIButton) {
+        
+        let bookFacility = self.storyboard?.instantiateViewController(withIdentifier: "bookFacilityID") as! BookFacilityViewController
+        
+        let bookAlertController = UIAlertController(title: "Book a Facility", message: "Which facility do you want to book?", preferredStyle: .alert)
+        let recreationFacility = UIAlertAction(title: "Athletics and Recreation", style: .default, handler: { action in
+            
+            bookFacility.facilityPage = 0
+            
+            self.present(bookFacility, animated: true, completion: nil)
+        })
+        
+        let aquaticsFacility = UIAlertAction(title: "Aquatics Center", style: .default, handler: { action in
+            
+            bookFacility.facilityPage = 1
+            self.present(bookFacility, animated: true, completion: nil)
+        })
+        
+        bookAlertController.addAction(recreationFacility)
+        bookAlertController.addAction(aquaticsFacility)
+        present(bookAlertController, animated: true, completion: {
+            
+            bookAlertController.view.superview?.isUserInteractionEnabled = true
+            bookAlertController.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.backButton)))
+        })
+    }
+    
     @IBAction func createEventButton(_ sender: UIButton) {
         
         //get the user info

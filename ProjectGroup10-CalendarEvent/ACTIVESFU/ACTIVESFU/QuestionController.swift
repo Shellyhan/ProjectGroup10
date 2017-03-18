@@ -16,6 +16,14 @@
 //  Changed header color
 //  Allowed multiple selections
 //  Register survey 'data' into firebase
+//  Allowed multiple selections for certain questions
+//  Register actual survey data into firebase
+//
+//
+//  Bugs:
+//  When going back in the survey the last selection is still up so you can end up selecting 2 choices for
+//  options that are supposed to be only 1
+//  You can select no option
 //
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
@@ -32,31 +40,102 @@ import Firebase
 
 class QuestionController: UITableViewController {
     
-    var surveyScore = 0
+    var answerArray = Array(repeating: 0, count: 6)
     
     let cellID = "cmpt276"
     let headerId = "headerId"
+    
+    func InitializeDatabaseQuestion() {
+        
+        if let questionIndex = navigationController?.viewControllers.index(of: self) {
+            
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            let ref = FIRDatabase.database().reference()
+            
+            var questionAnswer = [String: Any]()
+            
+            let SurveyRef = ref.child("Survey").child(uid!)
+            
+            if questionIndex == 0 {
+                
+                questionAnswer = ["FitnessLevel": ["Expert": answerArray[0],
+                                                        "Advanced": answerArray[1],
+                                                        "Intermediate": answerArray[2],
+                                                        "Novice": answerArray[3],
+                                                        "Beginner": answerArray[4]]]
+            }
+            else if questionIndex == 1 {
+                
+                questionAnswer = ["FavouriteActivities": ["Weights": answerArray[0],
+                                         "Cardio": answerArray[1],
+                                         "Yoga": answerArray[2],
+                                         "Sports": answerArray[3]]]
+            }
+            else if questionIndex == 2 {
+                
+                questionAnswer = ["TimeOfDay": ["8:30-10:30AM": answerArray[0],
+                                                "10:30-12:30PM": answerArray[1],
+                                                "12:30-2:30PM": answerArray[2],
+                                                "2:30-4:30PM": answerArray[3],
+                                                "4:30-6:30PM": answerArray[4]]]
+            }
+            else if questionIndex == 3 {
+                
+                questionAnswer = ["DaysAvail": ["Mon": answerArray[0],
+                                  "Tues": answerArray[1],
+                                  "Wed" : answerArray[2],
+                                  "Thurs": answerArray[3],
+                                  "Fri": answerArray[4]]]
+            }
+                SurveyRef.updateChildValues(questionAnswer)
+        }
+    }
     
     func userClickedContinue() {
         
         if let questionIndex = navigationController?.viewControllers.index(of: self) {
             
-            questionsList[questionIndex].selectedAnswerIndex = surveyScore
-            
-            // This is what allows the user to proceed to the next question
-            if questionIndex < questionsList.count - 1 {
+            if tableView.indexPathForSelectedRow == nil {
                 
-                print("Survey score is \(surveyScore)")
-                let questionController = QuestionController()
-                questionController.surveyScore = surveyScore
-                navigationController?.pushViewController(questionController, animated: true)
+                let alertController = UIAlertController(title: "No Answer Selected", message: "Please select an answer", preferredStyle: .alert)
+                let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                
+                alertController.addAction(defaulAction)
+                
+                self.present(alertController, animated: true, completion: nil)
             }
             else {
                 
-                let resultsController = ResultsController()
-                resultsController.surveyScore = surveyScore
-                resultsController.currentSurveyQuestion = questionsList[questionIndex]
-                navigationController?.pushViewController(resultsController, animated: true)
+                InitializeDatabaseQuestion()
+                // This is what allows the user to proceed to the next question
+                if questionIndex < questionsList.count - 1 {
+                    
+                    print(answerArray)
+                    let questionController = QuestionController()
+                    navigationController?.pushViewController(questionController, animated: true)
+                }
+                else {
+                    
+                    let resultsController = ResultsController()
+                    resultsController.currentSurveyQuestion = questionsList[questionIndex]
+                    navigationController?.pushViewController(resultsController, animated: true)
+                }
+            }
+        }
+    }
+    
+    func allowSingleOrMultipleChoice() {
+        
+        if let questionIndex = navigationController?.viewControllers.index(of: self) {
+            
+            print("question number is \(questionIndex)")
+            if questionIndex == 2 || questionIndex == 3 {
+                
+                tableView.allowsMultipleSelection = true
+            }
+            else {
+                
+                tableView.allowsMultipleSelection = false
             }
         }
     }
@@ -66,14 +145,17 @@ class QuestionController: UITableViewController {
     
     
     override func viewDidLoad() {
+ 
         super.viewDidLoad()
+        //print("hello cindy")
+
         
-        self.tableView.allowsMultipleSelection = true
+        allowSingleOrMultipleChoice()
         
         navigationItem.title = "Question"
         
         // The back button color/text
-        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.tintColor = UIColor.black
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Return", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(userClickedContinue))
         
@@ -90,7 +172,7 @@ class QuestionController: UITableViewController {
         tableView.tableFooterView = UIView()
     }
     
-    // Repeat the answer labels 5 times
+    // Repeat the answer labels as many times as needed
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // This is for accessing the desired question
@@ -139,15 +221,19 @@ class QuestionController: UITableViewController {
     // Recognzie and create results page
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        surveyScore = surveyScore + indexPath.item
-        print(surveyScore)
+        if (navigationController?.viewControllers.index(of: self)) != nil {
+
+            answerArray[indexPath.item] = 1
+            print("the index of \(indexPath.item) now has a value of 1")
+        }
+        
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
-        surveyScore = surveyScore - indexPath.item
-        print(surveyScore)
+        answerArray[indexPath.item] = 0
+        print("the index of \(indexPath.item) now has a value of 0")
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
 }
@@ -159,7 +245,6 @@ class QuestionController: UITableViewController {
 // This is what they see after they've answered the questions
 class ResultsController: UIViewController {
     
-    var surveyScore = 0
     var currentSurveyQuestion: Question? {
         
         didSet {
@@ -181,12 +266,6 @@ class ResultsController: UIViewController {
     }()
     
     func continueToApp() {
-        
-        let currentUID = FIRAuth.auth()?.currentUser?.uid
-        let firebaseReference = FIRDatabase.database().reference()
-        let userReferenceInDatabase = firebaseReference.child("Users").child(currentUID!)
-        
-        userReferenceInDatabase.updateChildValues(["survey": surveyScore])
         
         self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
     }
@@ -294,7 +373,7 @@ class AnswerCell: UITableViewCell {
 
 // Future feature would be to add the ability to select multiple answers
 // It is unfortunately very messy and cluttered, haven't figured out how to remedy that just yet
-var questionsList: [Question] = [Question(questionString: "What is your fitness experience level?", answers: ["Expert (5+ years)", "Advanced (2-5 years)", "Intermediate (1-2 years)", "Novice (< 1 year)", "Total beginner (0 experience)"], selectedAnswerIndex: nil), Question(questionString: "What best describes your fitness activity interests?", answers: ["Free weight training", "Cardiovascular training", "Yoga", "Sports", "All of the above"], selectedAnswerIndex: nil), Question(questionString: "In what time slot are you available?", answers:["8:30-10:30AM", "10:30-12:30PM", "12:30-2:30PM", "2:30-4:30PM", "4:30-6:30PM"], selectedAnswerIndex: nil), Question(questionString: "What day(s) of the week are you available?", answers: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Mon/Wed/Fri", "Tues/Thurs", "Everyday"], selectedAnswerIndex: nil), Question(questionString: "Do you have a gender matching preference?", answers:["I'd prefer to match with people of my gender", "I don't care"], selectedAnswerIndex: nil)]
+var questionsList: [Question] = [Question(questionString: "What is your fitness experience level?", answers: ["Expert (5+ years)", "Advanced (2-5 years)", "Intermediate (1-2 years)", "Novice (< 1 year)", "Total beginner (0 experience)"], selectedAnswerIndex: nil), Question(questionString: "What best describes your fitness activity interests?", answers: ["Free weight training", "Cardiovascular training", "Yoga", "Sports"], selectedAnswerIndex: nil), Question(questionString: "In what time slot are you available?", answers:["8:30-10:30AM", "10:30-12:30PM", "12:30-2:30PM", "2:30-4:30PM", "4:30-6:30PM"], selectedAnswerIndex: nil), Question(questionString: "What day(s) of the week are you available?", answers: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], selectedAnswerIndex: nil)]
 
 struct Question {
     
