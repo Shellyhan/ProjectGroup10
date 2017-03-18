@@ -23,7 +23,7 @@
 //  Bugs:
 //  When going back in the survey the last selection is still up so you can end up selecting 2 choices for
 //  options that are supposed to be only 1
-//  You can select no option
+//  You can select no option - FIXED
 //
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
