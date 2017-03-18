@@ -15,6 +15,7 @@
 		3E2400E81E6FC93D00371805 /* ViewEventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2400E71E6FC93D00371805 /* ViewEventDetailController.swift */; };
 		3E2400EE1E6FFC1A00371805 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E2400ED1E6FFC1A00371805 /* Main.storyboard */; };
 		3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD26691E6B8EDF00729365 /* MainViewController.swift */; };
+		3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */; };
 		3EE33E111E6CF92500C3379F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE33E101E6CF92500C3379F /* User.swift */; };
 		3EE8328D1E6AC690001DA398 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3EE8328C1E6AC690001DA398 /* Default-568h@2x.png */; };
 		4AEBE68A29AE4C4A956EA6CD /* Pods_ACTIVESFUUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70012F85D869216C2314ED26 /* Pods_ACTIVESFUUITests.framework */; };
@@ -66,6 +67,7 @@
 		3E2400E71E6FC93D00371805 /* ViewEventDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEventDetailController.swift; sourceTree = "<group>"; };
 		3E2400ED1E6FFC1A00371805 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3EDD26691E6B8EDF00729365 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookFacilityViewController.swift; sourceTree = "<group>"; };
 		3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACTIVESFU.entitlements; sourceTree = "<group>"; };
 		3EE33E101E6CF92500C3379F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		3EE8328C1E6AC690001DA398 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				95D894D41E6E6E7000E11F82 /* CreateEventController.swift */,
 				3E2400DF1E6FC3EB00371805 /* QuestionController.swift */,
 				95EFB39A1E654389006E8115 /* LoginViewController.swift */,
+				3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */,
 				95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */,
 				95D894D01E6E6D8900E11F82 /* ChatLogController.swift */,
 				3EE33E121E6CF94800C3379F /* Models */,
@@ -528,6 +531,7 @@
 				3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */,
 				3E2400E81E6FC93D00371805 /* ViewEventDetailController.swift in Sources */,
 				3E2400E61E6FC81F00371805 /* Event.swift in Sources */,
+				3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */,
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
 				95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */,
 				95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */,
