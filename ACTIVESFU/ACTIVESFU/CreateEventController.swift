@@ -1,6 +1,6 @@
 //
 //  CreateEventViewController.swift
-//  Developed by Xue (Shelly) Han, Bronwyn Biro
+//  Developed by Bronwyn Biro, Xue (Shelly) Han
 //
 //  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
@@ -8,18 +8,17 @@
 //  of the event. The newly created event is then stored in Firebase where others can view it.
 //
 //  Bugs:
-//  When editing an event, the sliders should go automatically to the time and activity for the 
-//  event selected
+//
+//
 //
 //  Changes:
-//  Implemented location picker
-//  Changed time saved to hour and date instead of day of month
 //
 //
 //
 //
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
+//TODO: Implement Maps integration, select location
 
 import UIKit
 import Firebase
@@ -29,22 +28,17 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
 
     //date passed from calendar:
     var dateIDCreate: String!
+    var selectedLocation = ""
+    var selectedPrivacy = ""
     
     //date passed from edit event:
     var eventToModify = Event()
     
-    //set up pickers for the changing event time
-    let privacies = ["Private", "Public"]
+    let options = ["Private", "Public"]
     let locations = ["Gym", "Aquatics centre", "Field"]
-    let activities = ["Badminton", "Basketball", "Climbing", "Cycling", "Hiking", "Gym", "Tennis", "Yoga", "Other"]
     
-    var selectedLocation = "Gym"
-    var selectedPrivacy = "Private"
-    var selectedActivity = "Badminton"
- 
-
     
-    @IBOutlet weak var activityPicker: UIPickerView!
+    @IBOutlet weak var eventTextField: UITextField!
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var privacyPicker: UIPickerView!
     @IBOutlet weak var locationPicker: UIPickerView!
@@ -99,174 +93,131 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         //get the user info
         let uid = FIRAuth.auth()?.currentUser?.uid
         let ref = FIRDatabase.database().reference()
-        let UsersRef = ref.child("Users").child(uid!)
-        UsersRef.observeSingleEvent(of: .value, with: { (snapshot) in //print(snapshot)
-        }, withCancel: nil)
         
         //create event
         let EventRef = ref.child("Events")
-        let EventKey = EventRef.childByAutoId().key
-        let owner = uid
-        let activity = selectedActivity
+        var EventKey = EventRef.childByAutoId().key
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm a"
-        let date = timePicker.date as NSDate!
-        let timeString = dateFormatter.string(from: date as! Date)
+        //refer to existing event of editing:
+        if (eventToModify.date != nil) {
+            EventKey = eventToModify.eventID!
+        }
+        
+        
+        let IDString = "\(uid ?? "")"
+        let title = eventTextField.text!
         let location = selectedLocation
-        print("location:", location)
-        
-        //set time of day
-        let morning = dateFormatter.date(from: "4:30 am")!
-        let afternoon = dateFormatter.date(from: "12:00 pm")!
-        let evening = dateFormatter.date(from: "4:00 pm")!
-        let night = dateFormatter.date(from: "11:00 pm")!
-        var timeOfDay = ""
-        
-        
-        let eventHour = dateFormatter.date(from: timeString)!
-        
-        print("eventHour-------------------", eventHour)
-        print("morning-------------------", morning)
-        if (eventHour >= morning && eventHour < afternoon){
-            timeOfDay = "Morning"
-        }
-        else if (eventHour >= afternoon && eventHour < evening){
-            timeOfDay = "Afternoon"
-        }
-        else if (eventHour >= evening && eventHour < night){
-            timeOfDay = "Evening"
-        }
-        else {
-            timeOfDay = ""
-        }
-        
+        let privacy = selectedPrivacy
+        let timeSelected = formatter.string(from: timePicker.date)
         
         //insert event:
-        let eventContent = ["uid": owner as Any,
-                            // "title": title,
-            "title": activity,
-            "date": dateIDCreate,
-            "time": timeString,
-            "location": location,
-            "timeOfDay": timeOfDay,
-            "privacy": selectedPrivacy] as [String : Any]
+        let eventContent = ["uid": IDString,
+                            "title": title,
+                            "date": dateIDCreate!,
+                            "time": timeSelected,
+                            "location": location,
+                            "privacy": privacy] as [String : Any]
+        
         let eventUpdates = ["\(EventKey)": eventContent]
         EventRef.updateChildValues(eventUpdates)
         
-        //display event info:
         
+        //Participants are stored separetly:
+        ref.child("Participants").child(EventKey).setValue(["\(IDString)": "1"])
+
+        //display event info:
         EventRef.child(EventKey).observeSingleEvent(of: .value, with: { (snapshot) in
             print("----------event info--------------")
             print(snapshot)
-        }, withCancel: nil)
+            }, withCancel: nil)
+        
         let alertController = UIAlertController(title: "Create New Event", message: "Successfully created a new event", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: skipBack)
         alertController.addAction(defaultAction)
         present(alertController, animated: true, completion: nil)
-        
+    }
+    //skip back button:
+    func skipBack(alert: UIAlertAction){
+        self.backButton(skipBackButton)
     }
     
-    //MARK: UIViewController
     
+    //MARK: UIViewController
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
         //set up UI if modifying event:
         if (eventToModify.date != nil) {
-            //activityPicker.setValue(eventToModify.title)
+            eventTextField.text = eventToModify.title
             dateIDCreate = eventToModify.date
             createEventButtonText.setTitle("Update",for: .normal)
             createEventTitle.text = ("Update Event")
         }
         //set up test fields:
+        self.timePicker.datePickerMode = UIDatePickerMode.time
+        eventTextField.delegate = self
         self.privacyPicker.dataSource = self
         self.privacyPicker.delegate = self
-        
         self.locationPicker.dataSource = self
         self.locationPicker.delegate = self
-        
-        self.activityPicker.dataSource = self
-        self.activityPicker.delegate = self
-        
         locationPicker.tag = 0
         privacyPicker.tag = 1
-        activityPicker.tag = 2
-
-    
     }
 
-    
     override func didReceiveMemoryWarning() {
-        
         super.didReceiveMemoryWarning()
-        
         // Dispose of any resources that can be recreated.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
         return true
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        
         textField.returnKeyType = UIReturnKeyType.done
         return true
     }
     
     //MARK: UIPicker methods
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch (pickerView.tag){
-        case 0:
+        if (pickerView.tag == 0){
             return locations.count
-        case 1:
-            return privacies.count
-        case 2:
-            return activities.count
-        default:
-            return 1
         }
+        return options.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch (pickerView.tag){
-        case 0:
+        if (pickerView.tag == 0){
             return locations[row]
-        case 1:
-            return privacies[row]
-        case 2:
-            return activities[row]
-        default:
-            return ""
         }
+        return options[row]
     }
+
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let tag = pickerView.tag
-        switch (pickerView.tag){
-        case 0:
+        if (pickerView.tag == 0){
             selectedLocation = locations[row]
-            break
-        case 1:
-            selectedPrivacy = privacies[row]
-            break
-        case 2:
-            selectedActivity = activities[row]
-            break
-        default:
-            selectedLocation = locations[0]
-            selectedPrivacy = privacies[0]
-            selectedActivity = activities[0]
-            break
+            // as! String
+        }
+        else{
+            selectedPrivacy = options[row]// as! String
         }
     }
+   
     
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */    
 }

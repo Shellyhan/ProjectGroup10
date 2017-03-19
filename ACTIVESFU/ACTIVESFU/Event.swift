@@ -23,5 +23,6 @@ class Event: NSObject {
     var time: String?
     var eventID: String?
     var timeOfDay: String?
+
     
 }
