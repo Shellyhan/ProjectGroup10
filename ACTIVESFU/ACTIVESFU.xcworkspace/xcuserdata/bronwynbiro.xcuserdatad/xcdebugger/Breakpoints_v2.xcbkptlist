@@ -97,6 +97,68 @@
             endingLineNumber = "47"
             landmarkName = "loginButton(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ACTIVESFU.LoginViewController.firebaseReference.getter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FIRDatabaseReference&gt;"
+                  moduleName = "ACTIVESFU"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bronwynbiro/Documents/School/cmpt/CMPT276/ACTIVESFU/ACTIVESFU/ACTIVESFU/LoginViewController.swift"
+                  timestampString = "511580961.517293"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "35">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ACTIVESFU.LoginViewController.firebaseReference.setter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.FIRDatabaseReference&gt;"
+                  moduleName = "ACTIVESFU"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bronwynbiro/Documents/School/cmpt/CMPT276/ACTIVESFU/ACTIVESFU/ACTIVESFU/LoginViewController.swift"
+                  timestampString = "511580961.520564"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "65">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ACTIVESFU.LoginViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; ACTIVESFU.LoginViewController"
+                  moduleName = "ACTIVESFU"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bronwynbiro/Documents/School/cmpt/CMPT276/ACTIVESFU/ACTIVESFU/ACTIVESFU/LoginViewController.swift"
+                  timestampString = "511580961.522975"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "652">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ACTIVESFU.LoginViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;ACTIVESFU.LoginViewController&gt;"
+                  moduleName = "ACTIVESFU"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bronwynbiro/Documents/School/cmpt/CMPT276/ACTIVESFU/ACTIVESFU/ACTIVESFU/LoginViewController.swift"
+                  timestampString = "511580961.525875"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "542">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
