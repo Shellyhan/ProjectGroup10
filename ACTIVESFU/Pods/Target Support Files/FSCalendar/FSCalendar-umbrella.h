@@ -1,14 +1,4 @@
-#ifdef __OBJC__
 #import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
 
 #import "FSCalendar.h"
 #import "FSCalendarAppearance.h"
@@ -26,6 +16,11 @@
 #import "FSCalendarStickyHeader.h"
 #import "FSCalendarTransitionCoordinator.h"
 #import "FSCalendarWeekdayView.h"
+#import "NSCalendar+NSCalendarExtension.h"
+#import "NSCalendarExtensionControlCenter.h"
+#import "NSDateComponents+NSCalendarExtension.h"
+#import "NSString+NSCalendarExtension.h"
+#import "NSTimer+NSCalendarExtension.h"
 
 FOUNDATION_EXPORT double FSCalendarVersionNumber;
 FOUNDATION_EXPORT const unsigned char FSCalendarVersionString[];
