@@ -104,9 +104,15 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         //create event
         let EventRef = ref.child("Events")
-        let EventKey = EventRef.childByAutoId().key
-        let owner = uid
+        var EventKey = EventRef.childByAutoId().key
+
         let activity = selectedActivity
+        let IDString = "\(uid ?? "")"
+        
+        //refer to existing event of editing:
+        if (eventToModify.date != nil) {
+            EventKey = eventToModify.eventID!
+        }
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
@@ -125,8 +131,6 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         let eventHour = dateFormatter.date(from: timeString)!
         
-        print("eventHour-------------------", eventHour)
-        print("morning-------------------", morning)
         if (eventHour >= morning && eventHour < afternoon){
             timeOfDay = "Morning"
         }
@@ -142,7 +146,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         
         //insert event:
-        let eventContent = ["uid": owner as Any,
+        let eventContent = ["uid": IDString,
                             // "title": title,
             "title": activity,
             "date": dateIDCreate,
@@ -150,21 +154,30 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             "location": location,
             "timeOfDay": timeOfDay,
             "privacy": selectedPrivacy] as [String : Any]
+        
         let eventUpdates = ["\(EventKey)": eventContent]
         EventRef.updateChildValues(eventUpdates)
+        //Participants are stored separetly:
+        ref.child("Participants").child(EventKey).setValue(["\(IDString)": "1"])
         
         //display event info:
-        
         EventRef.child(EventKey).observeSingleEvent(of: .value, with: { (snapshot) in
             print("----------event info--------------")
             print(snapshot)
         }, withCancel: nil)
+        
         let alertController = UIAlertController(title: "Create New Event", message: "Successfully created a new event", preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: skipBack)
         alertController.addAction(defaultAction)
         present(alertController, animated: true, completion: nil)
-        
     }
+    
+    //skip back button:
+    func skipBack(alert: UIAlertAction){
+        self.backButton(skipBackButton)
+    }
+    
+    
     
     //MARK: UIViewController
     

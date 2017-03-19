@@ -24,5 +24,4 @@ class Event: NSObject {
     var eventID: String?
     var timeOfDay: String?
 
-    
 }

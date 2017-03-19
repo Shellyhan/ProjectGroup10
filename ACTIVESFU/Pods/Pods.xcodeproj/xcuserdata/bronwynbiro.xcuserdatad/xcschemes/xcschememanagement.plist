@@ -6,63 +6,63 @@
 	<dict>
 		<key>FSCalendar.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-ACTIVESFU.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-ACTIVESFUTests.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>5</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-ACTIVESFUUITests.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>107A9565F9DF88517DFD3E28C05B2B96</key>
+		<key>02B28412B2C6EE6D3B0E6C2FECD3B473</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5721A6C46876DF204E88B816EA825B91</key>
+		<key>12480C28E98E08996F0B8F15A8C9E6EC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B2A5216C45A644D7C8EBB02572DB9984</key>
+		<key>23BA9083ED0D2392A167A8AFA04427FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<key>735E205CAC4EF089D4522AA644B30E6E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5A2DB7A84B7B78E359870D2E1B24AA7</key>
+		<key>7D04535608058A2FABC0D16935868FB9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DC0FFC0090E845BB5227D26296529758</key>
+		<key>9188D4AFC20B7FC91214B09CCB9C55C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

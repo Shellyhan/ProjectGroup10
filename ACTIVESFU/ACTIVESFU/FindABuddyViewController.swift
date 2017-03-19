@@ -9,6 +9,8 @@
 import UIKit
 
 class FindABuddyViewController: UIViewController {
+    
+    @IBOutlet weak var testLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,12 @@ class FindABuddyViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            testLabel.text = "shaking"
+        }
+    }
 
 }
 

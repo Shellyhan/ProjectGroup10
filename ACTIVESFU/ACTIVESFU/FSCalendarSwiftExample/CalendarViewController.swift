@@ -1,8 +1,8 @@
 //
 //  CalendarViewController.swift
-//  Developed by Nathan Cheung, Xue (Shelly) Han
+//  Developed by Nathan Cheung, Xue (Shelly) Han, Bronwyn Biro
 //
-//  Inspired by Jeron Thomas (JTAppleCalendar): github.com/patchthecode/JTAppleCalendar
+//  
 //
 //  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
@@ -11,23 +11,13 @@
 //  view events on that day, or create one.
 //
 //  Bugs:
-//
+//  Search bar hides the first row in the event
+//  Editing an event just creates a new one
+//  Lag while searching
 //
 //
 //  Changes:
-//
-////
-//  ViewController.swift
-//  FSCalendarSwiftExample
-//
-//  Created by Wenchao Ding on 9/3/15.
-//  Copyright (c) 2015 wenchao. All rights reserved.
-//
-//
-//  this is the controller for the calendar
-//
-//
-//
+//  Added search and filter bar
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
@@ -35,8 +25,6 @@ import UIKit
 import Foundation
 import FSCalendar
 import Firebase
-
-
 
 
 class ViewCalendarController: UIViewController, UITableViewDataSource, UITableViewDelegate, FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance {
@@ -51,6 +39,8 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     var cellID = "cellID"
     var events = [Event]()
     var selected = "\(Date())"
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredEvents = [Event]()
     
     let white = UIColor(colorWithHexValue: 0xECEAED)
     let orangeBright = UIColor(colorWithHexValue: 0xFFA500)
@@ -85,6 +75,22 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     // MARK:- Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        tableView.register(EventCell.self, forCellReuseIdentifier: cellID)
+        
+        
+        fetchEvent()
+        
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+        searchController.searchBar.delegate = self
+        
+        // Setup the Scope Bar
+        searchController.searchBar.scopeButtonTitles = ["All", "Morning", "Afternoon", "Evening"]
+        searchController.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = searchController.searchBar
     }
     
     
@@ -129,8 +135,6 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         tableView.register(EventCell.self, forCellReuseIdentifier: cellID)
     
     }
-    
-    
     
     
     //fetch all events:
@@ -195,7 +199,8 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         self.view.layoutIfNeeded()
     }
     
-    //event views:-----------------
+    
+    //event views:-----------------here
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return events.count
     }
@@ -212,7 +217,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         return cell
         
     }
-    
+ 
     func fetchTodayEvent() {
         //reset events array
         events = []
@@ -241,14 +246,68 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
             self.tableView.reloadData()
         }
     }
-    //end of event views-------------
     
-    //remove events aa month ago:
- /*   func expiredEvent(){
+    /*
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return filteredEvents.count
+        }
+        return events.count
+    }
     
-    }*/
-    
+  
+   
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        
+        let event: Event
+        if searchController.isActive && searchController.searchBar.text != "" {
+            event = filteredEvents[indexPath.row]
+        } else {
+            event = events[indexPath.row]
+        }
+        cell.textLabel?.text = event.title
+        cell.detailTextLabel?.text = event.time
+        return cell
+    }
+ */
 
+    
+    
+    //MARK: filter and search bar
+    //TODO: implement time of day search
+    func filterEventsForSearch(searchText: String, scope: String = "All") {
+        
+        filteredEvents = events.filter { event in
+            
+            let timeMatch = (scope == "All") || (event.timeOfDay == scope)
+            
+            print("event-----------------------", event.title)
+            print("event.timeofDay-------------", event.timeOfDay)
+            print("scope-----------------------", scope)
+            print("time match-------------------", timeMatch)
+            
+            return timeMatch && (event.title?.lowercased().contains(searchText.lowercased()))!
+        }
+        tableView.reloadData()
+        
+        print(filteredEvents)
+    }
+    
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        
+        let searchBar = searchController.searchBar
+        
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        print("--------------------------scope", scope)
+        
+        filterEventsForSearch(searchText: searchController.searchBar.text!, scope: scope)
+    }
+
+    
+    
     // view event details:
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -260,8 +319,6 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
             segueEventView.uniqueEvent = cellEvent
             present(segueEventView, animated: true, completion: nil)
         }
-        
-    }
 }
 
 class EventCell: UITableViewCell{
@@ -273,7 +330,10 @@ class EventCell: UITableViewCell{
         
         fatalError("init(coder:) has not been implemented")
     }
+  }
 }
+
+
 //MARK: UIColor
 
 extension UIColor {
@@ -287,6 +347,28 @@ extension UIColor {
             blue: CGFloat(value & 0x0000FF) / 255.0,
             alpha: alpha
         )
+    }
+    }
+
+extension ViewCalendarController: UISearchResultsUpdating {
+    
+@available(iOS 8.0, *)
+public func updateSearchResults(for searchController: UISearchController) {
+    
+    let searchBar = searchController.searchBar
+    
+    let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+    
+    filterEventsForSearch(searchText: searchController.searchBar.text!, scope: scope)
+
+    }
+}
+
+
+
+extension ViewCalendarController: UISearchBarDelegate {
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterEventsForSearch(searchText: searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
 }
 
