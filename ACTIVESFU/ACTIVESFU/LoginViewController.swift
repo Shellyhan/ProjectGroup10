@@ -79,39 +79,26 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-
-    
-//    @IBAction func loginButton(_ sender: UIButton) {
-//
-//
-//        if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
-//            
-//            print("Login was pressed")
-//            
-//            let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
-//            let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//            alertController.addAction(defaulAction)
-//            
-//            self.present(alertController, animated: true, completion: nil)
-//        }
-//        else {
-//            
-//            handleLogin()
-//        }
-//    }
-    
     @IBAction func loginRegisterButton(_ sender: UIButton) {
         
         if toggleLoginRegister.selectedSegmentIndex == 1 {
             
             if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
                 
-                let alertController = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
+                let emptyEmailandPassAlert = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
                 let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 
-                alertController.addAction(defaulAction)
+                emptyEmailandPassAlert.addAction(defaulAction)
                 
-                self.present(alertController, animated: true, completion: nil)
+                self.present(emptyEmailandPassAlert, animated: true, completion: nil)
+            }
+            else if self.nameTextField.text == "" {
+                
+                let emptyUsernameAlert = UIAlertController(title: "Oops!", message: "Please enter your name in the name field", preferredStyle: .alert)
+                let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                
+                emptyUsernameAlert.addAction(defaulAction)
+                self.present(emptyUsernameAlert, animated: true, completion: nil)
             }
             else {
                 
@@ -141,7 +128,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
             if error != nil {
                 
-                print(error!)
+                let loginPageError = UIAlertController(title: "Oops!", message: error?.localizedDescription, preferredStyle: .alert)
+                let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                
+                loginPageError.addAction(defaulAction)
+                self.present(loginPageError, animated: true, completion: nil)
                 return
             }
             else{
@@ -159,11 +150,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
             if error != nil {
                 
-                print(error!)
+                let registerErrorAlert = UIAlertController(title: "Oops!", message: error?.localizedDescription, preferredStyle: .alert)
+                let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                
+                registerErrorAlert.addAction(defaulAction)
+                self.present(registerErrorAlert, animated: true, completion: nil)
                 return
             }
             guard let userUID = user?.uid
             else {
+                
                 return
             }
             
@@ -184,7 +180,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.segueToSurvey()
             })
     }
-    
+
     
     //MARK: UIViewController
     
@@ -214,64 +210,4 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
-
-//fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
-//    
-//    let referenceToDatabase = FIRDatabase.database().reference()
-//    let usersReference = referenceToDatabase.child("users").child(uid)
-//    let userUsername: String = "shelly"
-//        //let userFriends: Array = ["7PT0C9flfDM3RcZtdcHURzySlaJ2", "orQY3pNQxJa1h5RcBa1QrjKblQg2"]//dummy users
-//
-//    FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
-//        if error != nil {
-//                
-//            print(error!)
-//            return
-//        }
-//        guard let userUID = user?.uid
-//        else {
-//                    
-//        return
-//        }
-//            
-//    self.firebaseReference = FIRDatabase.database().reference()
-//    let userReferenceInDatabase = self.firebaseReference.child("Users").child(userUID)
-//            
-//    //insert user
-//    userReferenceInDatabase.updateChildValues(["user": userUsername, "email": self.emailTextField.text!], withCompletionBlock: { (err, ref) in
-//        if err != nil {
-//                    
-//            print(err!)
-//            return
-//        }
-//        print("Create account successful")
-//        self.segueToSurvey()
-//    })
-//    })
-//}
 }
-
-    
-//    fileprivate func registerUserIntoDatabaseWithUID(_ uid: String, values: [String: AnyObject]) {
-//        let ref = FIRDatabase.database().reference()
-//        let usersReference = ref.child("users").child(uid)
-//        
-//        usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-//            
-//            if err != nil {
-//                print(err!)
-//                return
-//            }
-//            
-//            let user = User()
-//            //this setter potentially crashes if keys don't match
-//            user.setValuesForKeys(values)
-//            self.dismiss(animated: true, completion: nil)
-//        })
-//    }
-
-
-    
-
-
-
