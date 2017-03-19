@@ -69,11 +69,13 @@ class BuddiesViewController: UITableViewController{
         }, withCancel: nil)
     }
     
+    
     func dismissView() {
         
         dismiss(animated: true, completion: nil)
     }
    
+    
     func viewUsernameInDatabase() {
         
         /*
