@@ -30,8 +30,6 @@ class BuddiesViewController: UITableViewController{
     
     
     //MARK: Internal
-    
-    
     var cellID = "cellID"
     var userFormatInDatabase = [User]()
     

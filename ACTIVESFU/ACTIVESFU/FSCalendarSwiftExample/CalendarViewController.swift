@@ -18,6 +18,7 @@
 //
 //  Changes:
 //  Added search and filter bar
+//  Changed appearance of table view
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
@@ -91,6 +92,10 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         searchController.searchBar.scopeButtonTitles = ["All", "Morning", "Afternoon", "Evening"]
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
+
+        //TODO: change search bar to clear
+        searchController.searchBar.barTintColor = UIColor.white
+        searchController.searchBar.backgroundColor = UIColor.white
     }
     
     
@@ -200,7 +205,8 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    //event views:-----------------here
+    //MARK: table view 
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return events.count
     }
@@ -209,6 +215,10 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        cell.backgroundColor = UIColor.clear
+        cell.textLabel?.textColor = UIColor.white
+        cell.detailTextLabel?.textColor = UIColor.white
+        
         if events.count != 0 {
             let event = events[indexPath.row]
             cell.textLabel?.text = event.title

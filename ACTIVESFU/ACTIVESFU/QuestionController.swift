@@ -143,13 +143,11 @@ class QuestionController: UITableViewController {
     
     //MARK: UITableViewController
     
-    
     override func viewDidLoad() {
  
         super.viewDidLoad()
         //print("hello cindy")
 
-        
         allowSingleOrMultipleChoice()
         
         navigationItem.title = "Question"
@@ -381,3 +379,4 @@ struct Question {
     var answers: [String]?
     var selectedAnswerIndex: Int?
 }
+
