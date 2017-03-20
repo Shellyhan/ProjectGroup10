@@ -17,14 +17,17 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     let cell = "cell"
     var userFormatInDatabase = [User]()
+    
+    var firebaseReference: FIRDatabaseReference!
+    let uid = FIRAuth.auth()?.currentUser?.uid
+    var ref = FIRDatabase.database().reference()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(Cell.self, forCellReuseIdentifier: cell)
-        fetchAllBuddiesInDatabase()
-        tableView.reloadData()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +38,9 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
            print("shaking")
+            fetchAllBuddiesInDatabase()
+            //fetchSurveyResults()
+            tableView.reloadData()
         }
     }
     
@@ -50,6 +56,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                 // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
                 
                 singleUserInDatabase.setValuesForKeys(dictionary)
+                self.fetchSurveyResults()
                 self.userFormatInDatabase.append(singleUserInDatabase)
                 
                 // This will crash because of background thread, so the dispatch fixes it
@@ -62,6 +69,33 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }, withCancel: nil)
     }
     
+    
+
+    func fetchSurveyResults(){
+            let databaseRef = FIRDatabase.database().reference()
+            databaseRef.child("Survey").observe(.value, with: {
+            snapshot in
+                
+                for childSnap in snapshot.children.allObjects {
+                    
+                    let snap = childSnap as! FIRDataSnapshot
+                   // print("snapkey----------", snap.key)
+                    
+                    if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? AnyObject {
+                        let level = snapshotValue.object(forKey: "FitnessLevel")
+                        let activities = snapshotValue.object(forKey: "FavouriteActivities")
+                        print("snap-----------" , snapVal)
+     
+                        print("level------------------",level)
+                        print("activities----------------------", activities)
+                    }
+                }
+
+                
+                })
+    }
+ 
+
     //MARK: table view functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,10 +105,15 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
+        //setup UI
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath)
+        tableCell.backgroundColor = UIColor.clear
+        tableCell.textLabel?.textColor = UIColor.white
+        tableCell.detailTextLabel?.textColor = UIColor.white
+        
         let userInDatabase = userFormatInDatabase[indexPath.row]
         tableCell.textLabel?.text = userInDatabase.user
-        tableCell.detailTextLabel?.text = "interests"
+        tableCell.detailTextLabel?.text = "test"
         print("---------------------------------------------", userFormatInDatabase)
         return tableCell
     }
