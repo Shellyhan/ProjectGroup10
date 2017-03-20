@@ -48,8 +48,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var firebaseReference: FIRDatabaseReference!
     
     @IBAction func toggleLoginRegister(_ sender: UISegmentedControl) {
+        
+        nameTextField.text = ""
+        emailTextField.text = ""
+        passwordTextField.text = ""
 
         if sender.selectedSegmentIndex == 0 {
+            
             
             nameTextField.isHidden = true
             passLine.isHidden = true
@@ -82,28 +87,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func loginRegisterButton(_ sender: UIButton) {
         
         if toggleLoginRegister.selectedSegmentIndex == 1 {
-            
-            if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
-                
-                let emptyEmailandPassAlert = UIAlertController(title: "Oops!", message: "Please enter and email and password.", preferredStyle: .alert)
-                let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                
-                emptyEmailandPassAlert.addAction(defaulAction)
-                
-                self.present(emptyEmailandPassAlert, animated: true, completion: nil)
-            }
-            else if self.nameTextField.text == "" {
-                
-                let emptyUsernameAlert = UIAlertController(title: "Oops!", message: "Please enter your name in the name field", preferredStyle: .alert)
-                let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                
-                emptyUsernameAlert.addAction(defaulAction)
-                self.present(emptyUsernameAlert, animated: true, completion: nil)
-            }
-            else {
-                
+
                 handleRegister()
-            }
         }
         else {
             
@@ -123,9 +108,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func handleLogin() {
+
+        if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
+            
+            let emptyEmailandPassAlert = UIAlertController(title: "Oops!", message: "Please enter an email and password.", preferredStyle: .alert)
+            let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            
+            emptyEmailandPassAlert.addAction(defaulAction)
+            
+            self.present(emptyEmailandPassAlert, animated: true, completion: nil)
+        }
         
         //checking the authentication:
-        FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
+        else {
+            FIRAuth.auth()?.signIn(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user, error) in
             if error != nil {
                 
                 let loginPageError = UIAlertController(title: "Oops!", message: error?.localizedDescription, preferredStyle: .alert)
@@ -140,13 +136,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("login successful")
                 self.dismiss(animated: true, completion: nil)
             }
-        })
+            })
+        }
     }
     
     func handleRegister() {
         
         let name = nameTextField.text
         
+        if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
+            
+            let emptyEmailandPassAlert = UIAlertController(title: "Oops!", message: "Please enter an email and password.", preferredStyle: .alert)
+            let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            
+            emptyEmailandPassAlert.addAction(defaulAction)
+            
+            self.present(emptyEmailandPassAlert, animated: true, completion: nil)
+        }
+        
+        else if self.nameTextField.text == "" {
+            
+            let emptyUsernameAlert = UIAlertController(title: "Oops!", message: "Please enter your name in the name field.", preferredStyle: .alert)
+            let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            
+            emptyUsernameAlert.addAction(defaulAction)
+            self.present(emptyUsernameAlert, animated: true, completion: nil)
+        }
+            
+        else {
+            
         FIRAuth.auth()?.createUser(withEmail: self.emailTextField.text!, password: self.passwordTextField.text!, completion: { (user: FIRUser?, error) in
             if error != nil {
                 
@@ -179,6 +197,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("Create account successful")
                 self.segueToSurvey()
             })
+        }
     }
 
     
