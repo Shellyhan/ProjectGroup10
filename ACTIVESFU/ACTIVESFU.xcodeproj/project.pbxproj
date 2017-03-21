@@ -30,7 +30,7 @@
 		95107B1C1E451F44004F8461 /* ACTIVESFUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B1B1E451F44004F8461 /* ACTIVESFUTests.swift */; };
 		95107B271E451F44004F8461 /* ACTIVESFUUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */; };
 		95CA71611E7E5BC000D88AB4 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71601E7E5BC000D88AB4 /* LocationViewController.swift */; };
-		95CA71631E7E5C0500D88AB4 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71621E7E5C0500D88AB4 /* UserProfile.swift */; };
+		95CA71631E7E5C0500D88AB4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71621E7E5C0500D88AB4 /* ProfileViewController.swift */; };
 		95CA71761E7F12CC00D88AB4 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA716D1E7F12CC00D88AB4 /* GeoFire.m */; };
 		95CA71771E7F12CC00D88AB4 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA716F1E7F12CC00D88AB4 /* GFBase32Utils.m */; };
 		95CA71781E7F12CC00D88AB4 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71711E7F12CC00D88AB4 /* GFGeoHash.m */; };
@@ -101,7 +101,7 @@
 		95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ACTIVESFUUITests.swift; sourceTree = "<group>"; };
 		95107B281E451F44004F8461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95CA71601E7E5BC000D88AB4 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
-		95CA71621E7E5C0500D88AB4 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		95CA71621E7E5C0500D88AB4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		95CA71661E7F12CC00D88AB4 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
 		95CA71671E7F12CC00D88AB4 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
 		95CA71681E7F12CC00D88AB4 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
@@ -217,7 +217,7 @@
 				3E2400ED1E6FFC1A00371805 /* Main.storyboard */,
 				95107B081E451F42004F8461 /* BuddiesViewController.swift */,
 				95CA71601E7E5BC000D88AB4 /* LocationViewController.swift */,
-				95CA71621E7E5C0500D88AB4 /* UserProfile.swift */,
+				95CA71621E7E5C0500D88AB4 /* ProfileViewController.swift */,
 				1C44F4011E75219200047DB9 /* CalendarViewController.swift */,
 				1C55CA581E75385100825A0E /* Objc-Bridge-Header.h */,
 				3E2400E71E6FC93D00371805 /* ViewEventDetailController.swift */,
@@ -617,7 +617,7 @@
 				95CA717A1E7F12CC00D88AB4 /* GFQuery.m in Sources */,
 				95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */,
 				95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */,
-				95CA71631E7E5C0500D88AB4 /* UserProfile.swift in Sources */,
+				95CA71631E7E5C0500D88AB4 /* ProfileViewController.swift in Sources */,
 				95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */,
 				95CA71781E7F12CC00D88AB4 /* GFGeoHash.m in Sources */,
 				95CA71611E7E5BC000D88AB4 /* LocationViewController.swift in Sources */,
