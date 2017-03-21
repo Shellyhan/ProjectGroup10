@@ -44,6 +44,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    //MARK: database functions
+    
     func fetchAllBuddiesInDatabase() {
         
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
@@ -82,22 +84,31 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                    // print("snapkey----------", snap.key)
                     
                     if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? AnyObject {
-                        let level = snapshotValue.object(forKey: "FitnessLevel")
-                        let activities = snapshotValue.object(forKey: "FavouriteActivities")
-                        print("snap-----------" , snapVal)
-     
-                        print("level------------------",level)
+                        let level = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
+                        let time = snapshotValue.object(forKey: "TimeOfDay") as! NSDictionary
+                        let activities = snapshotValue.object(forKey: "FavActivity") as! NSDictionary
+                        let avail = snapshotValue.object(forKey: "DaysAvail") as! NSDictionary
+                        
+                        let value = avail["Friday"] as! NSDictionary
+                        let val1 = value.allKeys
+                        print("----------------------------value for Friday is", value)
+                        print("----------------------------all Keys friday", val1)
+                            
+                        //print("snap-----------" , snapVal)
+                        print("level---------------------------",level)
                         print("activities----------------------", activities)
+                        print("avail---------------------------", avail)
+                        print("time----------------------------", time)
                     }
                 }
 
                 
-                })
+        })
     }
- 
+    
 
     //MARK: table view functions
-    
+ 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return userFormatInDatabase.count

@@ -11,7 +11,8 @@ target 'ACTIVESFU' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'FSCalendar'
-  # pod 'GeoFire', :git => 'https://github.com/firebase/geofire-objc.git'
+  pod GTMSessionFetcher/Core 😊 1.1.9), GTMSessionFetcher/Core (~> 1.1)
+  
 
   target 'ACTIVESFUTests' do
     inherit! :search_paths
