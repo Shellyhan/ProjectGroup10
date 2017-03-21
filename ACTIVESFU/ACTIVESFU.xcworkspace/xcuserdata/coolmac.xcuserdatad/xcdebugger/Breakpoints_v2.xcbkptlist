@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ACTIVESFU/LoginViewController.swift"
-            timestampString = "511601729.504941"
+            filePath = "ACTIVESFUUITests/CalendarUITest.swift"
+            timestampString = "511773651.209195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "handleLogin()"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "testDeleteEventWorks()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
