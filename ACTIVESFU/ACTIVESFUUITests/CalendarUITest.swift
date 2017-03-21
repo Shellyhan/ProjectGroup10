@@ -108,7 +108,35 @@ class CalendarUITest: UITestCase {
         XCTAssert(editInfoView.exists) //Event doesn't update until you deselect and reselect - BUG
     }
 
-    
+    func testShowBookFacility() {
+        
+        app.buttons["Calendar"].tap()
+        
+        app.collectionViews.staticTexts["22"].tap()
+        app.buttons["Create New"].tap()
+        
+        app.buttons["Book a Facility"].tap()
+        
+        app.alerts["Book a Facility"].buttons["Athletics and Recreation"].tap()
+        
+        let submitForm = app.staticTexts["SFU Athletics & Recreation Facilities Online Booking Request Form"]
+        
+        waitForElementToAppear(submitForm)
+        
+        XCTAssert(submitForm.exists)
+        
+        app.navigationBars.buttons["Back"].tap()
+        app.buttons["Book a Facility"].tap()
+        
+        app.alerts["Book a Facility"].buttons["Aquatics Center"].tap()
+        
+        let submitAquaticsForm = app.staticTexts["SFU Aquatic Online Booking Request Form"]
+        
+        waitForElementToAppear(submitAquaticsForm)
+        
+        XCTAssert(submitAquaticsForm.exists)
+        
+    }
     func testDeleteEventWorks() {
         
         app.buttons["Calendar"].tap()

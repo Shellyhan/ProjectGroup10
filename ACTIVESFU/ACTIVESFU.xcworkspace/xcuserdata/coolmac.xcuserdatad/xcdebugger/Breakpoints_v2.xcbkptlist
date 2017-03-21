@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACTIVESFUUITests/CalendarUITest.swift"
-            timestampString = "511772280.349549"
+            timestampString = "511773651.209195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
             landmarkName = "testDeleteEventWorks()"
             landmarkType = "7">
          </BreakpointContent>
