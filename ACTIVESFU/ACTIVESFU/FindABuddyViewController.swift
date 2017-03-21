@@ -1,10 +1,25 @@
 //
-//  FirstViewController.swift
-//  ACTIVESFU
+//  FindABuddyViewController.swift
+//  Developed by Bronwyn Biro
 //
-//  Created by Bronwyn Biro on 2017-02-03.
+//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
+//
+//  Allows the user to shake their phone in order to find users that they may want to connect with. Clicking
+//  on a user leads to their profile and gives them the ability to connect. Matching is done through answering 
+//  similar things on the survey.
+//
+//  Bugs:
+//  Hardcoded match, need to expand to all similar things
+//
+//
+//
+//
+//  Changes:
+//  Changed from location -> similar interests
+//  Ensured that a user won't see themself in the recommended list 
+//
+//
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
-//
 
 import UIKit
 import Firebase
@@ -30,7 +45,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(Cell.self, forCellReuseIdentifier: cell)
-
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -98,55 +113,42 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                         //hard coded for now: return all users who like sports
                         let sports = activities["Sports"] as! NSDictionary
             
-                        
                         let snapKeys = snapVal.allKeys as! [String]
                         let snapVals = snapVal.allValues
-                        
-                    
-                        print("----------------------------snapvals", snapVals)
-                        print("----------------------------snapvkey", snapKeys)
+
                         
                         let sportsUID = sports.allKeys
                         
                         
                         for item in sportsUID {
                             let item = String(describing: item)
-                            
-                            print("item--------------------------", item)
                                 self.sportsUsers.append(item)
 
                         }
                         
-                        self.unique = Array(Set(self.sportsUsers))
-                      
+                        self.sportsUsers = Array(Set(self.sportsUsers))
                         
+                        //Remove myself from showing up
+                        for user in self.userFormatInDatabase {
+                            let currentUID = user.id
+                            if self.sportsUsers.contains(currentUID!){
+                                if currentUID != self.uid {
+                                    self.usersForTable.append(user)
+                                }
+                            }
+                        }
+                        print("-------------------------------------", self.usersForTable)
+                      
+                        /*
+                        print("----------------------------snapvals", snapVals)
+                        print("----------------------------snapvkey", snapKeys)
                         print("unique array-----------------------", self.unique)
                         print("unique array count------------", self.unique.count)
-                        
-                       
-                            
-                        /*
-                        for debugging
-                        let afternoon = time["4:30-6:30PM"] as! NSDictionary
-                        let afternoonUID = afternoon.allKeys
-                        
-                        print("sportuid-------------------'-", sportsUID)
-                        print("count-----------------------", sportsUID.count)
-                         
-                        print("----------------------------uids for sports", sportsUID)
-                         
-                        let test = time.allKeys //shows all chosen answers,
-                        print("----------------------------uids for friday", fridayUID)
-                        print("----------------------------afternoonArray", afternoonUID)
-                         
-                        print("level---------------------------",level)
-                        print("activities----------------------", activities)
-                        print("avail---------------------------", avail)
-                        print("time----------------------------", time)
                         */
+                         self.tableView.reloadData()
+                       
                     }
                 }
-
                 
         })
     }
@@ -155,8 +157,10 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     //MARK: table view functions
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let usersForTable = Array(Set(self.usersForTable))
+        print("usersForTablecount------------------------", usersForTable.count)
+        return usersForTable.count
         
-        return userFormatInDatabase.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -167,10 +171,11 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         tableCell.textLabel?.textColor = UIColor.white
         tableCell.detailTextLabel?.textColor = UIColor.white
         
-        let userInDatabase = userFormatInDatabase[indexPath.row]
-        tableCell.textLabel?.text = userInDatabase.user
-        tableCell.detailTextLabel?.text = "test"
-        print("---------------------------------------------", userFormatInDatabase)
+        
+        let userAtRow = usersForTable[indexPath.row]
+        tableCell.textLabel?.text = userAtRow.user
+        //tableCell.textLabel?.text = userInDatabase.user
+        tableCell.detailTextLabel?.text = "Also likes sports"
         return tableCell
     }
     
@@ -181,16 +186,10 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        for user in userFormatInDatabase {
-            let currentUID = user.id
-            if unique.contains(currentUID!){
-                usersForTable.append(user)
-            }
-        }
-        
         var user = self.usersForTable[indexPath.row]
         
         print("segue here")
+        
     }
     
     class Cell: UITableViewCell{
