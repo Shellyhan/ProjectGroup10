@@ -40,7 +40,7 @@ class MainViewController: UIViewController {
         handleLogout()
     }
     
-//  the calendar used to be here!!!!
+
      @IBAction func calendarSegue(_ sender: UIButton) {
 
         let calendarController = storyboard?.instantiateViewController(withIdentifier: "calendarViewID") as! ViewCalendarController

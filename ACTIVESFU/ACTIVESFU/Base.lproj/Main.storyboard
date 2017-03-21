@@ -73,8 +73,7 @@
                                     <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="viewBuddiesSegue:" destination="pTr-PA-EUS" eventType="touchUpInside" id="Ng1-2T-QsV"/>
-                                    <segue destination="NT6-fO-uhz" kind="show" id="XcH-yx-WNM"/>
+                                    <segue destination="NT6-fO-uhz" kind="show" animates="NO" id="XcH-yx-WNM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NR1-aK-HiU">
@@ -84,9 +83,6 @@
                                 <state key="normal" title="User Profile">
                                     <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
-                                <connections>
-                                    <action selector="viewBuddiesSegue:" destination="pTr-PA-EUS" eventType="touchUpInside" id="LEW-Xq-cnP"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2W-Hh-A5b">
                                 <rect key="frame" x="107" y="463" width="155" height="47"/>
@@ -96,7 +92,6 @@
                                     <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="viewBuddiesSegue:" destination="pTr-PA-EUS" eventType="touchUpInside" id="9on-tM-nqi"/>
                                     <segue destination="6c3-tz-xsG" kind="show" id="5y7-cI-cdn"/>
                                 </connections>
                             </button>
@@ -385,7 +380,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Uh-Kt-WGS">
-                                <rect key="frame" x="58" y="556" width="30" height="30"/>
+                                <rect key="frame" x="58" y="592" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Join"/>
                                 <connections>
@@ -400,14 +395,6 @@
                                     <action selector="DeleteEvent:" destination="ZBC-PF-ETp" eventType="touchUpInside" id="UIl-02-euZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08y-Y1-cMD">
-                                <rect key="frame" x="233" y="556" width="120" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Contact Creator"/>
-                                <connections>
-                                    <action selector="ContactCreator:" destination="ZBC-PF-ETp" eventType="touchUpInside" id="dsy-8k-7vk"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khC-gF-LcE">
                                 <rect key="frame" x="36" y="289" width="323" height="67"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
@@ -415,6 +402,14 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="08y-Y1-cMD">
+                                <rect key="frame" x="233" y="592" width="120" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Contact Creator"/>
+                                <connections>
+                                    <action selector="ContactCreator:" destination="ZBC-PF-ETp" eventType="touchUpInside" id="dsy-8k-7vk"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
