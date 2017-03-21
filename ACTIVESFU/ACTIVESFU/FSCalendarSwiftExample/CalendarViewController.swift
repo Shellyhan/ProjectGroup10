@@ -72,6 +72,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     //set events and date:
     var datesWithEvent = [""]
     var datesWithMultipleEvents = [""]
+    var datesWithRecommedation = [""]
     
     // MARK:- Life cycle
     override func viewDidLoad() {
@@ -146,12 +147,18 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     func fetchEvent() {
         print("-------im here fetching events, will lag")
         let ref = FIRDatabase.database().reference()
+        var index = 0
         ref.child("Events").queryOrdered(byChild: "date").observe(.childAdded, with: {(snapshot) in
             
             if let dictionary = snapshot.value as? [String: String] {
                 let eventNow = Event()
                 eventNow.setValuesForKeys(dictionary)
                 self.datesWithEvent.append(eventNow.date!)
+                
+                index = index + 1
+                if (index % 7 == 0){
+                    self.datesWithRecommedation.append(eventNow.date!)
+                }
             }},withCancel: nil)
     }
     
@@ -176,6 +183,11 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
             return 3
         }*/
         return 0
+    }
+    
+    func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
+        let dateString = self.formatter.string(from: date)
+        return self.datesWithRecommedation.contains(dateString) ? UIImage(named: "circle2-1") : nil
     }
 
     
