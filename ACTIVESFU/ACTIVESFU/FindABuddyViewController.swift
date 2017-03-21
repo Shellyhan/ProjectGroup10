@@ -58,7 +58,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                 // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
                 
                 singleUserInDatabase.setValuesForKeys(dictionary)
-                self.fetchSurveyResults()
+                
+                self.fetchSurveyResults(userID: singleUserInDatabase.id!)
                 self.userFormatInDatabase.append(singleUserInDatabase)
                 
                 // This will crash because of background thread, so the dispatch fixes it
@@ -73,7 +74,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     
 
-    func fetchSurveyResults(){
+    func fetchSurveyResults(userID: String){
+            let id = userID
             let databaseRef = FIRDatabase.database().reference()
             databaseRef.child("Survey").observe(.value, with: {
             snapshot in
@@ -83,7 +85,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                     let snap = childSnap as! FIRDataSnapshot
     
                     
-                    if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? AnyObject {
+                    if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? NSDictionary {
                         let level = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
                         let time = snapshotValue.object(forKey: "TimeOfDay") as! NSDictionary
                         let activities = snapshotValue.object(forKey: "FavActivity") as! NSDictionary
@@ -91,22 +93,31 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                         
                         //hard coded for now
                         
-                        
                         let sports = activities["Sports"] as! NSDictionary
                         let friday = avail["Friday"] as! NSDictionary
+                        let afternoon = time["4:30-6:30PM"] as! NSDictionary
+                        
+                        
+                        let snapKeys = snapVal.allKeys as! [String]
+                        let snapVals = snapVal.allValues
+                        
+                    
+                        print("----------------------------snapvals", snapVals)
+                        print("----------------------------snapvkey", snapKeys)
                         
                         let fridayUID = friday.allKeys
                         let sportsUID = sports.allKeys
-                        let test = time.allKeys
-                        let activArray = activities.allKeys
+                        let afternoonUID = afternoon.allKeys
+                       
                         
                         print("----------------------------uids for friday", fridayUID)
                         
                         print("----------------------------uids for sports", sportsUID)
-                        print("test--------------------------",test)
+                        print("----------------------------afternoonArray", afternoonUID)
                             
                         /*
                         for debugging
+                        let test = time.allKeys //shows all chosen answers,
                         print("level---------------------------",level)
                         print("activities----------------------", activities)
                         print("avail---------------------------", avail)
