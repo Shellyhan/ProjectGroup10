@@ -8,6 +8,10 @@
 
 import XCTest
 
+
+@testable import ACTIVESFU
+
+
 class CreateEventControllertest: XCTestCase {
     
     let app = XCUIApplication()
@@ -25,9 +29,9 @@ class CreateEventControllertest: XCTestCase {
         app.terminate()
     }
     
-    func testNavigateToCreate(){
-        let nav = app.buttons["Calendar"]
-        nav.press(forDuration: 0.5)
+    func testUserIsLoggedOut() {
+        
+        let loginView = MainViewController()
     }
     /*
     func testExample() {
