@@ -17,9 +17,12 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     let cell = "cell"
     var userFormatInDatabase = [User]()
+    var sportsUsers = [String]()
+    var usersForTable = [User]()
+    var unique = [String]()
     
     var firebaseReference: FIRDatabaseReference!
-    let uid = FIRAuth.auth()?.currentUser?.uid
+    var uid = FIRAuth.auth()?.currentUser?.uid
     var ref = FIRDatabase.database().reference()
 
     override func viewDidLoad() {
@@ -39,7 +42,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         if motion == .motionShake {
            print("shaking")
             fetchAllBuddiesInDatabase()
-            //fetchSurveyResults()
+            fetchSurveyResults()
             tableView.reloadData()
         }
     }
@@ -58,9 +61,9 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                 // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
                 
                 singleUserInDatabase.setValuesForKeys(dictionary)
-                
-                self.fetchSurveyResults(userID: singleUserInDatabase.id!)
+
                 self.userFormatInDatabase.append(singleUserInDatabase)
+            
                 
                 // This will crash because of background thread, so the dispatch fixes it
                 
@@ -74,8 +77,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     
 
-    func fetchSurveyResults(userID: String){
-            let id = userID
+    func fetchSurveyResults(){
             let databaseRef = FIRDatabase.database().reference()
             databaseRef.child("Survey").observe(.value, with: {
             snapshot in
@@ -86,17 +88,16 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
                     
                     if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? NSDictionary {
+                        
+                        //to be used in V3
                         let level = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
                         let time = snapshotValue.object(forKey: "TimeOfDay") as! NSDictionary
                         let activities = snapshotValue.object(forKey: "FavActivity") as! NSDictionary
                         let avail = snapshotValue.object(forKey: "DaysAvail") as! NSDictionary
                         
-                        //hard coded for now
-                        
+                        //hard coded for now: return all users who like sports
                         let sports = activities["Sports"] as! NSDictionary
-                        let friday = avail["Friday"] as! NSDictionary
-                        let afternoon = time["4:30-6:30PM"] as! NSDictionary
-                        
+            
                         
                         let snapKeys = snapVal.allKeys as! [String]
                         let snapVals = snapVal.allValues
@@ -105,19 +106,39 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                         print("----------------------------snapvals", snapVals)
                         print("----------------------------snapvkey", snapKeys)
                         
-                        let fridayUID = friday.allKeys
                         let sportsUID = sports.allKeys
-                        let afternoonUID = afternoon.allKeys
+                        
+                        
+                        for item in sportsUID {
+                            let item = String(describing: item)
+                            
+                            print("item--------------------------", item)
+                                self.sportsUsers.append(item)
+
+                        }
+                        
+                        self.unique = Array(Set(self.sportsUsers))
+                      
+                        
+                        print("unique array-----------------------", self.unique)
+                        print("unique array count------------", self.unique.count)
+                        
                        
-                        
-                        print("----------------------------uids for friday", fridayUID)
-                        
-                        print("----------------------------uids for sports", sportsUID)
-                        print("----------------------------afternoonArray", afternoonUID)
                             
                         /*
                         for debugging
+                        let afternoon = time["4:30-6:30PM"] as! NSDictionary
+                        let afternoonUID = afternoon.allKeys
+                        
+                        print("sportuid-------------------'-", sportsUID)
+                        print("count-----------------------", sportsUID.count)
+                         
+                        print("----------------------------uids for sports", sportsUID)
+                         
                         let test = time.allKeys //shows all chosen answers,
+                        print("----------------------------uids for friday", fridayUID)
+                        print("----------------------------afternoonArray", afternoonUID)
+                         
                         print("level---------------------------",level)
                         print("activities----------------------", activities)
                         print("avail---------------------------", avail)
@@ -160,7 +181,15 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var user = self.userFormatInDatabase[indexPath.row]
+        for user in userFormatInDatabase {
+            let currentUID = user.id
+            if unique.contains(currentUID!){
+                usersForTable.append(user)
+            }
+        }
+        
+        var user = self.usersForTable[indexPath.row]
+        
         print("segue here")
     }
     
