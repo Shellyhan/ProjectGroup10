@@ -48,7 +48,7 @@ class MainViewUITests: UITestCase {
         
     }
     
-    func testGoToLocation { //integrate this test once location is complete
+    func testGoToLocation() { //integrate this test once location is complete
         
         
     }

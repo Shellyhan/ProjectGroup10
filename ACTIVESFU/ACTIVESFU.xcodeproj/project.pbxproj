@@ -17,6 +17,7 @@
 		3E4AB8091E80AE7800467535 /* LoginViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8061E80AE7800467535 /* LoginViewUITests.swift */; };
 		3E4AB80A1E80AE7800467535 /* MainViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8071E80AE7800467535 /* MainViewUITests.swift */; };
 		3E4AB80B1E80AE7800467535 /* UITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8081E80AE7800467535 /* UITestCase.swift */; };
+		3E4AB80D1E80EC6F00467535 /* CalendarUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB80C1E80EC6F00467535 /* CalendarUITest.swift */; };
 		3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD26691E6B8EDF00729365 /* MainViewController.swift */; };
 		3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */; };
 		3EE33E111E6CF92500C3379F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE33E101E6CF92500C3379F /* User.swift */; };
@@ -80,6 +81,7 @@
 		3E4AB8061E80AE7800467535 /* LoginViewUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewUITests.swift; sourceTree = "<group>"; };
 		3E4AB8071E80AE7800467535 /* MainViewUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewUITests.swift; sourceTree = "<group>"; };
 		3E4AB8081E80AE7800467535 /* UITestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITestCase.swift; sourceTree = "<group>"; };
+		3E4AB80C1E80EC6F00467535 /* CalendarUITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarUITest.swift; sourceTree = "<group>"; };
 		3EDD26691E6B8EDF00729365 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookFacilityViewController.swift; sourceTree = "<group>"; };
 		3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACTIVESFU.entitlements; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				3E4AB8081E80AE7800467535 /* UITestCase.swift */,
 				95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */,
 				95107B281E451F44004F8461 /* Info.plist */,
+				3E4AB80C1E80EC6F00467535 /* CalendarUITest.swift */,
 			);
 			path = ACTIVESFUUITests;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				3E4AB80B1E80AE7800467535 /* UITestCase.swift in Sources */,
 				3E4AB80A1E80AE7800467535 /* MainViewUITests.swift in Sources */,
 				95107B271E451F44004F8461 /* ACTIVESFUUITests.swift in Sources */,
+				3E4AB80D1E80EC6F00467535 /* CalendarUITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
