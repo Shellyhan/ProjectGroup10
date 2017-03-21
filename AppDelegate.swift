@@ -7,10 +7,18 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    // Need this otherwise an error occurs
+    override init(){
+        super.init()
+        FIRApp.configure()
+    }
+    
+    
     var window: UIWindow?
 
 
