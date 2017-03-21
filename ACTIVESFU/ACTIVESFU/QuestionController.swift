@@ -18,12 +18,14 @@
 //  Register survey 'data' into firebase
 //  Allowed multiple selections for certain questions
 //  Register actual survey data into firebase
+//  Overhauled the way we recorded question data
 //
 //
 //  Bugs:
 //  When going back in the survey the last selection is still up so you can end up selecting 2 choices for
 //  options that are supposed to be only 1
 //  You can select no option - FIXED
+//  users can tap back if they are quicker than the app is at hiding it
 //
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
@@ -45,6 +47,8 @@ class QuestionController: UITableViewController {
     let cellID = "cmpt276"
     let headerId = "headerId"
     
+    let questionHeadersForRecordingFirebase = ["FitnessLevel", "FavActivity", "TimeOfDay", "DaysAvail"]
+    
     func InitializeDatabaseQuestion() {
         
         if let questionIndex = navigationController?.viewControllers.index(of: self) {
@@ -52,44 +56,27 @@ class QuestionController: UITableViewController {
             let uid = FIRAuth.auth()?.currentUser?.uid
             let ref = FIRDatabase.database().reference()
             
-            var questionAnswer = [String: Any]()
+            let surveyRef = ref.child("Survey")
+            var childOfSurveyRef = surveyRef
             
-            let SurveyRef = ref.child("Survey").child(uid!)
+            let surveyQuestionAnswers = questionsList[questionIndex]
+
+            //set the reference to whatever question we are on in the database
+            childOfSurveyRef = surveyRef.child("\(questionHeadersForRecordingFirebase[questionIndex])")
             
-            if questionIndex == 0 {
+            for numAnswers in 0..<(surveyQuestionAnswers.answers!.count) {
                 
-                questionAnswer = ["FitnessLevel": ["Expert": answerArray[0],
-                                                        "Advanced": answerArray[1],
-                                                        "Intermediate": answerArray[2],
-                                                        "Novice": answerArray[3],
-                                                        "Beginner": answerArray[4]]]
+                if answerArray[numAnswers] == 1 {
+                    
+                    let childTitle = surveyQuestionAnswers.answers![numAnswers]
+                    let newChild = childOfSurveyRef.child("\(childTitle)").child(uid!)
+                    
+                    newChild.setValue(1)
+                }
             }
-            else if questionIndex == 1 {
-                
-                questionAnswer = ["FavouriteActivities": ["Weights": answerArray[0],
-                                         "Cardio": answerArray[1],
-                                         "Yoga": answerArray[2],
-                                         "Sports": answerArray[3]]]
-            }
-            else if questionIndex == 2 {
-                
-                questionAnswer = ["TimeOfDay": ["8:30-10:30AM": answerArray[0],
-                                                "10:30-12:30PM": answerArray[1],
-                                                "12:30-2:30PM": answerArray[2],
-                                                "2:30-4:30PM": answerArray[3],
-                                                "4:30-6:30PM": answerArray[4]]]
-            }
-            else if questionIndex == 3 {
-                
-                questionAnswer = ["DaysAvail": ["Mon": answerArray[0],
-                                  "Tues": answerArray[1],
-                                  "Wed" : answerArray[2],
-                                  "Thurs": answerArray[3],
-                                  "Fri": answerArray[4]]]
-            }
-                SurveyRef.updateChildValues(questionAnswer)
         }
     }
+    
     
     func userClickedContinue() {
         
@@ -110,7 +97,6 @@ class QuestionController: UITableViewController {
                 // This is what allows the user to proceed to the next question
                 if questionIndex < questionsList.count - 1 {
                     
-                    print(answerArray)
                     let questionController = QuestionController()
                     navigationController?.pushViewController(questionController, animated: true)
                 }
@@ -127,8 +113,7 @@ class QuestionController: UITableViewController {
     func allowSingleOrMultipleChoice() {
         
         if let questionIndex = navigationController?.viewControllers.index(of: self) {
-            
-            print("question number is \(questionIndex)")
+
             if questionIndex == 2 || questionIndex == 3 {
                 
                 tableView.allowsMultipleSelection = true
@@ -143,10 +128,11 @@ class QuestionController: UITableViewController {
     
     //MARK: UITableViewController
     
+    
+    
     override func viewDidLoad() {
  
         super.viewDidLoad()
-        //print("hello cindy")
 
         allowSingleOrMultipleChoice()
         
@@ -154,7 +140,7 @@ class QuestionController: UITableViewController {
         
         // The back button color/text
         navigationController?.navigationBar.tintColor = UIColor.black
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Return", style: .plain, target: nil, action: nil)
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(userClickedContinue))
         
         // Register the answercell class in creating new table cells. Assign this an id value of 'cellID'
@@ -168,6 +154,12 @@ class QuestionController: UITableViewController {
         
         // Gets rid of the lines below the bottom cells
         tableView.tableFooterView = UIView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+         navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
+        navigationItem.hidesBackButton = true
     }
     
     // Repeat the answer labels as many times as needed
@@ -277,6 +269,7 @@ class ResultsController: UIViewController {
         
         super.viewDidLoad()
         
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(continueToApp))
         
         navigationItem.title = "Finished"
@@ -286,6 +279,11 @@ class ResultsController: UIViewController {
         view.addSubview(resultsLabel)
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":resultsLabel]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", options: NSLayoutFormatOptions(), metrics: nil, views: ["v0":resultsLabel]))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        navigationItem.hidesBackButton = true
     }
 }
 
