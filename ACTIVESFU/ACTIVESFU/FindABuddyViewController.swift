@@ -81,7 +81,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                 for childSnap in snapshot.children.allObjects {
                     
                     let snap = childSnap as! FIRDataSnapshot
-                   // print("snapkey----------", snap.key)
+    
                     
                     if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? AnyObject {
                         let level = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
@@ -89,16 +89,29 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                         let activities = snapshotValue.object(forKey: "FavActivity") as! NSDictionary
                         let avail = snapshotValue.object(forKey: "DaysAvail") as! NSDictionary
                         
-                        let value = avail["Friday"] as! NSDictionary
-                        let val1 = value.allKeys
-                        print("----------------------------value for Friday is", value)
-                        print("----------------------------all Keys friday", val1)
+                        //hard coded for now
+                        
+                        
+                        let sports = activities["Sports"] as! NSDictionary
+                        let friday = avail["Friday"] as! NSDictionary
+                        
+                        let fridayUID = friday.allKeys
+                        let sportsUID = sports.allKeys
+                        let test = time.allKeys
+                        let activArray = activities.allKeys
+                        
+                        print("----------------------------uids for friday", fridayUID)
+                        
+                        print("----------------------------uids for sports", sportsUID)
+                        print("test--------------------------",test)
                             
-                        //print("snap-----------" , snapVal)
+                        /*
+                        for debugging
                         print("level---------------------------",level)
                         print("activities----------------------", activities)
                         print("avail---------------------------", avail)
                         print("time----------------------------", time)
+                        */
                     }
                 }
 
@@ -153,6 +166,5 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     
 }
-
 
  
