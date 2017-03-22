@@ -1,5 +1,5 @@
 //
-//  UserProfile.swift
+//  ProfileViewController.swift
 //  Developed by Ryan Brown
 //
 //  Using the coding standard provided by eure: github.com/eure/swift-style-guide
@@ -81,9 +81,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         profileImage.clipsToBounds = true
         
         if let uid = FIRAuth.auth()?.currentUser?.uid{
-            databaseRef.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            databaseRef.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dict = snapshot.value as? [String: AnyObject]{
-                    self.usernameText.text = dict["username"] as? String
+                    self.usernameText.text = dict["user"] as? String
                     if let profileImageURL = dict["pic"] as? String{
                         let url = URL(string: profileImageURL)
                         URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in

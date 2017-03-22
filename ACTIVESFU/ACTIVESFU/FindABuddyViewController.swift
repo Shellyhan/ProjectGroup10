@@ -98,10 +98,9 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
             snapshot in
                 
                 for childSnap in snapshot.children.allObjects {
-                    
+                
                     let snap = childSnap as! FIRDataSnapshot
     
-                    
                     if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? NSDictionary {
                         
                         //to be used in V3
@@ -158,7 +157,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let usersForTable = Array(Set(self.usersForTable))
-        print("usersForTablecount------------------------", usersForTable.count)
         return usersForTable.count
         
     }
