@@ -15,7 +15,7 @@
 //
 //
 //  Changes:
-//  Changed from location -> similar interests
+//  Changed from location based to similar interests
 //  Ensured that a user won't see themself in the recommended list 
 //
 //
@@ -26,6 +26,9 @@ import Firebase
 import CoreLocation
 
 class FindABuddyViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    
+    //MARK: Internal
     
     @IBOutlet weak var directionsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -50,7 +53,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
@@ -62,7 +64,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    //MARK: database functions
     
     func fetchAllBuddiesInDatabase() {
         
@@ -78,7 +79,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                 singleUserInDatabase.setValuesForKeys(dictionary)
 
                 self.userFormatInDatabase.append(singleUserInDatabase)
-            
                 
                 // This will crash because of background thread, so the dispatch fixes it
                 
@@ -115,9 +115,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                         let snapKeys = snapVal.allKeys as! [String]
                         let snapVals = snapVal.allValues
 
-                        
                         let sportsUID = sports.allKeys
-                        
                         
                         for item in sportsUID {
                             let item = String(describing: item)
@@ -136,24 +134,15 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                                 }
                             }
                         }
-                        print("-------------------------------------", self.usersForTable)
-                      
-                        /*
-                        print("----------------------------snapvals", snapVals)
-                        print("----------------------------snapvkey", snapKeys)
-                        print("unique array-----------------------", self.unique)
-                        print("unique array count------------", self.unique.count)
-                        */
-                         self.tableView.reloadData()
+                    self.tableView.reloadData()
                        
-                    }
                 }
-                
+            }
         })
     }
     
 
-    //MARK: table view functions
+    // MARK: UITableView
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let usersForTable = Array(Set(self.usersForTable))
@@ -163,7 +152,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
-        //setup UI
+        //Setup UI
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath)
         tableCell.backgroundColor = UIColor.clear
         tableCell.textLabel?.textColor = UIColor.white
@@ -172,7 +161,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         
         let userAtRow = usersForTable[indexPath.row]
         tableCell.textLabel?.text = userAtRow.user
-        //tableCell.textLabel?.text = userInDatabase.user
         tableCell.detailTextLabel?.text = "Also likes sports"
         return tableCell
     }
@@ -190,6 +178,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
+    
     class Cell: UITableViewCell{
         
         override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -203,5 +192,3 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     
 }
-
- 

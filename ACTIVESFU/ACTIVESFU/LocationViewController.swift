@@ -1,11 +1,21 @@
 //
-//  ViewController.swift
-//  userLocation
+//  LocationViewController.swift
+//  Developed by Ryan Brown
 //
-//  Created by Ryan Brown on 2017-03-15.
-//  Copyright © 2017 Ryan Brown. All rights reserved.
+//  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
-// Credits to http://theswiftguy.com/index.php/2016/09/28/how-to-get-the-users-current-location-in-xcode-8-swift-3-0/
+//  Tracks the user location, shows their location on a map.
+//
+//  Bugs:
+//
+//
+//
+//  Changes:
+//
+//
+//
+//  Copyright © 2017 CMPT276 Group 10. All rights reserved.
+//  Credits to http://theswiftguy.com/index.php/2016/09/28/how-to-get-the-users-current-location-in-xcode-8-swift-3-0/
 
 import UIKit
 import MapKit
@@ -14,10 +24,10 @@ import Firebase
 
 class LocationViewController: UIViewController, CLLocationManagerDelegate {
     
-    // Map
-    @IBOutlet weak var map: MKMapView!
     
-    // Manager keeps track of user location
+    // MARK: Internal
+    
+    @IBOutlet weak var map: MKMapView!
     let manager = CLLocationManager()
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
