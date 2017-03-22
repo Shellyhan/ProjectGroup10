@@ -1,7 +1,7 @@
 //
 //  ChatMessageController.swift
 //
-//  Handles the messaging in the chat feature
+//  User interface for the chat bubble messages. 
 //
 //  Created by Bronwyn Biro on 2017-03-06.
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.

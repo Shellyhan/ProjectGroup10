@@ -8,7 +8,7 @@
 //
 //  View controller when the user wants to see the calendar to find or create an event.
 //  A calendar will show up and the user will be able to select a date and choose to either
-//  view events on that day, or create one.
+//  view events on that day, or create one. Users can also modify or delete their events.
 //
 //  Bugs:
 //  Search bar hides the first row in the event

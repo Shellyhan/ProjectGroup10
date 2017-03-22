@@ -4,9 +4,8 @@
 //
 //  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
-//  When registering a new user, the app will ask a series of questions to the user about his activity habits and
-//  schedule.
-//  using this, the app will be able to run matching algorithms and tailor the app to the user's preferences.
+//  When registering a new user, the app will ask a series of questions to the user about his/her activity habits and
+//  schedule. Using this information, the app will be able to run matching algorithms and tailor the app to the user's preferences.
 //
 //  Bugs:
 //  users are able to choose more than one choice on questions that are supposed to be only one selection

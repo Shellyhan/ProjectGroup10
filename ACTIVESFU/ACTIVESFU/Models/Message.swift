@@ -1,5 +1,5 @@
 //
-//  ChatClasses.swift
+//  Message.swift
 //  ACTIVESFU
 //
 //  Created by Bronwyn Biro on 2017-03-06.
@@ -34,10 +34,4 @@ class Message: NSObject {
         toId = dictionary["toId"] as? String
     }
 }
-/*
-class ChatUser: NSObject {
-    var id: String?
-    var name: String?
-    var email: String?
-}
- */
+

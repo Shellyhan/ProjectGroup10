@@ -1,14 +1,13 @@
 //
 //  ChatChatUserCell.swift
 //
-//  Used to setup the cells of the chat UI
+//  Used to create the appearance of the chat cell. 
 //
 //  ACTIVESFU
 //
 //  Created by Bronwyn Biro on 2017-03-06.
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 //
-// Worked on by: Bronwyn
 
 import Foundation
 import UIKit

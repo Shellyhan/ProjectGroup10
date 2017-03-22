@@ -37,7 +37,7 @@
 		95CA71791E7F12CC00D88AB4 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71731E7F12CC00D88AB4 /* GFGeoHashQuery.m */; };
 		95CA717A1E7F12CC00D88AB4 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71751E7F12CC00D88AB4 /* GFQuery.m */; };
 		95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */; };
-		95D894C91E6E6B9200E11F82 /* ChatClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C81E6E6B9200E11F82 /* ChatClasses.swift */; };
+		95D894C91E6E6B9200E11F82 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C81E6E6B9200E11F82 /* Message.swift */; };
 		95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */; };
 		95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */; };
 		95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894D01E6E6D8900E11F82 /* ChatLogController.swift */; };
@@ -118,7 +118,7 @@
 		95CA71741E7F12CC00D88AB4 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
 		95CA71751E7F12CC00D88AB4 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
 		95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUserCell.swift; sourceTree = "<group>"; };
-		95D894C81E6E6B9200E11F82 /* ChatClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatClasses.swift; path = Models/ChatClasses.swift; sourceTree = "<group>"; };
+		95D894C81E6E6B9200E11F82 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
 		95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInputContainer.swift; sourceTree = "<group>"; };
 		95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageController.swift; path = Models/ChatMessageController.swift; sourceTree = "<group>"; };
 		95D894D01E6E6D8900E11F82 /* ChatLogController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
@@ -166,7 +166,7 @@
 				3EE33E101E6CF92500C3379F /* User.swift */,
 				95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */,
 				95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */,
-				95D894C81E6E6B9200E11F82 /* ChatClasses.swift */,
+				95D894C81E6E6B9200E11F82 /* Message.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -604,7 +604,7 @@
 				95CA71791E7F12CC00D88AB4 /* GFGeoHashQuery.m in Sources */,
 				1C44F4021E75219200047DB9 /* CalendarViewController.swift in Sources */,
 				95107B051E451F42004F8461 /* AppDelegate.swift in Sources */,
-				95D894C91E6E6B9200E11F82 /* ChatClasses.swift in Sources */,
+				95D894C91E6E6B9200E11F82 /* Message.swift in Sources */,
 				95CA71771E7F12CC00D88AB4 /* GFBase32Utils.m in Sources */,
 				3E2400E01E6FC3EB00371805 /* QuestionController.swift in Sources */,
 				3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */,

@@ -4,7 +4,7 @@
 //
 //  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
-//  Allows the user to create an event on the date chosen. The user can set a time and place (yet to be implemented), as well as set the privacy
+//  Allows the user to create an event on the date chosen. The user can set a time and place, as well as set the privacy
 //  of the event. The newly created event is then stored in Firebase where others can view it.
 //
 //  Bugs:

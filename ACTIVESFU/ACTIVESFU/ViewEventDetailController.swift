@@ -3,8 +3,7 @@
 //
 //  Using the coding standard provided by eure: github.com/eure/swift-style-guide
 //
-//  Allows the user to select if they would like to view events or create event on the day they have chosen
-//  In the previous calendar page.
+//  Allows the user to view the details of their event and gives them the ability to modify or delete their events. If a user is viewing an event that they didn’t create, they can join the event or message the event creator.
 //
 //  Bugs:
 //
