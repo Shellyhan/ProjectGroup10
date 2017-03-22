@@ -48,6 +48,7 @@ class QuestionController: UITableViewController {
     
     let questionHeadersForRecordingFirebase = ["FitnessLevel", "FavActivity", "TimeOfDay", "DaysAvail"]
     
+    //This records the user's answer into the firebase database
     func InitializeDatabaseQuestion() {
         
         if let questionIndex = navigationController?.viewControllers.index(of: self) {
