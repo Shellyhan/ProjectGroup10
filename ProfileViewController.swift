@@ -1,6 +1,6 @@
 // *** READ: All login/logout related code is commented out
 // because the tutorial I was following had its own login
-// system in place. Not sure how to connect it to ours.
+// system in place. Still needs to be connected to ours.
 //
 //  ProfileViewController.swift
 //  userProfile
@@ -29,14 +29,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         
         // Logs the user out if they're not logged in
-        
       //  if FIRAuth.auth()?.currentUser?.uid == nil{
      //       logout()
      //   }
         
         setupProfile()
     }
-    
     
     // Buttons
     @IBAction func changeUsername(_ sender: Any) {
@@ -66,7 +64,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         self.present(picker, animated: true, completion: nil)
     }
-    
     
     // Functions
     func setupProfile(){
@@ -123,9 +120,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         dismiss(animated: true, completion: nil)
     }
     
-    
-    
-    func saveChanges(){
+     func saveChanges(){
         let imageName = NSUUID().uuidString
         let storedImage = storageRef.child("profileImages").child(imageName)
         
@@ -153,12 +148,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
 }
 
