@@ -31,6 +31,7 @@ class BuddiesViewController: UITableViewController{
     
     //MARK: Internal
     
+    
     var cellID = "cellID"
     var userFormatInDatabase = [User]()
     
@@ -44,6 +45,7 @@ class BuddiesViewController: UITableViewController{
         dismiss(animated: true, completion: nil)
     }
     
+    //fetches all buddies in the firebase database
     func fetchAllBuddiesInDatabase() {
         
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
@@ -67,29 +69,12 @@ class BuddiesViewController: UITableViewController{
             }
         }, withCancel: nil)
     }
-    
-    
+   
+    //dismissess view when pressing the back button
     func dismissView() {
         
         dismiss(animated: true, completion: nil)
     }
-   
-    
-    func viewUsernameInDatabase() {
-        
-        /*
-        let UID = FIRAuth.auth()?.currentUser?.uid
-        print("current user UID..", UID)
-        FIRDatabase.database().reference().child("Users").child(UID!).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: Any] {
-                self.navigationItem.title = dictionary["user"] as? String
-            }
- 
-        }, withCancel: nil)
-  */
-    }
-
     
     //MARK: UITableViewController
     
@@ -99,7 +84,6 @@ class BuddiesViewController: UITableViewController{
         super.viewDidLoad()
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
-        viewUsernameInDatabase()
         fetchAllBuddiesInDatabase() 
     }
 
