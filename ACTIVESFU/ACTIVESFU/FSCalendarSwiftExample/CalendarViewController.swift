@@ -187,7 +187,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     
     func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
         let dateString = self.formatter.string(from: date)
-        return self.datesWithRecommedation.contains(dateString) ? UIImage(named: "circle2-1") : nil
+        return self.datesWithRecommedation.contains(dateString) ? UIImage(named: "circle2") : nil
     }
 
     
