@@ -1,22 +1,24 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8D80C2D43D2B4377995F2DD648393A19D140026B",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "93CB4C547D6905AB3D356E239A078308A49AEBDD+++5FF56C4",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD" : 9223372036854775807,
-    "B1E1758F67049E7891918114F985453E3A6E92A2" : 9223372036854775807,
-    "93CB4C547D6905AB3D356E239A078308A49AEBDD" : 9223372036854775807,
-    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : 9223372036854775807,
-    "8D80C2D43D2B4377995F2DD648393A19D140026B" : 9223372036854775807
+    "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD+++D05920D" : 9223372036854775807,
+    "B1E1758F67049E7891918114F985453E3A6E92A2+++1048FDC" : 9223372036854775807,
+    "8D80C2D43D2B4377995F2DD648393A19D140026B+++3A8D923" : 9223372036854775807,
+    "8D80C2D43D2B4377995F2DD648393A19D140026B+++7C5809D" : 9223372036854775807,
+    "93CB4C547D6905AB3D356E239A078308A49AEBDD+++5FF56C4" : 9223372036854775807,
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3+++E206508" : 9223372036854775807
   },
-  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "5A8B22A9-F90A-4126-AC52-0CD91D040F5B",
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "63E9E613-EDD2-48BA-BF58-D541BEE981C1",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD" : "CalendarTutorial\/",
-    "B1E1758F67049E7891918114F985453E3A6E92A2" : "",
-    "93CB4C547D6905AB3D356E239A078308A49AEBDD" : "ACTIVESFU\/",
-    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3" : "..",
-    "8D80C2D43D2B4377995F2DD648393A19D140026B" : "ACTIVESFU\/"
+    "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD+++D05920D" : "CalendarTutorial\/",
+    "B1E1758F67049E7891918114F985453E3A6E92A2+++1048FDC" : "",
+    "8D80C2D43D2B4377995F2DD648393A19D140026B+++3A8D923" : "ProjectGroup10\/",
+    "8D80C2D43D2B4377995F2DD648393A19D140026B+++7C5809D" : "ProjectGroup10\/",
+    "93CB4C547D6905AB3D356E239A078308A49AEBDD+++5FF56C4" : "ACTIVESFU\/",
+    "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3+++E206508" : ".."
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "ACTIVESFU",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -25,27 +27,32 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:bronwynbiro\/Time-Tracker.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B8BBC9D9D6C3B4891AD4F98D21917D9B98909E3+++E206508"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SFU-2017-1-cmpt276\/ProjectGroup10.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8D80C2D43D2B4377995F2DD648393A19D140026B"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8D80C2D43D2B4377995F2DD648393A19D140026B+++3A8D923"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SFU-2017-1-cmpt276\/ProjectGroup10.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "93CB4C547D6905AB3D356E239A078308A49AEBDD"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8D80C2D43D2B4377995F2DD648393A19D140026B+++7C5809D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/SFU-2017-1-cmpt276\/ProjectGroup10.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "93CB4C547D6905AB3D356E239A078308A49AEBDD+++5FF56C4"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/csil-git1.cs.surrey.sfu.ca\/bbiro\/CMPT276Assn1.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1E1758F67049E7891918114F985453E3A6E92A2"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "B1E1758F67049E7891918114F985453E3A6E92A2+++1048FDC"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/patchthecode\/CalendarTutorial.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BBBFCD1EBD1EFF2BEB8221464193C49F11CDF6CD+++D05920D"
     }
   ]
 }

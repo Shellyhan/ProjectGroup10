@@ -56,22 +56,28 @@ class QuestionController: UITableViewController {
             let uid = FIRAuth.auth()?.currentUser?.uid
             let ref = FIRDatabase.database().reference()
             
-            let surveyRef = ref.child("Survey")
+            let currentSurveyQuestion = questionHeadersForRecordingFirebase[questionIndex] //returns the current question being asked
+            
+            let surveyRef = ref.child("\(currentSurveyQuestion)") //eg. fitnessLevel
             var childOfSurveyRef = surveyRef
             
-            let surveyQuestionAnswers = questionsList[questionIndex]
+            let surveyQuestionAnswers = questionsList[questionIndex] //returns all the answers of the question being asked
 
             //set the reference to whatever question we are on in the database
-            childOfSurveyRef = surveyRef.child("\(questionHeadersForRecordingFirebase[questionIndex])")
             
             for numAnswers in 0..<(surveyQuestionAnswers.answers!.count) {
                 
+                let surveyAnswerChosen = surveyQuestionAnswers.answers![numAnswers]
+                childOfSurveyRef = surveyRef.child("\(surveyAnswerChosen)") //eg. beginner
+                
                 if answerArray[numAnswers] == 1 {
                     
-                    let childTitle = surveyQuestionAnswers.answers![numAnswers]
-                    let newChild = childOfSurveyRef.child("\(childTitle)").child(uid!)
+                    let newChild = childOfSurveyRef.child(uid!)
+                    newChild.setValue(true)
                     
-                    newChild.setValue(1)
+                    //update in users profile as well
+                    let userProfile = ref.child("Users").child(uid!)
+                    userProfile.child("\(currentSurveyQuestion)").child("\(surveyAnswerChosen)").setValue(true)
                 }
             }
         }
