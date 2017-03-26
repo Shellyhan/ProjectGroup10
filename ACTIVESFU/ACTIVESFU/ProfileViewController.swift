@@ -39,11 +39,51 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func viewStats(_ sender: UIButton) {
     }
 
-    
-    //TODO: Edit the survey
-    @IBAction func editSurvey(_ sender: Any) {
+    @IBAction func editSurvey(_ sender: UIButton) {
+        
+        //Gets the reference to the user's uid
+        let userID = FIRAuth.auth()?.currentUser?.uid
+        let referenceToUserID = databaseRef.child("Users").child(userID!)
+        
+        referenceToUserID.observeSingleEvent(of: .value, with: { (snapshot) in
+        
+            //eg. Users/Foo/name, email, DaysAvail, Time, etc - the children in the user's uid
+            for restCategory in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                
+                //Take advantage of the fact that only the survey questions will have children values
+                if restCategory.hasChildren() {
+                    
+                    //eg. DaysAvail
+                    let surveyCategoryToDelete = restCategory.key
+                    
+                    //eg. Users/Foo/DaysAvail
+                    let userReferenceToCategoryToDelete = referenceToUserID.child(surveyCategoryToDelete)
+                    
+                    userReferenceToCategoryToDelete.observeSingleEvent(of: .value, with: { (snapshot) in //Nested loop
+                     
+                        //eg. Users/Foo/DaysAvail/Mon, tues, wed,... - the nested children in the user's uid survey categories
+                        for restKeys in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                            
+                            //eg. DaysAvail/Mon/Foo uid - we want to delete the values in the survey answer arrays
+                            let pathToDelete = self.databaseRef.child("\(surveyCategoryToDelete)").child("\(restKeys.key)").child(userID!)
+
+                            //Remove the values in the survey arrays
+                            pathToDelete.removeValue()
+                            //Remove the values in the user's array as well
+                            userReferenceToCategoryToDelete.child("\(restKeys.key)").removeValue()
+                        }
+                    })
+                }
+            }
+        })
+        
+        //Redo survey
+        let surveyController = QuestionController()
+        surveyController.didEditProfile = 1
+        let navController = UINavigationController(rootViewController: surveyController)
+        self.present(navController, animated: true, completion: nil)
     }
-    
+
     @IBAction func saveChanges(_ sender: Any) {
         saveChanges()
     }

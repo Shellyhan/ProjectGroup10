@@ -42,6 +42,8 @@ import Firebase
 class QuestionController: UITableViewController {
     
     var answerArray = Array(repeating: 0, count: 6)
+    var didEditProfile = 0
+    
     
     let cellID = "cmpt276"
     let headerId = "headerId"
@@ -104,11 +106,13 @@ class QuestionController: UITableViewController {
                 if questionIndex < questionsList.count - 1 {
                     
                     let questionController = QuestionController()
+                    questionController.didEditProfile = didEditProfile
                     navigationController?.pushViewController(questionController, animated: true)
                 }
                 else {
                     
                     let resultsController = ResultsController()
+                    resultsController.didResultsEditProfile = didEditProfile
                     resultsController.currentSurveyQuestion = questionsList[questionIndex]
                     navigationController?.pushViewController(resultsController, animated: true)
                 }
@@ -139,6 +143,8 @@ class QuestionController: UITableViewController {
     override func viewDidLoad() {
  
         super.viewDidLoad()
+        
+        print(didEditProfile)
 
         allowSingleOrMultipleChoice()
         
@@ -241,6 +247,7 @@ class QuestionController: UITableViewController {
 // This is what they see after they've answered the questions
 class ResultsController: UIViewController {
     
+    var didResultsEditProfile = 0
     var currentSurveyQuestion: Question? {
         
         didSet {
@@ -262,8 +269,13 @@ class ResultsController: UIViewController {
     }()
     
     func continueToApp() {
-        
+        if didResultsEditProfile == 0 {
         self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
+        }
+        else {
+            
+            self.presentingViewController!.dismiss(animated: true, completion: nil)
+        }
     }
     
     
@@ -275,6 +287,7 @@ class ResultsController: UIViewController {
         
         super.viewDidLoad()
         
+        print(didResultsEditProfile)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Continue", style: .plain, target: self, action: #selector(continueToApp))
         
@@ -375,6 +388,8 @@ class AnswerCell: UITableViewCell {
 
 // Future feature would be to add the ability to select multiple answers
 // It is unfortunately very messy and cluttered, haven't figured out how to remedy that just yet
+
+
 var questionsList: [Question] = [Question(questionString: "What is your fitness experience level?", answers: ["Expert (5+ years)", "Advanced (2-5 years)", "Intermediate (1-2 years)", "Novice (< 1 year)", "Total beginner (0 experience)"], selectedAnswerIndex: nil), Question(questionString: "What best describes your fitness activity interests?", answers: ["Free weight training", "Cardiovascular training", "Yoga", "Sports"], selectedAnswerIndex: nil), Question(questionString: "In what time slot are you available?", answers:["8:30-10:30AM", "10:30-12:30PM", "12:30-2:30PM", "2:30-4:30PM", "4:30-6:30PM"], selectedAnswerIndex: nil), Question(questionString: "What day(s) of the week are you available?", answers: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], selectedAnswerIndex: nil)]
 
 struct Question {
@@ -383,4 +398,5 @@ struct Question {
     var answers: [String]?
     var selectedAnswerIndex: Int?
 }
+
 

@@ -176,7 +176,7 @@
                                 <rect key="frame" x="79" y="367" width="216" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Save Changes">
+                                <state key="normal" title="Save Username and Picture">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -190,6 +190,9 @@
                                 <state key="normal" title="Edit Survey">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="editSurvey:" destination="V9x-wl-TMr" eventType="touchUpInside" id="jm3-wc-z2K"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XKt-hp-5UW">
                                 <rect key="frame" x="112" y="305" width="150" height="30"/>
