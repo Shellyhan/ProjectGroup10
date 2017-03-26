@@ -9,8 +9,7 @@
 //
 //  Bugs:
 //  Users in the table are all users in the database, not the ones matched to the current user.
-//
-//
+//  //
 //  Changes:
 //  Added segue to chat
 //  Save snapshot for user ID
@@ -94,10 +93,30 @@ class BuddiesViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! UserCell
         let userInDatabase = userFormatInDatabase[indexPath.row]
         tableCell.textLabel?.text = userInDatabase.user
         tableCell.detailTextLabel?.text = userInDatabase.email // Comment this out if we don't want to display the email
+        
+        if let profileImageUrl = userInDatabase.pic {
+            
+            tableCell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
+//            let url = URL(string: profileImageUrl)
+//            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
+//                
+//                //download hit an error
+//                if error != nil {
+//                    print(error!)
+//                    return
+//                }
+//                
+//                DispatchQueue.main.async {
+//                    
+//                    tableCell.profileImageView.image = UIImage(data: data!)
+//                }
+//                
+//            }).resume()
+        }
         return tableCell 
     }
     
@@ -107,9 +126,39 @@ class BuddiesViewController: UITableViewController{
     
     class UserCell: UITableViewCell {
         
+        
+        let profileImageView: UIImageView = {
+            
+            let imageView = UIImageView()
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.layer.cornerRadius = 20
+            imageView.layer.masksToBounds = true
+            imageView.contentMode = .scaleAspectFill
+            return imageView
+        }()
+        
+        override func layoutSubviews() {
+            
+            super.layoutSubviews()
+            textLabel?.frame = CGRect(x: 56, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
+            detailTextLabel?.frame = CGRect(x: 56, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+        }
+        
         override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
             
             super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+            
+            addSubview(profileImageView)
+            
+            //use constraint anchors
+            //need x, y, width, height anchors
+            
+            profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+            profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            profileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            
+            
         }
         
         required init?(coder aDecoder: NSCoder) {

@@ -8,6 +8,7 @@
 //
 //  Bugs:
 //
+//  Profile pictures aren't deleted but replaced
 //
 //  Changes:
 //
@@ -51,7 +52,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             for restCategory in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 
                 //Take advantage of the fact that only the survey questions will have children values
-                if restCategory.hasChildren() {
+                if restCategory.hasChildren() && restCategory.key != "Buddies" {
                     
                     //eg. DaysAvail
                     let surveyCategoryToDelete = restCategory.key
@@ -150,7 +151,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func saveChanges(){
         let imageName = NSUUID().uuidString
         
-        let storedImage = storageRef.child("profileImages").child(imageName)
+        let storedImage = storageRef.child("profileImages").child("\(imageName).png")
         
         if let uploadData = UIImagePNGRepresentation(self.profileImage.image!){
             
