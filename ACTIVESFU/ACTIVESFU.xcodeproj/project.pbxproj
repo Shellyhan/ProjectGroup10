@@ -18,6 +18,7 @@
 		3E4AB80A1E80AE7800467535 /* MainViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8071E80AE7800467535 /* MainViewUITests.swift */; };
 		3E4AB80B1E80AE7800467535 /* UITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8081E80AE7800467535 /* UITestCase.swift */; };
 		3E4AB80D1E80EC6F00467535 /* CalendarUITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB80C1E80EC6F00467535 /* CalendarUITest.swift */; };
+		3E5136661E8753F4003F8080 /* Questions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E5136651E8753F4003F8080 /* Questions.swift */; };
 		3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD26691E6B8EDF00729365 /* MainViewController.swift */; };
 		3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */; };
 		3EE33E111E6CF92500C3379F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE33E101E6CF92500C3379F /* User.swift */; };
@@ -81,6 +82,7 @@
 		3E4AB8071E80AE7800467535 /* MainViewUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewUITests.swift; sourceTree = "<group>"; };
 		3E4AB8081E80AE7800467535 /* UITestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITestCase.swift; sourceTree = "<group>"; };
 		3E4AB80C1E80EC6F00467535 /* CalendarUITest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarUITest.swift; sourceTree = "<group>"; };
+		3E5136651E8753F4003F8080 /* Questions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Questions.swift; path = Models/Questions.swift; sourceTree = "<group>"; };
 		3EDD26691E6B8EDF00729365 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookFacilityViewController.swift; sourceTree = "<group>"; };
 		3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACTIVESFU.entitlements; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */,
 				95D894CC1E6E6C4100E11F82 /* ChatMessageController.swift */,
 				95D894C81E6E6B9200E11F82 /* Message.swift */,
+				3E5136651E8753F4003F8080 /* Questions.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -608,6 +611,7 @@
 				3E2400E61E6FC81F00371805 /* Event.swift in Sources */,
 				95CA71761E7F12CC00D88AB4 /* GeoFire.m in Sources */,
 				3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */,
+				3E5136661E8753F4003F8080 /* Questions.swift in Sources */,
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
 				95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */,
 				95CA717A1E7F12CC00D88AB4 /* GFQuery.m in Sources */,

@@ -20,52 +20,34 @@
 import UIKit
 import Firebase
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     // Variables
     let storageRef = FIRStorage.storage().reference()
     let databaseRef = FIRDatabase.database().reference()
     
-    
+    var originalUsername: String?
     // Outlets
     @IBOutlet weak var profileImage: UIImageView!
     
     @IBOutlet weak var usernameText: UITextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Logs the user out if they're not logged in
-        
-        //  if FIRAuth.auth()?.currentUser?.uid == nil{
-        //       logout()
-        //   }
-        
-        setupProfile()
-    }
-    
     
     // Buttons
-    @IBAction func changeUsername(_ sender: Any) {
+
+    //TODO: View stats for the month
+    @IBAction func viewStats(_ sender: UIButton) {
     }
+
     
-    @IBAction func editInfo(_ sender: Any) {
-        usernameText.isUserInteractionEnabled = true
-    }
-    
+    //TODO: Edit the survey
     @IBAction func editSurvey(_ sender: Any) {
-    }
-    
-    @IBAction func logoutButton(_ sender: Any) {
-        //      logout()
     }
     
     @IBAction func saveChanges(_ sender: Any) {
         saveChanges()
-        usernameText.isUserInteractionEnabled = false
-        usernameText.textAlignment = .center
     }
-    
+
     @IBAction func uploadImage(_ sender: Any) {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -73,16 +55,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         self.present(picker, animated: true, completion: nil)
     }
-    
-    
+
     // Functions
-    func setupProfile(){
+    func setupProfile() {
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
         
+        usernameText.textAlignment = .center
+        
         if let uid = FIRAuth.auth()?.currentUser?.uid{
             databaseRef.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                if let dict = snapshot.value as? [String: AnyObject]{
+                if let dict = snapshot.value as? [String: AnyObject] {
                     self.usernameText.text = dict["user"] as? String
                     if let profileImageURL = dict["pic"] as? String{
                         let url = URL(string: profileImageURL)
@@ -101,14 +84,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             
         }
     }
-    
-    /*
-     func logout(){
-     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-     let loginViewController = storyboard.instantiateViewController(withIdentifier: "Login")
-     present(loginViewController, animated: true, completion: nil)
-     }
-     */
     
     // This function allows you to change the profile image
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
@@ -134,9 +109,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func saveChanges(){
         let imageName = NSUUID().uuidString
+        
         let storedImage = storageRef.child("profileImages").child(imageName)
         
         if let uploadData = UIImagePNGRepresentation(self.profileImage.image!){
+            
             storedImage.put(uploadData, metadata: nil, completion: { (metadata, error) in
                 if error != nil{
                     print(error!)
@@ -147,8 +124,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                         print(error!)
                         return
                     }
-                    if let urlText = url?.absoluteString{
-                        self.databaseRef.child("users").child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["pic" : urlText], withCompletionBlock: { (error, ref) in
+                    if let urlText = url?.absoluteString {
+                        self.databaseRef.child("Users").child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["pic" : urlText, "user": self.usernameText.text!], withCompletionBlock: { (error, ref) in
                             if error != nil{
                                 print(error!)
                                 return
@@ -160,10 +137,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+        
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print(usernameText.text!)
+        usernameText.delegate = self
+        setupProfile()
+        
+    }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        if textField.text == "" {
+            usernameText.text = originalUsername
+        }
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        originalUsername = textField.text
+        textField.returnKeyType = .done
     }
     
     
