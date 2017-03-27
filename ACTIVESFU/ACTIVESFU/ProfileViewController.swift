@@ -67,7 +67,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                             
                             //eg. DaysAvail/Mon/Foo uid - we want to delete the values in the survey answer arrays
                             let pathToDelete = self.databaseRef.child("\(surveyCategoryToDelete)").child("\(restKeys.key)").child(userID!)
-
+                                                        
                             //Remove the values in the survey arrays
                             pathToDelete.removeValue()
                             //Remove the values in the user's array as well

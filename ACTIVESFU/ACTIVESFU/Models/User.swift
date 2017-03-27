@@ -17,4 +17,8 @@ class User: NSObject {
     var email: String?
     var id: String?
     var pic: String?
+    var DaysAvail: NSArray?
+    var FitnessLevel: NSArray?
+    var FavActivity: NSArray?
+    var TimeOfDay: NSArray?
 }

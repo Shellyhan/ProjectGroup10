@@ -49,13 +49,12 @@ class BuddiesViewController: UITableViewController{
         
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
             
-            if let dictionary = snapshot.value as? [String: String] {
+            if let dictionary = snapshot.value as? [String: Any] {
                 
                 let singleUserInDatabase = User()
                 singleUserInDatabase.id = snapshot.key
                 
                 // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
-                
                 singleUserInDatabase.setValuesForKeys(dictionary)
                 self.userFormatInDatabase.append(singleUserInDatabase)
                 
