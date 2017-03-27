@@ -161,11 +161,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     return
                 }
                 storedImage.downloadURL(completion: { (url, error) in
-                    if error != nil{
+                    if error != nil {
+                        
                         print(error!)
                         return
                     }
                     if let urlText = url?.absoluteString {
+                        
                         self.databaseRef.child("Users").child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["pic" : urlText, "user": self.usernameText.text!], withCompletionBlock: { (error, ref) in
                             if error != nil{
                                 print(error!)

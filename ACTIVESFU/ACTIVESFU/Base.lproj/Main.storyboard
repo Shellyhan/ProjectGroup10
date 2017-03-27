@@ -48,14 +48,6 @@
                                     <action selector="calendarSegue:" destination="pTr-PA-EUS" eventType="touchUpInside" id="VsW-nC-Idt"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGC-eT-0wJ">
-                                <rect key="frame" x="178" y="621" width="19" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="x-icon"/>
-                                <connections>
-                                    <action selector="logoutButton:" destination="pTr-PA-EUS" eventType="touchUpInside" id="Vwm-Nb-wVO"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ACTIVE SFU" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nW1-HV-QFi">
                                 <rect key="frame" x="112" y="72" width="150" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
@@ -96,6 +88,17 @@
                                 </state>
                                 <connections>
                                     <segue destination="6c3-tz-xsG" kind="show" id="5y7-cI-cdn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGC-eT-0wJ">
+                                <rect key="frame" x="145" y="625" width="84" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleColor" red="0.99599701166152954" green="0.99599379301071167" blue="0.99202793836593628" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutButton:" destination="pTr-PA-EUS" eventType="touchUpInside" id="Vwm-Nb-wVO"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -880,7 +883,6 @@
         <image name="sfu-bg" width="375" height="667"/>
         <image name="shake-phone" width="182" height="202"/>
         <image name="user-icon.png" width="23" height="20"/>
-        <image name="x-icon" width="19" height="19"/>
     </resources>
     <color key="tintColor" red="0.50980392159999999" green="0.62352941179999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
 </document>

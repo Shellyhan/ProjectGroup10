@@ -100,21 +100,6 @@ class BuddiesViewController: UITableViewController{
         if let profileImageUrl = userInDatabase.pic {
             
             tableCell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
-//            let url = URL(string: profileImageUrl)
-//            URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-//                
-//                //download hit an error
-//                if error != nil {
-//                    print(error!)
-//                    return
-//                }
-//                
-//                DispatchQueue.main.async {
-//                    
-//                    tableCell.profileImageView.image = UIImage(data: data!)
-//                }
-//                
-//            }).resume()
         }
         return tableCell 
     }
