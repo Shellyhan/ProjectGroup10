@@ -159,6 +159,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E27F1EC1E88DFEA0043511A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		3EE33E121E6CF94800C3379F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,6 +215,7 @@
 		95107B031E451F42004F8461 /* ACTIVESFU */ = {
 			isa = PBXGroup;
 			children = (
+				3E27F1EC1E88DFEA0043511A /* Extensions */,
 				95CA71641E7F12CC00D88AB4 /* GeoFire */,
 				1C55CA591E7539CC00825A0E /* FSCalendar */,
 				3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */,
@@ -215,7 +224,6 @@
 				95107B061E451F42004F8461 /* FindABuddyViewController.swift */,
 				3E2400ED1E6FFC1A00371805 /* Main.storyboard */,
 				95107B081E451F42004F8461 /* BuddiesViewController.swift */,
-				3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */,
 				95CA71601E7E5BC000D88AB4 /* LocationViewController.swift */,
 				95CA71621E7E5C0500D88AB4 /* ProfileViewController.swift */,
 				1C44F4011E75219200047DB9 /* CalendarViewController.swift */,

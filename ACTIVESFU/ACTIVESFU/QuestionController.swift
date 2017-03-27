@@ -24,7 +24,7 @@
 //  When going back in the survey the last selection is still up so you can end up selecting 2 choices for
 //  options that are supposed to be only 1
 //  You can select no option - FIXED
-//  users can tap back if they are quicker than the app is at hiding it
+//  users can tap back if they are quicker than the app is at hiding it - fixed
 //
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
@@ -226,7 +226,6 @@ class QuestionController: UITableViewController {
         if (navigationController?.viewControllers.index(of: self)) != nil {
 
             answerArray[indexPath.item] = 1
-            print("the index of \(indexPath.item) now has a value of 1")
         }
         
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
@@ -235,7 +234,6 @@ class QuestionController: UITableViewController {
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         
         answerArray[indexPath.item] = 0
-        print("the index of \(indexPath.item) now has a value of 0")
         tableView.cellForRow(at: indexPath)?.accessoryType = .none
     }
 }
@@ -247,7 +245,9 @@ class QuestionController: UITableViewController {
 // This is what they see after they've answered the questions
 class ResultsController: UIViewController {
     
-    var didResultsEditProfile = 0
+    var didResultsEditProfile = 0 //0 means register, not editing
+//    var isRegisteredOrEditing = 0 //0 means register
+    
     var currentSurveyQuestion: Question? {
         
         didSet {
@@ -256,10 +256,10 @@ class ResultsController: UIViewController {
         }
     }
     
-    let resultsLabel: UILabel = {
+     let resultsLabel: UILabel = {
         
         let finishLabel = UILabel()
-        finishLabel.text = "Thank you for answering."
+        finishLabel.text = "Thank you!"
         finishLabel.translatesAutoresizingMaskIntoConstraints = false
         finishLabel.textAlignment = .center
         finishLabel.font = UIFont.boldSystemFont(ofSize: 14)
@@ -270,6 +270,7 @@ class ResultsController: UIViewController {
     
     func continueToApp() {
         if didResultsEditProfile == 0 {
+
         self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
         }
         else {

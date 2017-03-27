@@ -9,6 +9,7 @@
 //  Bugs:
 //
 //  Profile pictures aren't deleted but replaced
+//  When changing photos it takes a while for cache to update, will see old profile for a few seconds
 //
 //  Changes:
 //
@@ -108,17 +109,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             databaseRef.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dict = snapshot.value as? [String: AnyObject] {
                     self.usernameText.text = dict["user"] as? String
-                    if let profileImageURL = dict["pic"] as? String{
-                        let url = URL(string: profileImageURL)
-                        URLSession.shared.dataTask(with: url!, completionHandler: { (data, response, error) in
-                            if error != nil{
-                                print(error!)
-                                return
-                            }
-                            DispatchQueue.main.async {
-                                self.profileImage?.image = UIImage(data: data!)
-                            }
-                        }).resume()
+                    if let profileImageURL = dict["pic"] as? String {
+                    
+                        self.profileImage.loadImageUsingCacheWithUrlString(urlString: profileImageURL)
                     }
                 }
             })
