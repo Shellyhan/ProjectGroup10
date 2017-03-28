@@ -60,6 +60,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
            print("shaking")
             fetchAllBuddiesInDatabase()
             fetchSurveyResults()
+            test()
             tableView.reloadData()
         }
     }
@@ -90,6 +91,14 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }, withCancel: nil)
     }
     
+    func test(){
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("DaysAvail").child("Monday").observe(.value, with: {
+            snapshot in
+            print("-------test snap", snapshot)
+            
+        })
+    }
     
 
     func fetchSurveyResults(){
