@@ -33,6 +33,8 @@ class BuddiesViewController: UITableViewController{
     
     var cellID = "cellID"
     var userFormatInDatabase = [User]()
+    //testing for view only approved buddies
+    let userUid = FIRAuth.auth()?.currentUser?.uid
     
     @IBAction func backButton(_ sender: UIBarButtonItem) {
         
@@ -47,27 +49,46 @@ class BuddiesViewController: UITableViewController{
     //fetches all buddies in the firebase database
     func fetchAllBuddiesInDatabase() {
         
-        FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
+        //Look in the user's buddy list
+        FIRDatabase.database().reference().child("Users").child(userUid!).child("Buddies").observe(.value, with: { (snapshot) in
             
-            if let dictionary = snapshot.value as? [String: Any] {
+            //enumerate across all buddies in the buddy list
+            for userBuddies in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 
-                let singleUserInDatabase = User()
-                singleUserInDatabase.id = snapshot.key
-                
-                // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
-                singleUserInDatabase.setValuesForKeys(dictionary)
-                self.userFormatInDatabase.append(singleUserInDatabase)
-                
-                // This will crash because of background thread, so the dispatch fixes it
-                
-                DispatchQueue.main.async {
+                //if the value is 1, then the user is blocked
+                if userBuddies.value as? Int == 0 {
                     
-                    self.tableView.reloadData()
+                    //search through the user list to find the buddy
+                    FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshotBuddies) in
+        
+                        if snapshotBuddies.key == userBuddies.key {
+                            
+                            //add it to the dictionary array
+                            if let dictionary = snapshotBuddies.value as? [String: Any] {
+    
+                                let singleUserInDatabase = User()
+                                singleUserInDatabase.id = snapshotBuddies.key
+    
+                                // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
+                                singleUserInDatabase.setValuesForKeys(dictionary)
+                                self.userFormatInDatabase.append(singleUserInDatabase)
+    
+                                // This will crash because of background thread, so the dispatch fixes it
+                                DispatchQueue.main.async {
+    
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        }
+                    }, withCancel: nil)
                 }
             }
         }, withCancel: nil)
+        
     }
-   
+
+
+
     //dismissess view when pressing the back button
     func dismissView() {
         
@@ -95,7 +116,7 @@ class BuddiesViewController: UITableViewController{
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! UserCell
         let userInDatabase = userFormatInDatabase[indexPath.row]
         tableCell.textLabel?.text = userInDatabase.user
-        tableCell.detailTextLabel?.text = userInDatabase.email // Comment this out if we don't want to display the email
+        tableCell.detailTextLabel?.text = "What a cool person!" // Comment this out if we don't want to display the email
         
         if let profileImageUrl = userInDatabase.pic {
             
