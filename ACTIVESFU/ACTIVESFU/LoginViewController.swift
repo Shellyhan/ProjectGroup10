@@ -180,22 +180,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 
                 return
             }
-            
             self.firebaseReference = FIRDatabase.database().reference()
             let userReferenceInDatabase = self.firebaseReference.child("Users").child(userUID)
             
-            //insert user
-            let values = ["user": name, "email": self.emailTextField.text!]
-            userReferenceInDatabase.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                
-                if err != nil {
-                    print(err!)
+            //get url for the default profile pic
+            let storageRef = FIRStorage.storage().reference()
+            let defaultImage = storageRef.child("Unknown.jpeg")
+            
+            defaultImage.downloadURL(completion: { (url, error) in
+                if error != nil {
+                    
+                    print(error!)
                     return
+                }
+                if let defaultURLText = url?.absoluteString {
+                    
+                    //insert user and data associated
+                    let values = ["user": name, "email": self.emailTextField.text!, "pic": defaultURLText]
+                    userReferenceInDatabase.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                        
+                        if err != nil {
+                            print(err!)
+                            return
+                        }
+                    })
                 }
             })
             
-                print("Create account successful")
-                self.segueToSurvey()
+            print("Create account successful")
+            self.segueToSurvey()
             })
         }
     }

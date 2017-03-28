@@ -9,8 +9,7 @@
 //
 //  Bugs:
 //  Users in the table are all users in the database, not the ones matched to the current user.
-//
-//
+//  //
 //  Changes:
 //  Added segue to chat
 //  Save snapshot for user ID
@@ -34,6 +33,8 @@ class BuddiesViewController: UITableViewController{
     
     var cellID = "cellID"
     var userFormatInDatabase = [User]()
+    //testing for view only approved buddies
+    let userUid = FIRAuth.auth()?.currentUser?.uid
     
     @IBAction func backButton(_ sender: UIBarButtonItem) {
         
@@ -48,28 +49,46 @@ class BuddiesViewController: UITableViewController{
     //fetches all buddies in the firebase database
     func fetchAllBuddiesInDatabase() {
         
-        FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
+        //Look in the user's buddy list
+        FIRDatabase.database().reference().child("Users").child(userUid!).child("Buddies").observe(.value, with: { (snapshot) in
             
-            if let dictionary = snapshot.value as? [String: String] {
+            //enumerate across all buddies in the buddy list
+            for userBuddies in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 
-                let singleUserInDatabase = User()
-                singleUserInDatabase.id = snapshot.key
-                
-                // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
-                
-                singleUserInDatabase.setValuesForKeys(dictionary)
-                self.userFormatInDatabase.append(singleUserInDatabase)
-                
-                // This will crash because of background thread, so the dispatch fixes it
-                
-                DispatchQueue.main.async {
+                //if the value is 1, then the user is blocked
+                if userBuddies.value as? Int == 0 {
                     
-                    self.tableView.reloadData()
+                    //search through the user list to find the buddy
+                    FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshotBuddies) in
+        
+                        if snapshotBuddies.key == userBuddies.key {
+                            
+                            //add it to the dictionary array
+                            if let dictionary = snapshotBuddies.value as? [String: Any] {
+    
+                                let singleUserInDatabase = User()
+                                singleUserInDatabase.id = snapshotBuddies.key
+    
+                                // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
+                                singleUserInDatabase.setValuesForKeys(dictionary)
+                                self.userFormatInDatabase.append(singleUserInDatabase)
+    
+                                // This will crash because of background thread, so the dispatch fixes it
+                                DispatchQueue.main.async {
+    
+                                    self.tableView.reloadData()
+                                }
+                            }
+                        }
+                    }, withCancel: nil)
                 }
             }
         }, withCancel: nil)
+        
     }
-   
+
+
+
     //dismissess view when pressing the back button
     func dismissView() {
         
@@ -94,10 +113,15 @@ class BuddiesViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! UserCell
         let userInDatabase = userFormatInDatabase[indexPath.row]
         tableCell.textLabel?.text = userInDatabase.user
-        tableCell.detailTextLabel?.text = userInDatabase.email // Comment this out if we don't want to display the email
+        tableCell.detailTextLabel?.text = "What a cool person!" // Comment this out if we don't want to display the email
+        
+        if let profileImageUrl = userInDatabase.pic {
+            
+            tableCell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
+        }
         return tableCell 
     }
     
@@ -107,9 +131,39 @@ class BuddiesViewController: UITableViewController{
     
     class UserCell: UITableViewCell {
         
+        
+        let profileImageView: UIImageView = {
+            
+            let imageView = UIImageView()
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.layer.cornerRadius = 20
+            imageView.layer.masksToBounds = true
+            imageView.contentMode = .scaleAspectFill
+            return imageView
+        }()
+        
+        override func layoutSubviews() {
+            
+            super.layoutSubviews()
+            textLabel?.frame = CGRect(x: 56, y: textLabel!.frame.origin.y - 2, width: textLabel!.frame.width, height: textLabel!.frame.height)
+            detailTextLabel?.frame = CGRect(x: 56, y: detailTextLabel!.frame.origin.y + 2, width: detailTextLabel!.frame.width, height: detailTextLabel!.frame.height)
+        }
+        
         override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
             
             super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
+            
+            addSubview(profileImageView)
+            
+            //use constraint anchors
+            //need x, y, width, height anchors
+            
+            profileImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
+            profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+            profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+            profileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            
+            
         }
         
         required init?(coder aDecoder: NSCoder) {

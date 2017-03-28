@@ -14,6 +14,8 @@
 		3E2400E61E6FC81F00371805 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2400E51E6FC81F00371805 /* Event.swift */; };
 		3E2400E81E6FC93D00371805 /* ViewEventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2400E71E6FC93D00371805 /* ViewEventDetailController.swift */; };
 		3E2400EE1E6FFC1A00371805 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E2400ED1E6FFC1A00371805 /* Main.storyboard */; };
+		3E27F1EB1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */; };
+		3E2847671E89E1DF009ED794 /* ProfileViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2847661E89E1DF009ED794 /* ProfileViewExtension.swift */; };
 		3E4AB8091E80AE7800467535 /* LoginViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8061E80AE7800467535 /* LoginViewUITests.swift */; };
 		3E4AB80A1E80AE7800467535 /* MainViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8071E80AE7800467535 /* MainViewUITests.swift */; };
 		3E4AB80B1E80AE7800467535 /* UITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8081E80AE7800467535 /* UITestCase.swift */; };
@@ -21,6 +23,8 @@
 		3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD26691E6B8EDF00729365 /* MainViewController.swift */; };
 		3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */; };
 		3EE33E111E6CF92500C3379F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE33E101E6CF92500C3379F /* User.swift */; };
+		3EF0F77B1E8A1101001D0467 /* MainViewControllerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF0F77A1E8A1101001D0467 /* MainViewControllerHandler.swift */; };
+		3EF0F77D1E8A12A3001D0467 /* TestLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3EF0F77C1E8A12A3001D0467 /* TestLocation.gpx */; };
 		95107B051E451F42004F8461 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B041E451F42004F8461 /* AppDelegate.swift */; };
 		95107B071E451F42004F8461 /* FindABuddyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B061E451F42004F8461 /* FindABuddyViewController.swift */; };
 		95107B091E451F42004F8461 /* BuddiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B081E451F42004F8461 /* BuddiesViewController.swift */; };
@@ -77,6 +81,8 @@
 		3E2400E51E6FC81F00371805 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		3E2400E71E6FC93D00371805 /* ViewEventDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEventDetailController.swift; sourceTree = "<group>"; };
 		3E2400ED1E6FFC1A00371805 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBuddiesViewCaching.swift; sourceTree = "<group>"; };
+		3E2847661E89E1DF009ED794 /* ProfileViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewExtension.swift; sourceTree = "<group>"; };
 		3E4AB8061E80AE7800467535 /* LoginViewUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewUITests.swift; sourceTree = "<group>"; };
 		3E4AB8071E80AE7800467535 /* MainViewUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewUITests.swift; sourceTree = "<group>"; };
 		3E4AB8081E80AE7800467535 /* UITestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITestCase.swift; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 		3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookFacilityViewController.swift; sourceTree = "<group>"; };
 		3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACTIVESFU.entitlements; sourceTree = "<group>"; };
 		3EE33E101E6CF92500C3379F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		3EF0F77A1E8A1101001D0467 /* MainViewControllerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerHandler.swift; sourceTree = "<group>"; };
+		3EF0F77C1E8A12A3001D0467 /* TestLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestLocation.gpx; sourceTree = "<group>"; };
 		95107B011E451F42004F8461 /* ACTIVESFU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACTIVESFU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95107B041E451F42004F8461 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95107B061E451F42004F8461 /* FindABuddyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindABuddyViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +165,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E27F1EC1E88DFEA0043511A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */,
+				3E2847661E89E1DF009ED794 /* ProfileViewExtension.swift */,
+				3EF0F77A1E8A1101001D0467 /* MainViewControllerHandler.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		3EE33E121E6CF94800C3379F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +223,7 @@
 		95107B031E451F42004F8461 /* ACTIVESFU */ = {
 			isa = PBXGroup;
 			children = (
+				3E27F1EC1E88DFEA0043511A /* Extensions */,
 				95CA71641E7F12CC00D88AB4 /* GeoFire */,
 				1C55CA591E7539CC00825A0E /* FSCalendar */,
 				3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */,
@@ -223,6 +242,7 @@
 				3E2400DF1E6FC3EB00371805 /* QuestionController.swift */,
 				3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */,
 				95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */,
+				3EF0F77C1E8A12A3001D0467 /* TestLocation.gpx */,
 				95D894D01E6E6D8900E11F82 /* ChatLogController.swift */,
 				3EE33E121E6CF94800C3379F /* Models */,
 				95107B0D1E451F43004F8461 /* Assets.xcassets */,
@@ -428,6 +448,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF0F77D1E8A12A3001D0467 /* TestLocation.gpx in Resources */,
 				95107B111E451F43004F8461 /* LaunchScreen.storyboard in Resources */,
 				1C55CA5A1E7539CC00825A0E /* FSCalendar in Resources */,
 				95107B0E1E451F43004F8461 /* Assets.xcassets in Resources */,
@@ -605,11 +626,14 @@
 				3E2400E01E6FC3EB00371805 /* QuestionController.swift in Sources */,
 				3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */,
 				3E2400E81E6FC93D00371805 /* ViewEventDetailController.swift in Sources */,
+				3E27F1EB1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift in Sources */,
+				3EF0F77B1E8A1101001D0467 /* MainViewControllerHandler.swift in Sources */,
 				3E2400E61E6FC81F00371805 /* Event.swift in Sources */,
 				95CA71761E7F12CC00D88AB4 /* GeoFire.m in Sources */,
 				3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */,
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
 				95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */,
+				3E2847671E89E1DF009ED794 /* ProfileViewExtension.swift in Sources */,
 				95CA717A1E7F12CC00D88AB4 /* GFQuery.m in Sources */,
 				95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */,
 				95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */,
