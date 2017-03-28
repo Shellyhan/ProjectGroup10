@@ -27,11 +27,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Variables
     let storageRef = FIRStorage.storage().reference()
     let databaseRef = FIRDatabase.database().reference()
+    let userDetails = User()
     
     var originalUsername: String?
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var activityContainer: UIView = UIView()
+    var loadingView: UIView = UIView()
+    
     // Outlets
     @IBOutlet weak var profileImage: UIImageView!
-    
     @IBOutlet weak var usernameText: UITextField!
     
     
@@ -139,12 +143,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         dismiss(animated: true, completion: nil)
     }
     
-    
-    
     func saveChanges(){
-        let imageName = NSUUID().uuidString
         
+        showActivityIndicator(uiView: self.view)
+        
+        let imageName = NSUUID().uuidString
         let storedImage = storageRef.child("profileImages").child("\(imageName).png")
+        
+        //stop user interaction while profile picture is updated
         
         if let uploadData = UIImagePNGRepresentation(self.profileImage.image!){
             
@@ -166,6 +172,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                                 print(error!)
                                 return
                             }
+                            //stop activity indicator once done
+                            self.hideActivityIndicator(uiView: self.view)
                         })
                     }
                 })
@@ -175,11 +183,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
         
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         print(usernameText.text!)
         usernameText.delegate = self
         setupProfile()
-        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -194,6 +202,5 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         originalUsername = textField.text
         textField.returnKeyType = .done
     }
-    
-    
+
 }

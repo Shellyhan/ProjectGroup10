@@ -67,6 +67,7 @@ class ViewEventDetailController: UIViewController {
         ref.observe(.childAdded, with: { (snapshot) in
             //reset each attribute
             switch snapshot.key {
+                
             case "title": self.uniqueEvent.title = snapshot.value as! String?
             case "date": self.uniqueEvent.date = snapshot.value as! String?
             case "time": self.uniqueEvent.time = snapshot.value as! String?

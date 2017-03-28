@@ -15,6 +15,7 @@
 		3E2400E81E6FC93D00371805 /* ViewEventDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2400E71E6FC93D00371805 /* ViewEventDetailController.swift */; };
 		3E2400EE1E6FFC1A00371805 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E2400ED1E6FFC1A00371805 /* Main.storyboard */; };
 		3E27F1EB1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */; };
+		3E2847671E89E1DF009ED794 /* ProfileViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2847661E89E1DF009ED794 /* ProfileViewExtension.swift */; };
 		3E4AB8091E80AE7800467535 /* LoginViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8061E80AE7800467535 /* LoginViewUITests.swift */; };
 		3E4AB80A1E80AE7800467535 /* MainViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8071E80AE7800467535 /* MainViewUITests.swift */; };
 		3E4AB80B1E80AE7800467535 /* UITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4AB8081E80AE7800467535 /* UITestCase.swift */; };
@@ -79,6 +80,7 @@
 		3E2400E71E6FC93D00371805 /* ViewEventDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEventDetailController.swift; sourceTree = "<group>"; };
 		3E2400ED1E6FFC1A00371805 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBuddiesViewCaching.swift; sourceTree = "<group>"; };
+		3E2847661E89E1DF009ED794 /* ProfileViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewExtension.swift; sourceTree = "<group>"; };
 		3E4AB8061E80AE7800467535 /* LoginViewUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewUITests.swift; sourceTree = "<group>"; };
 		3E4AB8071E80AE7800467535 /* MainViewUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewUITests.swift; sourceTree = "<group>"; };
 		3E4AB8081E80AE7800467535 /* UITestCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITestCase.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */,
+				3E2847661E89E1DF009ED794 /* ProfileViewExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 				3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */,
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
 				95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */,
+				3E2847671E89E1DF009ED794 /* ProfileViewExtension.swift in Sources */,
 				95CA717A1E7F12CC00D88AB4 /* GFQuery.m in Sources */,
 				95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */,
 				95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */,
