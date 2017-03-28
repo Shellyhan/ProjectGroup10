@@ -170,10 +170,7 @@
 			children = (
 				3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */,
 				3E2847661E89E1DF009ED794 /* ProfileViewExtension.swift */,
-<<<<<<< HEAD
 				3EF0F77A1E8A1101001D0467 /* MainViewControllerHandler.swift */,
-=======
->>>>>>> origin/ViewEvent
 			);
 			name = Extensions;
 			sourceTree = "<group>";
