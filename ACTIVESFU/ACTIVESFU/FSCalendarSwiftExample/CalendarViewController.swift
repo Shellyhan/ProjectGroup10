@@ -24,6 +24,8 @@
 
 import UIKit
 import Foundation
+
+
 import FSCalendar
 import Firebase
 
@@ -150,7 +152,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         var index = 0
         ref.child("Events").queryOrdered(byChild: "date").observe(.childAdded, with: {(snapshot) in
             
-            if let dictionary = snapshot.value as? [String: String] {
+            if let dictionary = snapshot.value as? [String: Any] {
                 let eventNow = Event()
                 eventNow.setValuesForKeys(dictionary)
                 self.datesWithEvent.append(eventNow.date!)
@@ -246,7 +248,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         let ref = FIRDatabase.database().reference()
         ref.child("Events").queryOrdered(byChild: "date").queryEqual(toValue: "\(selected )").observe(.childAdded, with: { (snapshot) in
             
-            if let dictionary = snapshot.value as? [String: String] {
+            if let dictionary = snapshot.value as? [String: Any] {
                 
                 let eventNow = Event()
                 eventNow.eventID = snapshot.key

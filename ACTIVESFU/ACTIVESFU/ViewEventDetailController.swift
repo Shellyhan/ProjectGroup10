@@ -19,13 +19,13 @@ import UIKit
 import Firebase
 
 class ViewEventDetailController: UIViewController {
-
+    
     //data from calendar
     var uniqueEvent = Event()
     var creatorID: String!
     var thisCreator = User()
     let me = FIRAuth.auth()?.currentUser?.uid
-
+    
     @IBOutlet weak var EventTitle: UILabel!
     @IBOutlet weak var Time: UILabel!
     @IBOutlet weak var Location: UILabel!
@@ -35,7 +35,7 @@ class ViewEventDetailController: UIViewController {
     @IBOutlet weak var RemoveButton: UIButton!
     @IBOutlet weak var JoinButton: UIButton!
     @IBOutlet weak var CreatorButton: UIButton!
-
+    
     @IBOutlet weak var skipBackButton: UIBarButtonItem!
     
     @IBAction func backButton(_ sender: UIBarButtonItem) {
@@ -44,29 +44,34 @@ class ViewEventDetailController: UIViewController {
     }
     
     
-    func fetchCreator(){
+    func fetchCreator() {
+        
         //get creator info:
         let ref = FIRDatabase.database().reference()
         ref.child("Users").child(self.creatorID!).observeSingleEvent(of: .value, with: { (snapshot) in
             
-            if let dictionary = snapshot.value as? [String: String] {
+            if let dictionary = snapshot.value as? [String: Any] {
+                
                 self.thisCreator.id = snapshot.key
                 self.thisCreator.setValuesForKeys(dictionary)
                 //wait for username:
                 self.Creator.text = "Creator is:        \(self.thisCreator.user ?? "")"
             }
         }) { (error) in
+            
             print(error.localizedDescription)
         }
     }
     
-    func fetchEvent(){
+    func fetchEvent() {
         
         let ref = FIRDatabase.database().reference().child("Events").child(uniqueEvent.eventID!)
         
         ref.observe(.childAdded, with: { (snapshot) in
+            
             //reset each attribute
             switch snapshot.key {
+                
             case "title": self.uniqueEvent.title = snapshot.value as! String?
             case "date": self.uniqueEvent.date = snapshot.value as! String?
             case "time": self.uniqueEvent.time = snapshot.value as! String?
@@ -77,8 +82,9 @@ class ViewEventDetailController: UIViewController {
             }
         },withCancel: nil)
     }
-   
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         //connect to DB:
         self.creatorID = self.uniqueEvent.uid
@@ -87,12 +93,14 @@ class ViewEventDetailController: UIViewController {
     
     //refresh content shown:
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
         setupUI()
     }
     
     //prepare data:
     override func viewWillAppear(_ animated: Bool) {
+        
         super.viewWillAppear(animated)
         fetchEvent()
     }
@@ -101,12 +109,15 @@ class ViewEventDetailController: UIViewController {
         
         //setup buttons:
         if self.me == self.creatorID {
+            
             self.JoinButton.isHidden = true
             self.CreatorButton.isHidden = true
             self.EditButton.isHidden = false
             self.RemoveButton.isHidden = false
             
-        }else{
+        }
+        else {
+            
             self.JoinButton.isHidden = false
             self.CreatorButton.isHidden = false
             self.EditButton.isHidden = true
@@ -121,7 +132,6 @@ class ViewEventDetailController: UIViewController {
         print("Event:\n \(self.uniqueEvent.title ?? "")")
         print("Time at:\n \(self.uniqueEvent.date ?? "") @ \(self.uniqueEvent.time ?? "")")
         print("Event at:\n    \(self.uniqueEvent.location ?? "")")
-        
     }
     
     
@@ -129,7 +139,7 @@ class ViewEventDetailController: UIViewController {
     func skipBack(alert: UIAlertAction){
         self.backButton(skipBackButton)
     }
-
+    
     @IBAction func EditEvent(_ sender: UIButton) {
         //segue to Create event:
         
@@ -139,9 +149,9 @@ class ViewEventDetailController: UIViewController {
         present(segueEventCreate, animated: true, completion: nil)
         
     }
-
+    
     @IBAction func DeleteEvent(_ sender: UIButton) {
-
+        
         FIRDatabase.database().reference().child("Events").child(self.uniqueEvent.eventID!).removeValue(
             completionBlock: { (error, refer) in
                 if error != nil {
@@ -150,8 +160,8 @@ class ViewEventDetailController: UIViewController {
                     print(refer)
                     print("Child Removed Correctly")
                 }
-            })
-
+        })
+        
         //set alert:
         let alertController = UIAlertController(title: "Delete Event", message: "Successfully deleted this event", preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: skipBack)
@@ -162,9 +172,11 @@ class ViewEventDetailController: UIViewController {
     
     @IBAction func JoinEvent(_ sender: UIButton) {
         
-        let EventKey = FIRDatabase.database().reference().child("Participants").child(self.uniqueEvent.eventID!)
-        EventKey.updateChildValues(["\(self.me ?? "")": "1"])
-        print("--------inserted new participant")
+        //add the event for current user:
+        let addEventKey = FIRDatabase.database().reference().child("Participants").child(self.me!)
+        addEventKey.updateChildValues([self.uniqueEvent.eventID!: 0])
+        print("--------inserted new event for me")
+             
         
         //set alert:
         let alertController = UIAlertController(title: "Join Event", message: "Successfully joined this event", preferredStyle: .alert)
@@ -188,5 +200,5 @@ class ViewEventDetailController: UIViewController {
             present(navController, animated: true, completion: nil)
         }
     }
-
+    
 }

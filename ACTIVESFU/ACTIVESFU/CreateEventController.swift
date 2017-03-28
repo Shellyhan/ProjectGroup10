@@ -105,8 +105,9 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         //create event
         let EventRef = ref.child("Events")
+        let ParticipantRef = ref.child("Participants")
         var EventKey = EventRef.childByAutoId().key
-
+        
         let activity = selectedActivity
         let IDString = "\(uid ?? "")"
         
@@ -133,15 +134,19 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         let eventHour = dateFormatter.date(from: timeString)!
         
         if (eventHour >= morning && eventHour < afternoon){
+            
             timeOfDay = "Morning"
         }
         else if (eventHour >= afternoon && eventHour < evening){
+            
             timeOfDay = "Afternoon"
         }
         else if (eventHour >= evening && eventHour < night){
+            
             timeOfDay = "Evening"
         }
         else {
+            
             timeOfDay = ""
         }
         
@@ -158,11 +163,14 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         let eventUpdates = ["\(EventKey)": eventContent]
         EventRef.updateChildValues(eventUpdates)
-        //Participants are stored separetly:
-        ref.child("Participants").child(EventKey).setValue(["\(IDString)": "1"])
+        
+        //add the event for current user:
+        ParticipantRef.child(IDString).updateChildValues([EventKey: 0])
+        print("--------inserted new event for me")
         
         //display event info:
         EventRef.child(EventKey).observeSingleEvent(of: .value, with: { (snapshot) in
+            
             print("----------event info--------------")
             print(snapshot)
         }, withCancel: nil)
@@ -174,7 +182,8 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     //skip back button:
-    func skipBack(alert: UIAlertAction){
+    func skipBack(alert: UIAlertAction) {
+        
         self.backButton(skipBackButton)
     }
     
@@ -187,11 +196,13 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         super.viewDidLoad()
         //set up UI if modifying event:
         if (eventToModify.date != nil) {
+            
             //activityPicker.setValue(eventToModify.title)
             dateIDCreate = eventToModify.date
             createEventButtonText.setTitle("Update",for: .normal)
             createEventTitle.text = ("Update Event")
         }
+        
         //set up test fields:
         self.privacyPicker.dataSource = self
         self.privacyPicker.delegate = self
@@ -205,16 +216,6 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         locationPicker.tag = 0
         privacyPicker.tag = 1
         activityPicker.tag = 2
-        
-        
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        
-        super.didReceiveMemoryWarning()
-        
-        // Dispose of any resources that can be recreated.
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -250,6 +251,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         switch (pickerView.tag){
         case 0:
             return locations[row]
@@ -263,8 +265,10 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         let tag = pickerView.tag
-        switch (pickerView.tag){
+        switch (pickerView.tag) {
+            
         case 0:
             selectedLocation = locations[row]
             break
@@ -281,5 +285,4 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             break
         }
     }
-    
 }

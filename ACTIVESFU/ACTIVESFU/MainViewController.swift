@@ -21,11 +21,34 @@
 
 
 import UIKit
+import Foundation
+import MapKit
+import CoreLocation
+import UserNotifications
+
 import Firebase
 
 //MARK: MainViewController
 
 class MainViewController: UIViewController {
+    
+    //----------------------for location-------------
+    let locationManager = CLLocationManager()
+    
+    //for time record:
+    var timeEnter: Date = Date()
+    var duration: TimeInterval = 0.0
+    
+    //---------------------for event----------------------------
+    var events = [Event]()
+    
+    let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        return formatter
+    }()
+    
+    //-------------------------------------------------
     
     //MARK: Internal
     
@@ -75,6 +98,37 @@ class MainViewController: UIViewController {
         
         super.viewDidLoad()
         checkIfUserIsLoggedIn()
+        
+        //location:
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        //distance per update:
+        self.locationManager.distanceFilter = kCLLocationAccuracyNearestTenMeters
+        
+        //setup target region:
+        setupData()
+        
+        // Configure User Notification Center
+        configureUserNotificationsCenter()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        // 1. status is not determined
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            locationManager.requestAlwaysAuthorization()
+        }
+            // 2. authorization were denied
+        else if CLLocationManager.authorizationStatus() == .denied {
+            print("Location services were previously denied. Please enable location services for this app in Settings.")
+            
+        }
+            // 3. we do have authorization
+        else if CLLocationManager.authorizationStatus() == .authorizedAlways {
+            locationManager.startUpdatingLocation()
+        }
     }
 }
 
