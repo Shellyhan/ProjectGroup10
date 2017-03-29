@@ -162,6 +162,19 @@ class ViewEventDetailController: UIViewController {
                 }
         })
         
+        FIRDatabase.database().reference().child("Participants").observe(.childAdded, with: { (snapshot) in
+            
+            FIRDatabase.database().reference().child("Participants").child(snapshot.key).child(self.uniqueEvent.eventID!).removeValue(
+                completionBlock: { (error, refer) in
+                    if error != nil {
+                        print("error removing")
+                    } else {
+                        print(refer)
+                        print("Child Removed Correctly")
+                    }
+            })
+        })
+        
         //set alert:
         let alertController = UIAlertController(title: "Delete Event", message: "Successfully deleted this event", preferredStyle: .alert)
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: skipBack)
