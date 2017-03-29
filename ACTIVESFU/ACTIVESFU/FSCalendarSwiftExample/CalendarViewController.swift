@@ -99,6 +99,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         //TODO: change search bar to clear
         searchController.searchBar.barTintColor = UIColor.white
         searchController.searchBar.backgroundColor = UIColor.white
+        
     }
     
     
@@ -220,12 +221,12 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     
     
     //MARK: table view 
-    
+    /*
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return events.count
     }
 
-        
+     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
@@ -241,6 +242,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         return cell
         
     }
+ */
  
     func fetchTodayEvent() {
         //reset events array
@@ -271,7 +273,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    /*
+    ///MARK - table view for search bar
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
             return filteredEvents.count
@@ -295,8 +297,6 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         cell.detailTextLabel?.text = event.time
         return cell
     }
- */
-
     
     
     //MARK: filter and search bar

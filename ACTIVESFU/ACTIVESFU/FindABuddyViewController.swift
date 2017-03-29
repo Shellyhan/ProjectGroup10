@@ -35,7 +35,9 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     let cell = "cell"
     var userFormatInDatabase = [User]()
-    var sportsUsers = [String]()
+    var levelArray = [String]()
+    var levelArrayUIDS = [Any]()
+    //TODO remove usersfortable
     var usersForTable = [User]()
     var unique = [String]()
     
@@ -90,57 +92,56 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }, withCancel: nil)
     }
     
-    
-
-    func fetchSurveyResults(){
-            let databaseRef = FIRDatabase.database().reference()
-            databaseRef.child("Survey").observe(.value, with: {
+    /*
+    func fetchAvail(){
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("DaysAvail").observe(.value, with: {
             snapshot in
-                
-                for childSnap in snapshot.children.allObjects {
-                
-                    let snap = childSnap as! FIRDataSnapshot
-    
-                    if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? NSDictionary {
-                        
-                        //to be used in V3
-                        let level = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
-                        let time = snapshotValue.object(forKey: "TimeOfDay") as! NSDictionary
-                        let activities = snapshotValue.object(forKey: "FavActivity") as! NSDictionary
-                        let avail = snapshotValue.object(forKey: "DaysAvail") as! NSDictionary
-                        
-                        //hard coded for now: return all users who like sports
-                        let sports = activities["Sports"] as! NSDictionary
-            
-                        let snapKeys = snapVal.allKeys as! [String]
-                        let snapVals = snapVal.allValues
-
-                        let sportsUID = sports.allKeys
-                        
-                        for item in sportsUID {
-                            let item = String(describing: item)
-                                self.sportsUsers.append(item)
-
-                        }
-                        
-                        self.sportsUsers = Array(Set(self.sportsUsers))
-                        
-                        //Remove myself from showing up
-                        for user in self.userFormatInDatabase {
-                            let currentUID = user.id
-                            if self.sportsUsers.contains(currentUID!){
-                                if currentUID != self.uid {
-                                    self.usersForTable.append(user)
-                                }
-                            }
-                        }
-                    self.tableView.reloadData()
-                       
-                }
+            if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? AnyObject {
+                print("fetch avail value")
             }
         })
     }
+ */
     
+    
+    func fetchSurveyResults(){
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Survey").observe(.value, with: {
+            snapshot in
+            
+            for childSnap in snapshot.children.allObjects {
+                
+                let snap = childSnap as! FIRDataSnapshot
+                // print("snapkey----------", snap.key)
+                
+                if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] as? AnyObject {
+                    let level = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
+                    
+                    for (key, value) in level {
+                    /*if my uid in values:
+                         append my info to myInfoArray
+                         append other uids to commonInterestsUIDArray eg 1234
+                         append other keys in commonInterestsArray eg expert
+                      else:
+                         do nothing
+                         
+                    when done: use commonInterestsArray to display table
+                    display x is also.."expert" or whatever
+                    */
+                    
+                    self.levelArray.append(key as! String)
+                    self.levelArrayUIDS.append(((value as! NSDictionary).allKeys))
+                    print("----------------------levelArray", self.levelArray)
+                    print("-----------------------levelArrayUID", self.levelArrayUIDS)
+                    print("Value-------------: \((value as! NSDictionary).allKeys) for key---------------: \(key)")
+                    }
+                   
+                }
+            }
+           self.tableView.reloadData()
+        })
+    }
 
     // MARK: UITableView
  
@@ -189,6 +190,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
             fatalError("init(coder:) has not been implemented")
         }
     }
-    
-    
 }
+
+
