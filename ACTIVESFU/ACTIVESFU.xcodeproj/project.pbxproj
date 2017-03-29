@@ -23,6 +23,7 @@
 		3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD26691E6B8EDF00729365 /* MainViewController.swift */; };
 		3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */; };
 		3EE33E111E6CF92500C3379F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE33E101E6CF92500C3379F /* User.swift */; };
+		3EEB937F1E8B851800757E40 /* ChatLogAlertHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEB937E1E8B851800757E40 /* ChatLogAlertHandlers.swift */; };
 		3EF0F77B1E8A1101001D0467 /* MainViewControllerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF0F77A1E8A1101001D0467 /* MainViewControllerHandler.swift */; };
 		3EF0F77D1E8A12A3001D0467 /* TestLocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 3EF0F77C1E8A12A3001D0467 /* TestLocation.gpx */; };
 		95107B051E451F42004F8461 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B041E451F42004F8461 /* AppDelegate.swift */; };
@@ -91,6 +92,7 @@
 		3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookFacilityViewController.swift; sourceTree = "<group>"; };
 		3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACTIVESFU.entitlements; sourceTree = "<group>"; };
 		3EE33E101E6CF92500C3379F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		3EEB937E1E8B851800757E40 /* ChatLogAlertHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogAlertHandlers.swift; sourceTree = "<group>"; };
 		3EF0F77A1E8A1101001D0467 /* MainViewControllerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerHandler.swift; sourceTree = "<group>"; };
 		3EF0F77C1E8A12A3001D0467 /* TestLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestLocation.gpx; sourceTree = "<group>"; };
 		95107B011E451F42004F8461 /* ACTIVESFU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACTIVESFU.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 				3E27F1EA1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift */,
 				3E2847661E89E1DF009ED794 /* ProfileViewExtension.swift */,
 				3EF0F77A1E8A1101001D0467 /* MainViewControllerHandler.swift */,
+				3EEB937E1E8B851800757E40 /* ChatLogAlertHandlers.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -640,6 +643,7 @@
 				95CA71631E7E5C0500D88AB4 /* ProfileViewController.swift in Sources */,
 				95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */,
 				95CA71781E7F12CC00D88AB4 /* GFGeoHash.m in Sources */,
+				3EEB937F1E8B851800757E40 /* ChatLogAlertHandlers.swift in Sources */,
 				95CA71611E7E5BC000D88AB4 /* LocationViewController.swift in Sources */,
 				95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */,
 				95107B071E451F42004F8461 /* FindABuddyViewController.swift in Sources */,

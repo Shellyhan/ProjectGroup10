@@ -48,7 +48,9 @@ class BuddiesViewController: UITableViewController{
     
     //fetches all buddies in the firebase database
     func fetchAllBuddiesInDatabase() {
+
         
+        print("Fetching...")
         //Look in the user's buddy list
         FIRDatabase.database().reference().child("Users").child(userUid!).child("Buddies").observe(.value, with: { (snapshot) in
             
@@ -101,11 +103,17 @@ class BuddiesViewController: UITableViewController{
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        print("ViewBuddies did load")
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
-        fetchAllBuddiesInDatabase() 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        userFormatInDatabase.removeAll()
+        tableView.reloadData()
+        fetchAllBuddiesInDatabase()
 
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return userFormatInDatabase.count
@@ -122,7 +130,7 @@ class BuddiesViewController: UITableViewController{
             
             tableCell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
         }
-        return tableCell 
+        return tableCell
     }
     
     

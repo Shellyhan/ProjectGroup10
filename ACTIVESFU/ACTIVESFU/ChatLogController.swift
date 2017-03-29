@@ -55,7 +55,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         return true
     }
     
-    
+    let usersDatabaseReference = FIRDatabase.database().reference().child("Users")
+    let userUID = FIRAuth.auth()?.currentUser?.uid
     let cellId = "cellId"
     
     @IBAction func backButton(_ sender: UIBarButtonItem) {
@@ -65,13 +66,27 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
 
     func handleSend() {
         
-        let properties = ["text": inputContainerView.inputTextField.text!]
-        sendMessageWithProperties(properties as [String : AnyObject])
+        let buddyId = user?.id
+        let isBuddyBlocked = usersDatabaseReference.child(userUID!).child("Buddies").child(buddyId!)
+        
+        isBuddyBlocked.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            //user isn't blocked
+            if snapshot.value! as? Int == 0 {
+                
+                let properties = ["text": self.inputContainerView.inputTextField.text!]
+                self.sendMessageWithProperties(properties as [String : AnyObject])
+            }
+            else {
+                
+                self.userIsBlocked()
+            }
+        })
     }
     
     func observeMessages() {
 
-        guard let uid = FIRAuth.auth()?.currentUser?.uid, var toId = user?.id
+        guard let uid = FIRAuth.auth()?.currentUser?.uid, let toId = user?.id
         else {
             
             return
@@ -110,7 +125,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     }
     
     func dismissView() {
-
+        
+       // BuddiesViewController().fetchAllBuddiesInDatabase()
         dismiss(animated: true, completion: nil)
     }
     
@@ -152,7 +168,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         collectionView?.keyboardDismissMode = .interactive
         
         let backButton = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(dismissView))
+        let blockButton = UIBarButtonItem(title: "Options", style: UIBarButtonItemStyle.plain, target: self, action: #selector(optionsAlertHandler))
         navigationItem.leftBarButtonItem = backButton
+        navigationItem.rightBarButtonItem = blockButton
         
         setupKeyboardObservers()
     }

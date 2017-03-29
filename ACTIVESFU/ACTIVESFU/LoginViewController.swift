@@ -109,7 +109,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func handleLogin() {
 
-        if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
+        if (self.emailTextField.text == "" || self.passwordTextField.text == "") {
             
             let emptyEmailandPassAlert = UIAlertController(title: "Oops!", message: "Please enter an email and password.", preferredStyle: .alert)
             let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
@@ -144,7 +144,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         let name = nameTextField.text
         
-        if (self.emailTextField.text=="" || self.passwordTextField.text=="") {
+        if (self.emailTextField.text == "" || self.passwordTextField.text == "") {
             
             let emptyEmailandPassAlert = UIAlertController(title: "Oops!", message: "Please enter an email and password.", preferredStyle: .alert)
             let defaulAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
