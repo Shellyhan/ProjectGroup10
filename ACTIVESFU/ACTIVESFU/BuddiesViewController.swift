@@ -52,7 +52,7 @@ class BuddiesViewController: UITableViewController{
         
         print("Fetching...")
         //Look in the user's buddy list
-        FIRDatabase.database().reference().child("Users").child(userUid!).child("Buddies").observe(.value, with: { (snapshot) in
+        FIRDatabase.database().reference().child("Users").child(userUid!).child("Buddies").observeSingleEvent(of: .value, with: { (snapshot) in
             
             //enumerate across all buddies in the buddy list
             for userBuddies in snapshot.children.allObjects as! [FIRDataSnapshot] {
