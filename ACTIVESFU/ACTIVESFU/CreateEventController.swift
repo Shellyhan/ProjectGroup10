@@ -145,11 +145,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             
             timeOfDay = "Evening"
         }
-        else {
-            
-            timeOfDay = ""
-        }
-        
+      
         
         //insert event:
         let eventContent = ["uid": IDString,
