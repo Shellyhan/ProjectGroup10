@@ -82,7 +82,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         
         tableView.register(EventCell.self, forCellReuseIdentifier: cellID)
         
-        
+        //expiredEvents()   //only used by developer!
         fetchEvent()
         
         // Setup the Search Controller
@@ -220,29 +220,59 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     
-    //MARK: table view 
-    /*
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return events.count
-    }
+    //delete the events before a month ----- only used by developers!!
+//    func expiredEvents(){
+//        //fetch the events a month ago:
+//        let userCalendar = Calendar.current
+//        let monthAgo = formatter.string(from: userCalendar.date(byAdding: .day, value: -30, to: Date())!)
+//        print("a month ago is \(monthAgo)")
+//        
+//        events = []
+//        let ref = FIRDatabase.database().reference()
+//        ref.child("Events").queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
+//            
+//            if let dictionary = snapshot.value as? [String: Any] {
+//                
+//                let eventNow = Event()
+//                eventNow.eventID = snapshot.key
+//                
+//                eventNow.setValuesForKeys(dictionary)
+//                let dateString = eventNow.date
+//                if (dateString! <= monthAgo){
+//                    print("delete this \(dateString!)")
+//                    print("delete this \(eventNow.eventID!)")
+//
+//                    let eid = eventNow.eventID!
+//                    
+//                    //delete in events:
+//                    FIRDatabase.database().reference().child("Events").child(eid).removeValue(
+//                        completionBlock: { (error, refer) in
+//                            if error != nil {
+//                                print("error removing")
+//                            } else {
+//                                print(refer)
+//                                print("Child Removed Correctly")
+//                            }
+//                    })
+//                    
+//                    //delete in Participants:
+//                    FIRDatabase.database().reference().child("Participants").observe(.childAdded, with: { (snapshot) in
+//                        
+//                        FIRDatabase.database().reference().child("Participants").child(snapshot.key).child(eid).removeValue(
+//                            completionBlock: { (error, refer) in
+//                                if error != nil {
+//                                    print("error removing")
+//                                } else {
+//                                    print(refer)
+//                                    print("Child Removed Correctly")
+//                                }
+//                        })
+//                    })
+//                }
+//            }
+//        },withCancel: nil)
+//    }
 
-     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        cell.backgroundColor = UIColor.clear
-        cell.textLabel?.textColor = UIColor.white
-        cell.detailTextLabel?.textColor = UIColor.white
-        
-        if events.count != 0 {
-            let event = events[indexPath.row]
-            cell.textLabel?.text = event.title
-            cell.detailTextLabel?.text = event.time
-        }
-        return cell
-        
-    }
- */
  
     func fetchTodayEvent() {
         //reset events array
