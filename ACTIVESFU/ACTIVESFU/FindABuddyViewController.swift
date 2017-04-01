@@ -18,8 +18,10 @@
 //  Ensured that a user won't see themself in the recommended list
 //  Generalized interests from hard coded
 //  Shows common interests
+//  Removed duplicates users
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
+
 import UIKit
 import Firebase
 import CoreLocation
@@ -35,6 +37,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     let cell = "cell"
     var userFormatInDatabase = [User]()
     
+    var suggestedUsers = [User]()
+    
     //User's survey results
     var myDays = [String]()
     var myTime = [String]()
@@ -47,11 +51,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     var commonLevel = Set<String>()
     var commonTime =  Set<String>()
     var commonDays = Set<String>()
-    
-    
-    var test = [String]()
-    
-    
+
     
     var firebaseReference: FIRDatabaseReference!
     var uid = FIRAuth.auth()?.currentUser?.uid
@@ -83,7 +83,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    
+
     func fetchAllBuddiesInDatabase() {
 
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
@@ -121,35 +121,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         })
     }
 
-    
-    /*
-    func fetchAllBuddiesInDatabase() {
-        
-        FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: String] {
-                
-                let singleUserInDatabase = User()
-                singleUserInDatabase.id = snapshot.key
-                
-                // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
-                
-                singleUserInDatabase.setValuesForKeys(dictionary)
-                
-                self.userFormatInDatabase.append(singleUserInDatabase)
-                
-                // This will crash because of background thread, so the dispatch fixes it
-                
-                DispatchQueue.main.async {
-                    
-                    self.tableView.reloadData()
-                }
-            }
-        }, withCancel: nil)
-    }
-    
- */
 
+  
     func fetchSurveyResults(){
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child("\(uid!)").observe(.value, with: {
@@ -183,10 +156,10 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                     self.commonDays = self.fetchCommonInterests(interestType: "DaysAvail", interestArray: self.myDays)
                     
                     
-                    /*print("common activ------------------------", self.commonActivity)
+                    print("common activ------------------------", self.commonActivity)
                     print("common level------------------------", self.commonLevel)
                     print("common time------------------------", self.commonTime)
-                    */
+                    
                     
                 }
             }
@@ -217,27 +190,45 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         })
     }
     
-    
+
     func fetchCommonInterests(interestType: String, interestArray: [String]) -> Set<String> {
-        
+        var seenUsers = [String]()
         var commonInterestsSet = Set<String>()
-        
         let databaseRef = FIRDatabase.database().reference()
-        
         databaseRef.child("\(interestType)").observeSingleEvent(of: .value, with: {
             snapshot in
             
             for childSnap in snapshot.children.allObjects {
-                
                 
                 let snap = childSnap as! FIRDataSnapshot
                 
                 if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] {
                     
                     for item in interestArray{
-                        
-                        
                         let commonInterest = snapshotValue.object(forKey:"\(item)") as! NSDictionary
+                        print("------------------------------item", item)
+                        
+                        // for each UID with the interest, create a user with that UID and interest
+                        for userWithInterest in commonInterest.allKeys as! [String]{
+                            
+                            let suggestedUser = User()
+                            suggestedUser.interests = item
+                            suggestedUser.id = userWithInterest
+                            
+                            if seenUsers.contains(suggestedUser.id!) {
+                                print("duplicate:", suggestedUser.id!)
+                            }
+                            else{
+                                print("new:", suggestedUser.id!)
+                                self.suggestedUsers.append(suggestedUser)
+                                seenUsers.append(suggestedUser.id!)
+                            }
+                            
+                            //suggestedUser.setValuesForKeys(commonInterest.allValues as! [String])
+                            print("--------------------suggested user interes", suggestedUser.interests!)
+                            print("--------------------suggested user uid", suggestedUser.id!)
+                            
+                        }
                         
                         let commonInterestUIDs = commonInterest.allKeys as! [String]
                         self.commonInterests += commonInterestUIDs
@@ -245,27 +236,24 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                         
                         // print("------------------------------commonInterests", self.commonInterests)
                         commonInterestsSet = Set(self.commonInterests)
-                        
-                        
+                        print("--------------------common set", commonInterestsSet)
                     }
-                    
-                    
                 }
-                
             }
-            
         })
+        print("common activ here------------------------", self.commonActivity)
+        print("--------------------common set here", commonInterestsSet)
         return commonInterestsSet
         
         
     }
-    
+
     
     
     // MARK: UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Set(commonInterests).count
+        return userFormatInDatabase.count
         
     }
     
@@ -277,6 +265,20 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         tableCell.textLabel?.textColor = UIColor.white
         tableCell.detailTextLabel?.textColor = UIColor.white
         
+        /*
+        print("common level", commonLevel)
+        let userAtRow = userFormatInDatabase[indexPath.row]
+        tableCell.textLabel?.text = userAtRow.user
+        tableCell.detailTextLabel?.text = "\(userAtRow.interests)"
+        */
+        let userAtRow = userFormatInDatabase[indexPath.row]
+        tableCell.textLabel?.text = userAtRow.id!
+        tableCell.detailTextLabel?.text = "\(userAtRow.interests)"
+        
+        return tableCell
+    }
+        
+        /*
         let userInDatabase = userFormatInDatabase[indexPath.row]
         var category: String?
         var categoryDetails: String?
@@ -319,14 +321,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }
         return tableCell
         
-
-        /*let commonInterestsSet = Set(commonInterests)
-        let userAtRow = Array(commonInterestsSet)[indexPath.row]
-        tableCell.textLabel?.text = userAtRow
-        tableCell.detailTextLabel?.text = "Also likes sports"
-        return tableCell
-    */
     }
+ */
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
