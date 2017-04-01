@@ -13,7 +13,7 @@
 //  Changes:
 //  Added segue to chat
 //  Save snapshot for user ID
-//
+//  Added more detail to View Buddies
 //
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
@@ -35,6 +35,7 @@ class BuddiesViewController: UITableViewController{
     var userFormatInDatabase = [User]()
     //testing for view only approved buddies
     let userUid = FIRAuth.auth()?.currentUser?.uid
+    let referenceDatabase = FIRDatabase.database().reference()
     
     @IBAction func backButton(_ sender: UIBarButtonItem) {
         
@@ -46,13 +47,30 @@ class BuddiesViewController: UITableViewController{
         dismiss(animated: true, completion: nil)
     }
     
+    //This function fetches the buddy's survey preferences
+    func fetchBuddyInfo(category: String, buddyId: String, completion: @escaping (String) -> ()) {
+       
+        var buddyInterestsArray = [String]()
+        var buddyInterests = String()
+        
+        referenceDatabase.child("Users").child(buddyId).child(category).observeSingleEvent(of: .value, with: { (categorySnap) in
+            
+                for categoryItems in categorySnap.children.allObjects as! [FIRDataSnapshot] {
+                
+                    buddyInterestsArray.append(categoryItems.key)
+            }
+            buddyInterests = buddyInterestsArray.joined(separator: ", ")
+            
+            completion(buddyInterests)
+        })
+    }
+    
     //fetches all buddies in the firebase database
     func fetchAllBuddiesInDatabase() {
-
         
         print("Fetching...")
         //Look in the user's buddy list
-        FIRDatabase.database().reference().child("Users").child(userUid!).child("Buddies").observeSingleEvent(of: .value, with: { (snapshot) in
+        referenceDatabase.child("Users").child(userUid!).child("Buddies").observeSingleEvent(of: .value, with: { (snapshot) in
             
             //enumerate across all buddies in the buddy list
             for userBuddies in snapshot.children.allObjects as! [FIRDataSnapshot] {
@@ -61,7 +79,7 @@ class BuddiesViewController: UITableViewController{
                 if userBuddies.value as? Int == 0 {
                     
                     //search through the user list to find the buddy
-                    FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshotBuddies) in
+                    self.referenceDatabase.child("Users").observe(.childAdded, with: { (snapshotBuddies) in
         
                         if snapshotBuddies.key == userBuddies.key {
                             
@@ -86,16 +104,14 @@ class BuddiesViewController: UITableViewController{
                 }
             }
         }, withCancel: nil)
-        
     }
-
-
 
     //dismissess view when pressing the back button
     func dismissView() {
         
         dismiss(animated: true, completion: nil)
     }
+    
     
     //MARK: UITableViewController
     
@@ -107,6 +123,7 @@ class BuddiesViewController: UITableViewController{
         tableView.register(UserCell.self, forCellReuseIdentifier: cellID)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         
         userFormatInDatabase.removeAll()
@@ -114,8 +131,10 @@ class BuddiesViewController: UITableViewController{
         fetchAllBuddiesInDatabase()
 
     }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        //print(userFormatInDatabase.count)
         return userFormatInDatabase.count
     }
     
@@ -123,9 +142,46 @@ class BuddiesViewController: UITableViewController{
         
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! UserCell
         let userInDatabase = userFormatInDatabase[indexPath.row]
-        tableCell.textLabel?.text = userInDatabase.user
-        tableCell.detailTextLabel?.text = "What a cool person!" // Comment this out if we don't want to display the email
+        var category: String?
+        var categoryDetails: String?
         
+        tableCell.textLabel?.text = userInDatabase.user
+        
+        //randomize what kinda of info will display in viewbuddies
+        let diceRoll = Int(arc4random_uniform(4)+1)
+        
+        switch diceRoll {
+            
+        case 1:
+            
+            category = "FavActivity"
+            categoryDetails = "Preferred activity is "
+        
+        case 2:
+            
+            category = "DaysAvail"
+            categoryDetails = "Available on "
+        
+        case 3:
+            
+            category = "TimeOfDay"
+            categoryDetails = "Available from "
+            
+        case 4:
+            
+            category = "FitnessLevel"
+            categoryDetails = "Fitness level: "
+            
+        default:
+            break
+        }
+
+        //fetch the info and put into the detailtextlabel
+        fetchBuddyInfo(category: category!, buddyId: userInDatabase.id!) { (buddyInfoString) in
+            
+            tableCell.detailTextLabel?.text = categoryDetails! + buddyInfoString
+        }
+
         if let profileImageUrl = userInDatabase.pic {
             
             tableCell.profileImageView.loadImageUsingCacheWithUrlString(urlString: profileImageUrl)
@@ -170,8 +226,6 @@ class BuddiesViewController: UITableViewController{
             profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
             profileImageView.widthAnchor.constraint(equalToConstant: 40).isActive = true
             profileImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-            
-            
         }
         
         required init?(coder aDecoder: NSCoder) {
