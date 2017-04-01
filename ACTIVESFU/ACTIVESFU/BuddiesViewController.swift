@@ -58,7 +58,8 @@ class BuddiesViewController: UITableViewController{
                 for categoryItems in categorySnap.children.allObjects as! [FIRDataSnapshot] {
                 
                     buddyInterestsArray.append(categoryItems.key)
-            }
+                    
+                }
             buddyInterests = buddyInterestsArray.joined(separator: ", ")
             
             completion(buddyInterests)

@@ -21,5 +21,6 @@ class User: NSObject {
     var FitnessLevel: NSArray?
     var FavActivity: NSArray?
     var TimeOfDay: NSArray?
+    var interests: String?
     var Buddies: NSArray?
 }
