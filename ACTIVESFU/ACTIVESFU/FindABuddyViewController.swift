@@ -10,7 +10,7 @@
 //
 //  Bugs:
 //  Make sure suggest users are NOT buddies
-//  Make sure
+//
 //
 //
 //  Changes:
@@ -19,6 +19,7 @@
 //  Generalized interests from hard coded
 //  Shows common interests
 //  Removed duplicates users
+//
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
@@ -98,6 +99,10 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                                 
                                 print("singleuser.id--------", snapshot.key)
                                 
+                                let name = dictionary["user"] as! String
+                                print("name:", name)
+                                
+                                singleUserInDatabase.user = name
                                 // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
                                 
                                 singleUserInDatabase.setValuesForKeys(dictionary)
@@ -120,8 +125,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
             }
         })
     }
-
-
   
     func fetchSurveyResults(){
         let databaseRef = FIRDatabase.database().reference()
@@ -198,8 +201,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         databaseRef.child("\(interestType)").observeSingleEvent(of: .value, with: {
             snapshot in
             
-            for childSnap in snapshot.children.allObjects {
                 
+            for childSnap in snapshot.children.allObjects {
                 let snap = childSnap as! FIRDataSnapshot
                 
                 if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] {
@@ -209,36 +212,42 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                         print("------------------------------item", item)
                         
                         // for each UID with the interest, create a user with that UID and interest
+                        for suggestedUser in self.userFormatInDatabase {
                         for userWithInterest in commonInterest.allKeys as! [String]{
                             
-                            let suggestedUser = User()
-                            suggestedUser.interests = item
+                        if suggestedUser.id! == userWithInterest {
+                            print("match")
+                            
+                            suggestedUser.interests.insert(item)
                             suggestedUser.id = userWithInterest
                             
                             if seenUsers.contains(suggestedUser.id!) {
                                 print("duplicate:", suggestedUser.id!)
                             }
-                            else{
+                            else {
+                                
                                 print("new:", suggestedUser.id!)
                                 self.suggestedUsers.append(suggestedUser)
                                 seenUsers.append(suggestedUser.id!)
+                                
+                                print("--------------------suggested user interest", Set(suggestedUser.interests))
+                                print("--------------------suggested user uid", suggestedUser.id!)
                             }
+                        }
                             
                             //suggestedUser.setValuesForKeys(commonInterest.allValues as! [String])
-                            print("--------------------suggested user interes", suggestedUser.interests!)
-                            print("--------------------suggested user uid", suggestedUser.id!)
                             
                         }
                         
                         let commonInterestUIDs = commonInterest.allKeys as! [String]
                         self.commonInterests += commonInterestUIDs
                         
-                        
                         // print("------------------------------commonInterests", self.commonInterests)
                         commonInterestsSet = Set(self.commonInterests)
                         print("--------------------common set", commonInterestsSet)
                     }
                 }
+            }
             }
         })
         print("common activ here------------------------", self.commonActivity)
@@ -272,7 +281,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         tableCell.detailTextLabel?.text = "\(userAtRow.interests)"
         */
         let userAtRow = userFormatInDatabase[indexPath.row]
-        tableCell.textLabel?.text = userAtRow.id!
+        tableCell.textLabel?.text = userAtRow.user!
         tableCell.detailTextLabel?.text = "\(userAtRow.interests)"
         
         return tableCell

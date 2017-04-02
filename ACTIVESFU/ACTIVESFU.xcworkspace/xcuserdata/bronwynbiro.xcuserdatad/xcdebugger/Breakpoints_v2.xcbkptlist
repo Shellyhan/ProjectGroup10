@@ -42,13 +42,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACTIVESFU/FindABuddyViewController.swift"
-            timestampString = "512779101.531198"
+            timestampString = "512784339.876492"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "300"
-            endingLineNumber = "300"
-            landmarkName = "FindABuddyViewController"
-            landmarkType = "3">
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,45 +58,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ACTIVESFU/FindABuddyViewController.swift"
-            timestampString = "512779101.531198"
+            timestampString = "512784339.876492"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "FindABuddyViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ACTIVESFU.FindABuddyViewController.tableView (__ObjC.UITableView, cellForRowAt : Foundation.IndexPath) -&gt; __ObjC.UITableViewCell"
-                  moduleName = "ACTIVESFU"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bronwynbiro/Documents/School/cmpt/CMPT276/ACTIVESFU/ACTIVESFU/ACTIVESFU/FindABuddyViewController.swift"
-                  timestampString = "512775766.53335"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "314"
-                  endingLineNumber = "314"
-                  offsetFromSymbolStart = "2816">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ACTIVESFU.FindABuddyViewController.(tableView (__ObjC.UITableView, cellForRowAt : Foundation.IndexPath) -&gt; __ObjC.UITableViewCell).(closure #1)"
-                  moduleName = "ACTIVESFU"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bronwynbiro/Documents/School/cmpt/CMPT276/ACTIVESFU/ACTIVESFU/ACTIVESFU/FindABuddyViewController.swift"
-                  timestampString = "512775766.536342"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "280"
-                  endingLineNumber = "280"
-                  offsetFromSymbolStart = "27">
-               </Location>
-            </Locations>
+            startingLineNumber = "288"
+            endingLineNumber = "288"
+            landmarkName = "tableView(_:cellForRowAt:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
