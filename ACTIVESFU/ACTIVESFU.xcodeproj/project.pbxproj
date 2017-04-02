@@ -35,11 +35,6 @@
 		95107B271E451F44004F8461 /* ACTIVESFUUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95107B261E451F44004F8461 /* ACTIVESFUUITests.swift */; };
 		95CA71611E7E5BC000D88AB4 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71601E7E5BC000D88AB4 /* LocationViewController.swift */; };
 		95CA71631E7E5C0500D88AB4 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71621E7E5C0500D88AB4 /* ProfileViewController.swift */; };
-		95CA71761E7F12CC00D88AB4 /* GeoFire.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA716D1E7F12CC00D88AB4 /* GeoFire.m */; };
-		95CA71771E7F12CC00D88AB4 /* GFBase32Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA716F1E7F12CC00D88AB4 /* GFBase32Utils.m */; };
-		95CA71781E7F12CC00D88AB4 /* GFGeoHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71711E7F12CC00D88AB4 /* GFGeoHash.m */; };
-		95CA71791E7F12CC00D88AB4 /* GFGeoHashQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71731E7F12CC00D88AB4 /* GFGeoHashQuery.m */; };
-		95CA717A1E7F12CC00D88AB4 /* GFQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 95CA71751E7F12CC00D88AB4 /* GFQuery.m */; };
 		95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */; };
 		95D894C91E6E6B9200E11F82 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894C81E6E6B9200E11F82 /* Message.swift */; };
 		95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */; };
@@ -110,21 +105,6 @@
 		95107B281E451F44004F8461 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95CA71601E7E5BC000D88AB4 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		95CA71621E7E5C0500D88AB4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		95CA71661E7F12CC00D88AB4 /* GeoFire.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeoFire.h; sourceTree = "<group>"; };
-		95CA71671E7F12CC00D88AB4 /* GFCircleQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFCircleQuery.h; sourceTree = "<group>"; };
-		95CA71681E7F12CC00D88AB4 /* GFQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFQuery.h; sourceTree = "<group>"; };
-		95CA71691E7F12CC00D88AB4 /* GFRegionQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFRegionQuery.h; sourceTree = "<group>"; };
-		95CA716A1E7F12CC00D88AB4 /* GeoFire-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire-Prefix.pch"; sourceTree = "<group>"; };
-		95CA716C1E7F12CC00D88AB4 /* GeoFire+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeoFire+Private.h"; sourceTree = "<group>"; };
-		95CA716D1E7F12CC00D88AB4 /* GeoFire.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoFire.m; sourceTree = "<group>"; };
-		95CA716E1E7F12CC00D88AB4 /* GFBase32Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFBase32Utils.h; sourceTree = "<group>"; };
-		95CA716F1E7F12CC00D88AB4 /* GFBase32Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFBase32Utils.m; sourceTree = "<group>"; };
-		95CA71701E7F12CC00D88AB4 /* GFGeoHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHash.h; sourceTree = "<group>"; };
-		95CA71711E7F12CC00D88AB4 /* GFGeoHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHash.m; sourceTree = "<group>"; };
-		95CA71721E7F12CC00D88AB4 /* GFGeoHashQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GFGeoHashQuery.h; sourceTree = "<group>"; };
-		95CA71731E7F12CC00D88AB4 /* GFGeoHashQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFGeoHashQuery.m; sourceTree = "<group>"; };
-		95CA71741E7F12CC00D88AB4 /* GFQuery+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GFQuery+Private.h"; sourceTree = "<group>"; };
-		95CA71751E7F12CC00D88AB4 /* GFQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GFQuery.m; sourceTree = "<group>"; };
 		95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUserCell.swift; sourceTree = "<group>"; };
 		95D894C81E6E6B9200E11F82 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
 		95D894CA1E6E6C1B00E11F82 /* ChatInputContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatInputContainer.swift; sourceTree = "<group>"; };
@@ -227,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				3E27F1EC1E88DFEA0043511A /* Extensions */,
-				95CA71641E7F12CC00D88AB4 /* GeoFire */,
 				1C55CA591E7539CC00825A0E /* FSCalendar */,
 				3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */,
 				3EDD26691E6B8EDF00729365 /* MainViewController.swift */,
@@ -275,44 +254,6 @@
 				3E4AB80C1E80EC6F00467535 /* CalendarUITest.swift */,
 			);
 			path = ACTIVESFUUITests;
-			sourceTree = "<group>";
-		};
-		95CA71641E7F12CC00D88AB4 /* GeoFire */ = {
-			isa = PBXGroup;
-			children = (
-				95CA71651E7F12CC00D88AB4 /* API */,
-				95CA716A1E7F12CC00D88AB4 /* GeoFire-Prefix.pch */,
-				95CA716B1E7F12CC00D88AB4 /* Implementation */,
-			);
-			path = GeoFire;
-			sourceTree = "<group>";
-		};
-		95CA71651E7F12CC00D88AB4 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				95CA71661E7F12CC00D88AB4 /* GeoFire.h */,
-				95CA71671E7F12CC00D88AB4 /* GFCircleQuery.h */,
-				95CA71681E7F12CC00D88AB4 /* GFQuery.h */,
-				95CA71691E7F12CC00D88AB4 /* GFRegionQuery.h */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
-		95CA716B1E7F12CC00D88AB4 /* Implementation */ = {
-			isa = PBXGroup;
-			children = (
-				95CA716C1E7F12CC00D88AB4 /* GeoFire+Private.h */,
-				95CA716D1E7F12CC00D88AB4 /* GeoFire.m */,
-				95CA716E1E7F12CC00D88AB4 /* GFBase32Utils.h */,
-				95CA716F1E7F12CC00D88AB4 /* GFBase32Utils.m */,
-				95CA71701E7F12CC00D88AB4 /* GFGeoHash.h */,
-				95CA71711E7F12CC00D88AB4 /* GFGeoHash.m */,
-				95CA71721E7F12CC00D88AB4 /* GFGeoHashQuery.h */,
-				95CA71731E7F12CC00D88AB4 /* GFGeoHashQuery.m */,
-				95CA71741E7F12CC00D88AB4 /* GFQuery+Private.h */,
-				95CA71751E7F12CC00D88AB4 /* GFQuery.m */,
-			);
-			path = Implementation;
 			sourceTree = "<group>";
 		};
 		BD3B4DFC193E312540CCEC9D /* Pods */ = {
@@ -621,28 +562,23 @@
 			files = (
 				95D894D51E6E6E7000E11F82 /* CreateEventController.swift in Sources */,
 				95107B091E451F42004F8461 /* BuddiesViewController.swift in Sources */,
-				95CA71791E7F12CC00D88AB4 /* GFGeoHashQuery.m in Sources */,
 				1C44F4021E75219200047DB9 /* CalendarViewController.swift in Sources */,
 				95107B051E451F42004F8461 /* AppDelegate.swift in Sources */,
 				95D894C91E6E6B9200E11F82 /* Message.swift in Sources */,
-				95CA71771E7F12CC00D88AB4 /* GFBase32Utils.m in Sources */,
 				3E2400E01E6FC3EB00371805 /* QuestionController.swift in Sources */,
 				3EDD266A1E6B8EDF00729365 /* MainViewController.swift in Sources */,
 				3E2400E81E6FC93D00371805 /* ViewEventDetailController.swift in Sources */,
 				3E27F1EB1E887D0B0043511A /* ExtensionBuddiesViewCaching.swift in Sources */,
 				3EF0F77B1E8A1101001D0467 /* MainViewControllerHandler.swift in Sources */,
 				3E2400E61E6FC81F00371805 /* Event.swift in Sources */,
-				95CA71761E7F12CC00D88AB4 /* GeoFire.m in Sources */,
 				3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */,
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
 				95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */,
 				3E2847671E89E1DF009ED794 /* ProfileViewExtension.swift in Sources */,
-				95CA717A1E7F12CC00D88AB4 /* GFQuery.m in Sources */,
 				95D894CD1E6E6C4100E11F82 /* ChatMessageController.swift in Sources */,
 				95D894D11E6E6D8900E11F82 /* ChatLogController.swift in Sources */,
 				95CA71631E7E5C0500D88AB4 /* ProfileViewController.swift in Sources */,
 				95D894CB1E6E6C1B00E11F82 /* ChatInputContainer.swift in Sources */,
-				95CA71781E7F12CC00D88AB4 /* GFGeoHash.m in Sources */,
 				3EEB937F1E8B851800757E40 /* ChatLogAlertHandlers.swift in Sources */,
 				95CA71611E7E5BC000D88AB4 /* LocationViewController.swift in Sources */,
 				95EFB39B1E654389006E8115 /* LoginViewController.swift in Sources */,
