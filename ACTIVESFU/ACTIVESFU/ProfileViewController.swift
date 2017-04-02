@@ -146,40 +146,55 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func saveChanges(){
         
-        showActivityIndicator(uiView: self.view)
-        
-        let imageName = NSUUID().uuidString
-        let storedImage = storageRef.child("profileImages").child("\(imageName).png")
-        
-        //stop user interaction while profile picture is updated
-        
-        if let uploadData = UIImagePNGRepresentation(self.profileImage.image!){
-            
-            storedImage.put(uploadData, metadata: nil, completion: { (metadata, error) in
-                if error != nil{
-                    print(error!)
-                    return
-                }
-                storedImage.downloadURL(completion: { (url, error) in
-                    if error != nil {
-                        
-                        print(error!)
-                        return
-                    }
-                    if let urlText = url?.absoluteString {
-                        
-                        self.databaseRef.child("Users").child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["pic" : urlText, "user": self.usernameText.text!], withCompletionBlock: { (error, ref) in
-                            if error != nil{
+        //first check if connection is available
+        let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
+        connectedRef.observe(.value, with: { snapshot in
+            if let connected = snapshot.value as? Bool, connected {
+
+                self.showActivityIndicator(uiView: self.view)
+                
+                let imageName = NSUUID().uuidString
+                let storedImage = self.storageRef.child("profileImages").child("\(imageName).png")
+                
+                if let uploadData = UIImagePNGRepresentation(self.profileImage.image!){
+                    
+                    storedImage.put(uploadData, metadata: nil, completion: { (metadata, error) in
+                        if error != nil{
+                            
+                            print(error!)
+                            return
+                        }
+                        storedImage.downloadURL(completion: { (url, error) in
+                            if error != nil {
+                                
                                 print(error!)
                                 return
                             }
-                            //stop activity indicator once done
-                            self.hideActivityIndicator(uiView: self.view)
+                            if let urlText = url?.absoluteString {
+                                
+                                self.databaseRef.child("Users").child((FIRAuth.auth()?.currentUser?.uid)!).updateChildValues(["pic" : urlText, "user": self.usernameText.text!], withCompletionBlock: { (error, ref) in
+                                    if error != nil{
+                                        
+                                        print(error!)
+                                        return
+                                    }
+                                    //stop activity indicator once done
+                                    self.hideActivityIndicator(uiView: self.view)
+                                })
+                            }
                         })
-                    }
-                })
-            })
-        }
+                    })
+                }
+            }
+            else {
+                
+                let lostConnectionAlert = UIAlertController(title: "Connection Lost", message: "Connection to the servers has been lost. Please try again later", preferredStyle: .alert)
+                let lostConnectionAlertOk = UIAlertAction(title: "OK", style: .default, handler: nil)
+                lostConnectionAlert.addAction(lostConnectionAlertOk)
+                
+                self.present(lostConnectionAlert, animated: true, completion: nil)
+            }
+        })
     }
     
         

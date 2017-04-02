@@ -32,6 +32,8 @@ import Firebase
 
 class MainViewController: UIViewController {
     
+    
+    
     //----------------------for location-------------
     let locationManager = CLLocationManager()
     
@@ -95,8 +97,10 @@ class MainViewController: UIViewController {
     //MARK: UIViewController
    
     override func viewDidLoad() {
-        
+    
         super.viewDidLoad()
+        
+        FIRDatabase.database().persistenceEnabled = true
         checkIfUserIsLoggedIn()
         
         //location:
@@ -111,6 +115,7 @@ class MainViewController: UIViewController {
         
         // Configure User Notification Center
         configureUserNotificationsCenter()
+        //checkConnectionState()
     }
     
     override func viewDidAppear(_ animated: Bool) {
