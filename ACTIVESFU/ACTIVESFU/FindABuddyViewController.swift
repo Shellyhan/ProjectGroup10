@@ -19,7 +19,7 @@
 //  Generalized interests from hard coded
 //  Shows common interests
 //  Removed duplicates users
-//
+//  Made sure I dont show myself as a suggested user
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
@@ -45,13 +45,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     var myTime = [String]()
     var myActivity = [String]()
     var myLevel = [String]()
-    var commonInterests = [String]()
     
-    //Other users results
-    var commonActivity = Set<String>()
-    var commonLevel = Set<String>()
-    var commonTime =  Set<String>()
-    var commonDays = Set<String>()
 
     
     var firebaseReference: FIRDatabaseReference!
@@ -66,7 +60,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         tableView.register(Cell.self, forCellReuseIdentifier: cell)
         self.fetchSurveyResults()
         self.fetchAllBuddiesInDatabase()
-        
         
     }
     
@@ -103,15 +96,15 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                                 print("name:", name)
                                 
                                 singleUserInDatabase.user = name
+                                
                                 // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
                                 
                                 singleUserInDatabase.setValuesForKeys(dictionary)
                                 
-                                if seenUIDS.contains(singleUserInDatabase.id!){
-                                    print("duplicate----", singleUserInDatabase.id!)
+                                if seenUIDS.contains(singleUserInDatabase.id!) || singleUserInDatabase.id == self.uid{
+                                    print("duplicate or myself----", singleUserInDatabase.id!)
                                 }
                                 else {
-                                    print("unique uid---", singleUserInDatabase.id!)
                                     self.userFormatInDatabase.append(singleUserInDatabase)
                                     seenUIDS.append(singleUserInDatabase.id!)
                                 }
@@ -135,130 +128,74 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                 
                 let snap = childSnap as! FIRDataSnapshot
                 
-                if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key]  {
+                if let snapshotValue = snapshot.value as? NSDictionary {
                     
                     let myAvailability = snapshotValue.object(forKey: "DaysAvail") as! NSDictionary
                     self.myDays = myAvailability.allKeys as! [String]
-                    print("-----------my avail", self.myDays)
                     
                     let myTimeOfDay = snapshotValue.object(forKey: "TimeOfDay") as! NSDictionary
                     self.myTime = myTimeOfDay.allKeys as! [String]
-                    print("-----------myTime", self.myTime)
                     
                     let myFavActivity = snapshotValue.object(forKey: "FavActivity") as! NSDictionary
                     self.myActivity = myFavActivity.allKeys as! [String]
-                    print("-----------myActivity", self.myActivity)
                     
                     let fitnessLevel = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
                     self.myLevel = fitnessLevel.allKeys as! [String]
-                    print("-----------my level", self.myLevel)
                     
-                    self.commonActivity = self.fetchCommonInterests(interestType: "FavActivity", interestArray: self.myActivity)
-                    self.commonLevel = self.fetchCommonInterests(interestType: "FitnessLevel", interestArray: self.myLevel)
-                    self.commonTime = self.fetchCommonInterests(interestType: "TimeOfDay", interestArray: self.myTime)
-                    self.commonDays = self.fetchCommonInterests(interestType: "DaysAvail", interestArray: self.myDays)
-                    
-                    
-                    print("common activ------------------------", self.commonActivity)
-                    print("common level------------------------", self.commonLevel)
-                    print("common time------------------------", self.commonTime)
-                    
-                    
+                    //Search for other users with the same interests, add them to the shake feature table
+                    self.fetchCommonInterests(interestType: "FavActivity", interestArray: self.myActivity)
+                    self.fetchCommonInterests(interestType: "FitnessLevel", interestArray: self.myLevel)
+                    self.fetchCommonInterests(interestType: "TimeOfDay", interestArray: self.myTime)
+                    self.fetchCommonInterests(interestType: "DaysAvail", interestArray: self.myDays)
                 }
             }
             
          self.tableView.reloadData()
         })
     }
- 
-    
-    func fetchSuggestedUserInfo(category: String, id: String, completion: @escaping (String) -> ()) {
-        
-        print("id:", id)
-        print("category:,", category)
-        
-        var buddyInterestsArray = [String]()
-        var buddyInterests = String()
-        
-       FIRDatabase.database().reference().child("Users").child(id).child(category).observeSingleEvent(of: .value, with: { (categorySnap) in
-            
-            for categoryItems in categorySnap.children.allObjects as! [FIRDataSnapshot] {
-                
-                buddyInterestsArray.append(categoryItems.key)
-                
-            }
-            buddyInterests = buddyInterestsArray.joined(separator: ", ")
-            
-            completion(buddyInterests)
-        })
-    }
     
 
-    func fetchCommonInterests(interestType: String, interestArray: [String]) -> Set<String> {
+    func fetchCommonInterests(interestType: String, interestArray: [String]) {
         var seenUsers = [String]()
-        var commonInterestsSet = Set<String>()
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("\(interestType)").observeSingleEvent(of: .value, with: {
             snapshot in
             
-                
             for childSnap in snapshot.children.allObjects {
-                let snap = childSnap as! FIRDataSnapshot
                 
-                if let snapshotValue = snapshot.value as? NSDictionary, let snapVal = snapshotValue[snap.key] {
+                if let snapshotValue = snapshot.value as? NSDictionary {
                     
                     for item in interestArray{
                         let commonInterest = snapshotValue.object(forKey:"\(item)") as! NSDictionary
-                        print("------------------------------item", item)
                         
-                        // for each UID with the interest, create a user with that UID and interest
+                        // for each UID with the interest, add the interest to that user's info
                         for suggestedUser in self.userFormatInDatabase {
                         for userWithInterest in commonInterest.allKeys as! [String]{
-                            
+                        
+                        //ensure that the user has the given interest
                         if suggestedUser.id! == userWithInterest {
-                            print("match")
                             
                             suggestedUser.interests.insert(item)
                             suggestedUser.id = userWithInterest
                             
-                            if seenUsers.contains(suggestedUser.id!) {
-                                print("duplicate:", suggestedUser.id!)
+                            //Make sure we don't have any duplicates or recommend myself
+                            if seenUsers.contains(suggestedUser.id!) || userWithInterest == self.uid {
+                                
                             }
                             else {
-                                
-                                print("new:", suggestedUser.id!)
                                 self.suggestedUsers.append(suggestedUser)
                                 seenUsers.append(suggestedUser.id!)
-                                
-                                print("--------------------suggested user interest", Set(suggestedUser.interests))
-                                print("--------------------suggested user uid", suggestedUser.id!)
                             }
-                        }
-                            
-                            //suggestedUser.setValuesForKeys(commonInterest.allValues as! [String])
-                            
-                        }
-                        
-                        let commonInterestUIDs = commonInterest.allKeys as! [String]
-                        self.commonInterests += commonInterestUIDs
-                        
-                        // print("------------------------------commonInterests", self.commonInterests)
-                        commonInterestsSet = Set(self.commonInterests)
-                        print("--------------------common set", commonInterestsSet)
+                      }
                     }
+                  }
                 }
-            }
-            }
+              }
+           }
         })
-        print("common activ here------------------------", self.commonActivity)
-        print("--------------------common set here", commonInterestsSet)
-        return commonInterestsSet
-        
-        
+  
     }
 
-    
-    
     // MARK: UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -274,64 +211,14 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         tableCell.textLabel?.textColor = UIColor.white
         tableCell.detailTextLabel?.textColor = UIColor.white
         
-        /*
-        print("common level", commonLevel)
-        let userAtRow = userFormatInDatabase[indexPath.row]
-        tableCell.textLabel?.text = userAtRow.user
-        tableCell.detailTextLabel?.text = "\(userAtRow.interests)"
-        */
         let userAtRow = userFormatInDatabase[indexPath.row]
         tableCell.textLabel?.text = userAtRow.user!
-        tableCell.detailTextLabel?.text = "\(userAtRow.interests)"
+        tableCell.detailTextLabel?.text = "\(userAtRow.interests.joined(separator: ", "))"
         
         return tableCell
     }
         
-        /*
-        let userInDatabase = userFormatInDatabase[indexPath.row]
-        var category: String?
-        var categoryDetails: String?
-        
-        tableCell.textLabel?.text = userInDatabase.user
-        
-        //randomize what kinda of info will display in viewbuddies
-        let diceRoll = Int(arc4random_uniform(4)+1)
-        
-        switch diceRoll {
-            
-        case 1:
-            
-            category = "FavActivity"
-            categoryDetails = "Preferred activity is "
-            
-        case 2:
-            
-            category = "DaysAvail"
-            categoryDetails = "Available on "
-            
-        case 3:
-            
-            category = "TimeOfDay"
-            categoryDetails = "Available from "
-            
-        case 4:
-            
-            category = "FitnessLevel"
-            categoryDetails = "Fitness level: "
-            
-        default:
-            break
-        }
-        
-        //fetch the info and put into the detailtextlabel
-        fetchSuggestedUserInfo(category: category!, id: userInDatabase.id!) { (buddyInfoString) in
-            
-            tableCell.detailTextLabel?.text = categoryDetails! + buddyInfoString
-        }
-        return tableCell
-        
-    }
- */
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
@@ -339,9 +226,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let commonSet = Set(commonInterests)
-        var user = Array(commonSet)[indexPath.row]
-        
+        let userAtRow = userFormatInDatabase[indexPath.row]
         print("segue here")
         
     }
