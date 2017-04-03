@@ -91,7 +91,7 @@
 		3EE1AFE01E7DDFDE002813AE /* BookFacilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookFacilityViewController.swift; sourceTree = "<group>"; };
 		3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ACTIVESFU.entitlements; sourceTree = "<group>"; };
 		3EE33E101E6CF92500C3379F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
-		3EEB937E1E8B851800757E40 /* ChatLogAlertHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatLogAlertHandlers.swift; sourceTree = "<group>"; };
+		3EEB937E1E8B851800757E40 /* ChatLogAlertHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLogAlertHandlers.swift; path = ACTIVESFU/ChatLogAlertHandlers.swift; sourceTree = "<group>"; };
 		3EF0F77C1E8A12A3001D0467 /* TestLocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = TestLocation.gpx; sourceTree = "<group>"; };
 		95107B011E451F42004F8461 /* ACTIVESFU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ACTIVESFU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95107B041E451F42004F8461 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		95B742311E91C8810018BF6A /* CalenderDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderDataExtension.swift; sourceTree = "<group>"; };
 		95B742351E91C8BF0018BF6A /* ExtensionBuddiesViewCaching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionBuddiesViewCaching.swift; sourceTree = "<group>"; };
 		95B742361E91C8BF0018BF6A /* ProfileViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewExtension.swift; sourceTree = "<group>"; };
-		95B742391E91C9CD0018BF6A /* MainViewControllerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewControllerHandler.swift; sourceTree = "<group>"; };
+		95B742391E91C9CD0018BF6A /* MainViewControllerHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewControllerHandler.swift; path = ACTIVESFU/MainViewControllerHandler.swift; sourceTree = "<group>"; };
 		95CA71601E7E5BC000D88AB4 /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		95CA71621E7E5C0500D88AB4 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		95D894C61E6E6AD200E11F82 /* ChatUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatUserCell.swift; sourceTree = "<group>"; };
@@ -157,6 +157,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E6592CF1E922BC0009F1639 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				95B742351E91C8BF0018BF6A /* ExtensionBuddiesViewCaching.swift */,
+				3EEB937E1E8B851800757E40 /* ChatLogAlertHandlers.swift */,
+				95B742361E91C8BF0018BF6A /* ProfileViewExtension.swift */,
+				95B7422F1E91C8810018BF6A /* CalendarSearchExtension.swift */,
+				95B742391E91C9CD0018BF6A /* MainViewControllerHandler.swift */,
+				95B742301E91C8810018BF6A /* CalendarViewExtension.swift */,
+				95B742311E91C8810018BF6A /* CalenderDataExtension.swift */,
+			);
+			name = Extensions;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		3EE33E121E6CF94800C3379F /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,11 +197,6 @@
 		95107AF81E451F41004F8461 = {
 			isa = PBXGroup;
 			children = (
-				95B742351E91C8BF0018BF6A /* ExtensionBuddiesViewCaching.swift */,
-				95B742361E91C8BF0018BF6A /* ProfileViewExtension.swift */,
-				95B7422F1E91C8810018BF6A /* CalendarSearchExtension.swift */,
-				95B742301E91C8810018BF6A /* CalendarViewExtension.swift */,
-				95B742311E91C8810018BF6A /* CalenderDataExtension.swift */,
 				3E0280361E6AD4D9006A9936 /* GoogleService-Info.plist */,
 				95107B031E451F42004F8461 /* ACTIVESFU */,
 				95107B1A1E451F44004F8461 /* ACTIVESFUTests */,
@@ -210,16 +220,15 @@
 		95107B031E451F42004F8461 /* ACTIVESFU */ = {
 			isa = PBXGroup;
 			children = (
+				3E6592CF1E922BC0009F1639 /* Extensions */,
 				1C55CA591E7539CC00825A0E /* FSCalendar */,
 				3EE25B4F1E6BC77E00952675 /* ACTIVESFU.entitlements */,
 				3EDD26691E6B8EDF00729365 /* MainViewController.swift */,
-				95B742391E91C9CD0018BF6A /* MainViewControllerHandler.swift */,
 				95107B041E451F42004F8461 /* AppDelegate.swift */,
 				95107B061E451F42004F8461 /* FindABuddyViewController.swift */,
 				95B741521E91A8750018BF6A /* PublicProfileViewController.swift */,
 				3E2400ED1E6FFC1A00371805 /* Main.storyboard */,
 				95107B081E451F42004F8461 /* BuddiesViewController.swift */,
-				3EEB937E1E8B851800757E40 /* ChatLogAlertHandlers.swift */,
 				95CA71601E7E5BC000D88AB4 /* LocationViewController.swift */,
 				3E6592CC1E91CCC3009F1639 /* ProfileStatsViewController.swift */,
 				95CA71621E7E5C0500D88AB4 /* ProfileViewController.swift */,
@@ -580,9 +589,7 @@
 				3E2400E81E6FC93D00371805 /* ViewEventDetailController.swift in Sources */,
 				95B7423A1E91C9CD0018BF6A /* MainViewControllerHandler.swift in Sources */,
 				3E2400E61E6FC81F00371805 /* Event.swift in Sources */,
-
 				3E6592CD1E91CCC3009F1639 /* ProfileStatsViewController.swift in Sources */,
-				95CA71761E7F12CC00D88AB4 /* GeoFire.m in Sources */,
 				3EE1AFE11E7DDFDE002813AE /* BookFacilityViewController.swift in Sources */,
 				3EE33E111E6CF92500C3379F /* User.swift in Sources */,
 				95D894C71E6E6AD200E11F82 /* ChatUserCell.swift in Sources */,
