@@ -11,7 +11,7 @@
 //  Bugs:
 //  Make sure suggest users are NOT buddies
 //  Users should dissapear if I swipe no
-//
+//  Some new users have no info in table view ??
 //
 //  Changes:
 //  Changed from location based to similar interests
@@ -98,9 +98,9 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                                 
                                 singleUserInDatabase.user = name
                                 
-                                // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
+                                // This crashes: the class properties don't exactly match up with the firebase dictionary keys
                                 
-                                singleUserInDatabase.setValuesForKeys(dictionary)
+                               // singleUserInDatabase.setValuesForKeys(dictionary)
                                 
                                 if seenUIDS.contains(singleUserInDatabase.id!) || singleUserInDatabase.id == self.uid{
                                     print("duplicate or myself----", singleUserInDatabase.id!)

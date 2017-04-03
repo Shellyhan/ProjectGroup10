@@ -109,6 +109,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         searchController.searchBar.barTintColor = UIColor.white
         searchController.searchBar.backgroundColor = UIColor.white
         
+        
     }
     
     //refresh content shown:
@@ -232,6 +233,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        cell.backgroundColor = UIColor.clear
         
         let event: Event
         if searchController.isActive && searchController.searchBar.text != "" {
@@ -248,7 +250,8 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
             }
         }
             
-        
+        cell.textLabel?.textColor = UIColor.white
+        cell.detailTextLabel?.textColor = UIColor.white
         
         cell.textLabel?.text = event.title
         cell.detailTextLabel?.text = event.time

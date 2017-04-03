@@ -92,9 +92,15 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
     
     
     @IBAction func likeButtonPressed(_ sender: Any) {
+
+        let myUID = FIRAuth.auth()?.currentUser?.uid
+        let ref = FIRDatabase.database().reference()
+        let newBuddyRef = ref.child("Users").child("\(myUID!)").child("Buddies")
         
+        newBuddyRef.updateChildValues(["\(user.id!)": 0])
+      
     }
-    
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()

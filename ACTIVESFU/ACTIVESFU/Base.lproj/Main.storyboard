@@ -470,7 +470,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexColor" red="0.99304887820512822" green="0.95066168677977636" blue="0.99114711739078321" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.54169750107502612" green="0.041443243253141991" blue="0.5956322862694301" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" red="0.41410823096830296" green="0.0" blue="0.47489983974358974" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.79913680414462807" green="0.061138958368791303" blue="0.87870385362694303" alpha="0.34848151408450706" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Fdb-rD-UKc" id="pa2-o6-URX"/>
