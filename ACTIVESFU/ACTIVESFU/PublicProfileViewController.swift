@@ -87,6 +87,7 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
 
 
     @IBAction func dislikeButtonPressed(_ sender: Any) {
+         dismiss(animated: true, completion: nil)
         
     }
     
@@ -98,6 +99,7 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
         let newBuddyRef = ref.child("Users").child("\(myUID!)").child("Buddies")
         
         newBuddyRef.updateChildValues(["\(user.id!)": 0])
+        dismiss(animated: true, completion: nil)
       
     }
   
