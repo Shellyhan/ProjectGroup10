@@ -13,7 +13,6 @@ target 'ACTIVESFU' do
   pod 'FSCalendar'
   pod 'GTMSessionFetcher'
   pod 'Charts', '~> 3.0.2'
-  
 
   target 'ACTIVESFUTests' do
     inherit! :search_paths

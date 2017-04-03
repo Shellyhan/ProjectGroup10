@@ -12,20 +12,16 @@
 //
 //  Bugs:
 //  Search bar hides the first row in the event
-//  Editing an event just creates a new one
-//  Lag while searching
-//
 //
 //  Changes:
-//  Added search and filter bar
-//  Changed appearance of table view
+//  fixed lag
+//  Recommended events show in table view with icon
+//
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
 import UIKit
 import Foundation
-
-
 import FSCalendar
 import Firebase
 
@@ -41,13 +37,27 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     
     var cellID = "cellID"
     var events = [Event]()
+    var eventsTable = [Event]()
     var selected = "\(Date())"
     let searchController = UISearchController(searchResultsController: nil)
     var filteredEvents = [Event]()
+    var recommendationEvents = [Event]()
     
     let white = UIColor(colorWithHexValue: 0xECEAED)
     let orangeBright = UIColor(colorWithHexValue: 0xFFA500)
     let orangeDark = UIColor(colorWithHexValue: 0xFF7F50)
+    
+    //loading indicator:
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    var activityContainer: UIView = UIView()
+    var loadingView: UIView = UIView()
+    
+    //matching events:
+    var userPref: String!
+    let locations = ["Gym", "Aquatics centre", "Field"]
+    let options = ["Free weight training", "Cardiovascular training", "Yoga", "Sports"]
+    var matchingLocation = [String]()
+    
     
     //set up navigation:
     @IBAction func CreateEventClick(_ sender: UIButton) {
@@ -72,19 +82,18 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     fileprivate let gregorian: NSCalendar! = NSCalendar(calendarIdentifier:NSCalendar.Identifier.gregorian)
     
     //set events and date:
-    var datesWithEvent = [""]
-    var datesWithMultipleEvents = [""]
-    var datesWithRecommedation = [""]
+    var datesWithEvent = [String]()
+    var datesWithMultipleEvents = [String]()
+    var datesWithRecommedation = [String]()
+    
+    
     
     // MARK:- Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.register(EventCell.self, forCellReuseIdentifier: cellID)
-        
-        //expiredEvents()   //only used by developer!
-        fetchEvent()
-        
+
+        setupUI()
+
         // Setup the Search Controller
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = true
@@ -102,17 +111,33 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         
     }
     
-    
     //refresh content shown:
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        setupUI()
-    }
-    
-    //prepare data:
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        showActivityIndicator(uiView: self.view)
+        
+        datesWithEvent = []
+        datesWithRecommedation = []
+        
+        //find the matching events:
         fetchEvent()
+        
+        //wait for events to load:
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(4), execute: {
+            
+            if(self.datesWithEvent.count == 1){
+                print("error loading events")
+            }
+            
+            //reload calendar and table view:
+            self.fetchTodayEvent()
+            self.calendar.reloadData()
+            
+            //stop activity indicator once done
+            self.hideActivityIndicator(uiView: self.view)
+        })
+        
     }
     
     
@@ -145,28 +170,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     
     }
     
-    
-    //fetch all events:
-    func fetchEvent() {
-        print("-------im here fetching events, will lag")
-        let ref = FIRDatabase.database().reference()
-        var index = 0
-        ref.child("Events").queryOrdered(byChild: "date").observe(.childAdded, with: {(snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: Any] {
-                let eventNow = Event()
-                eventNow.setValuesForKeys(dictionary)
-                self.datesWithEvent.append(eventNow.date!)
-                
-                index = index + 1
-                if (index % 7 == 0){
-                    self.datesWithRecommedation.append(eventNow.date!)
-                }
-            }},withCancel: nil)
-    }
-    
     // MARK:- FSCalendarDataSource:
-    
     func calendar(_ calendar: FSCalendar, titleFor date: Date) -> String? {
         return self.gregorian.isDateInToday(date) ? ":)" : nil
     }
@@ -174,9 +178,7 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     func maximumDate(for calendar: FSCalendar) -> Date {
         return self.formatter.date(from: "2018/03/30")!
     }
-    
 
-    //display events:
     func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
         let dateString = self.formatter.string(from: date)
         if self.datesWithEvent.contains(dateString) {
@@ -194,12 +196,8 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     
-    // MARK:- FSCalendarDelegate
-    
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        //print("-------------change page to \(self.formatter.string(from: calendar.currentPage))")
     }
-
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
@@ -209,8 +207,9 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
             calendar.setCurrentPage(date, animated: true)
         }
         //pass to table view:
-        selected = dateSelected
+        self.selected = dateSelected
         fetchTodayEvent()
+        self.tableView.reloadData()
 
     }
     
@@ -219,100 +218,17 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         self.view.layoutIfNeeded()
     }
     
-    
-    //delete the events before a month ----- only used by developers!!
-//    func expiredEvents(){
-//        //fetch the events a month ago:
-//        let userCalendar = Calendar.current
-//        let monthAgo = formatter.string(from: userCalendar.date(byAdding: .day, value: -30, to: Date())!)
-//        print("a month ago is \(monthAgo)")
-//        
-//        events = []
-//        let ref = FIRDatabase.database().reference()
-//        ref.child("Events").queryOrdered(byChild: "date").observe(.childAdded, with: { (snapshot) in
-//            
-//            if let dictionary = snapshot.value as? [String: Any] {
-//                
-//                let eventNow = Event()
-//                eventNow.eventID = snapshot.key
-//                
-//                eventNow.setValuesForKeys(dictionary)
-//                let dateString = eventNow.date
-//                if (dateString! <= monthAgo){
-//                    print("delete this \(dateString!)")
-//                    print("delete this \(eventNow.eventID!)")
-//
-//                    let eid = eventNow.eventID!
-//                    
-//                    //delete in events:
-//                    FIRDatabase.database().reference().child("Events").child(eid).removeValue(
-//                        completionBlock: { (error, refer) in
-//                            if error != nil {
-//                                print("error removing")
-//                            } else {
-//                                print(refer)
-//                                print("Child Removed Correctly")
-//                            }
-//                    })
-//                    
-//                    //delete in Participants:
-//                    FIRDatabase.database().reference().child("Participants").observe(.childAdded, with: { (snapshot) in
-//                        
-//                        FIRDatabase.database().reference().child("Participants").child(snapshot.key).child(eid).removeValue(
-//                            completionBlock: { (error, refer) in
-//                                if error != nil {
-//                                    print("error removing")
-//                                } else {
-//                                    print(refer)
-//                                    print("Child Removed Correctly")
-//                                }
-//                        })
-//                    })
-//                }
-//            }
-//        },withCancel: nil)
-//    }
-
  
-    func fetchTodayEvent() {
-        //reset events array
-        events = []
-        let ref = FIRDatabase.database().reference()
-        ref.child("Events").queryOrdered(byChild: "date").queryEqual(toValue: "\(selected )").observe(.childAdded, with: { (snapshot) in
-            
-            if let dictionary = snapshot.value as? [String: Any] {
-                
-                let eventNow = Event()
-                eventNow.eventID = snapshot.key
-                
-                // If you use this setter, the app will crash IF the class properties don't exactly match up with the firebase dictionary keys
-                
-                eventNow.setValuesForKeys(dictionary)
-                self.events.append(eventNow)
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        },withCancel: nil)
-        
-        
-        // Update table if no events for today:
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
     
     ///MARK - table view for search bar
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
             return filteredEvents.count
         }
-        return events.count
+        return eventsTable.count
     }
     
   
-   
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
@@ -321,60 +237,41 @@ class ViewCalendarController: UIViewController, UITableViewDataSource, UITableVi
         if searchController.isActive && searchController.searchBar.text != "" {
             event = filteredEvents[indexPath.row]
         } else {
-            event = events[indexPath.row]
+            event = eventsTable[indexPath.row]
         }
+        
+        cell.accessoryView = nil
+        
+        for rEvent in self.recommendationEvents {
+            if (rEvent.eventID == event.eventID){
+                cell.accessoryView = UIImageView(image:UIImage(named:"R_icon")!)
+            }
+        }
+            
+        
+        
         cell.textLabel?.text = event.title
         cell.detailTextLabel?.text = event.time
+        
         return cell
     }
-    
-    
-    //MARK: filter and search bar
-    //TODO: implement time of day search
-    func filterEventsForSearch(searchText: String, scope: String = "All") {
-        
-        filteredEvents = events.filter { event in
-            
-            let timeMatch = (scope == "All") || (event.timeOfDay == scope)
-            
-            print("event-----------------------", event.title)
-            print("event.timeofDay-------------", event.timeOfDay)
-            print("scope-----------------------", scope)
-            print("time match-------------------", timeMatch)
-            
-            return timeMatch && (event.title?.lowercased().contains(searchText.lowercased()))!
-        }
-        tableView.reloadData()
-        
-        print(filteredEvents)
-    }
-    
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        
-        let searchBar = searchController.searchBar
-        
-        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        print("--------------------------scope", scope)
-        
-        filterEventsForSearch(searchText: searchController.searchBar.text!, scope: scope)
-    }
 
-    
     
     // view event details:
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if events.count != 0 {
+        if eventsTable.count != 0 {
             
-            let cellEvent = self.events[indexPath.row]
+            let cellEvent = self.eventsTable[indexPath.row]
 
             let segueEventView = storyboard?.instantiateViewController(withIdentifier: "ViewEvent_ID") as! ViewEventDetailController
             segueEventView.uniqueEvent = cellEvent
             present(segueEventView, animated: true, completion: nil)
         }
 }
-
+    
+//-----------------------------------
+//define the event cells:
 class EventCell: UITableViewCell{
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -387,8 +284,7 @@ class EventCell: UITableViewCell{
   }
 }
 
-
-//MARK: UIColor
+//MARK: more extensions:
 
 extension UIColor {
     
@@ -402,7 +298,7 @@ extension UIColor {
             alpha: alpha
         )
     }
-    }
+}
 
 extension ViewCalendarController: UISearchResultsUpdating {
     
@@ -417,7 +313,6 @@ public func updateSearchResults(for searchController: UISearchController) {
 
     }
 }
-
 
 
 extension ViewCalendarController: UISearchBarDelegate {

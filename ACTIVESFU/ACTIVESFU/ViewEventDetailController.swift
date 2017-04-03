@@ -82,27 +82,21 @@ class ViewEventDetailController: UIViewController {
             }
         },withCancel: nil)
     }
-    
+
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        //connect to DB:
-        self.creatorID = self.uniqueEvent.uid
-        fetchCreator()
     }
     
-    //refresh content shown:
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        setupUI()
-    }
     
     //prepare data:
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
         fetchEvent()
+        //connect to DB:
+        self.creatorID = self.uniqueEvent.uid
+        fetchCreator()
+        setupUI()
     }
     
     func setupUI(){

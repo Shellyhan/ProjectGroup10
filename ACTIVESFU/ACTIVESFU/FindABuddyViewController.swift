@@ -10,7 +10,7 @@
 //
 //  Bugs:
 //  Make sure suggest users are NOT buddies
-//
+//  Users should dissapear if I swipe no
 //
 //
 //  Changes:
@@ -78,6 +78,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     }
     
 
+    //Get all new users
     func fetchAllBuddiesInDatabase() {
 
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
@@ -119,6 +120,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         })
     }
   
+    //Get my survey results, compare with other users
     func fetchSurveyResults(){
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child("\(uid!)").observe(.value, with: {
@@ -228,7 +230,11 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userAtRow = userFormatInDatabase[indexPath.row]
         print("segue here")
-        
+        if let profileSegue = self.storyboard?.instantiateViewController(withIdentifier: "publicProfile") as? PublicProfileViewController {
+            profileSegue.user = userAtRow
+            let navController = UINavigationController(rootViewController: profileSegue)
+            present(navController, animated: true, completion: nil)
+        }
     }
     
     
