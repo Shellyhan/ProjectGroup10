@@ -228,7 +228,11 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userAtRow = userFormatInDatabase[indexPath.row]
         print("segue here")
-        
+        if let profileSegue = self.storyboard?.instantiateViewController(withIdentifier: "publicProfile") as? PublicProfileViewController {
+            profileSegue.user = userAtRow
+            let navController = UINavigationController(rootViewController: profileSegue)
+            present(navController, animated: true, completion: nil)
+        }
     }
     
     
