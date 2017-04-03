@@ -11,7 +11,8 @@ target 'ACTIVESFU' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'FSCalendar'
-  pod GTMSessionFetcher/Core 😊 1.1.9), GTMSessionFetcher/Core (~> 1.1)
+  pod 'GTMSessionFetcher'
+  pod 'Charts', '~> 3.0.2'
   
 
   target 'ACTIVESFUTests' do
