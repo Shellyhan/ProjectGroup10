@@ -1,4 +1,7 @@
 PODS:
+  - Charts (3.0.2):
+    - Charts/Core (= 3.0.2)
+  - Charts/Core (3.0.2)
   - Firebase/Auth (3.14.0):
     - Firebase/Core
     - FirebaseAuth (= 3.1.1)
@@ -45,6 +48,7 @@ PODS:
     - GTMSessionFetcher/Core (= 1.1.9)
 
 DEPENDENCIES:
+  - Charts (~> 3.0.2)
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -53,6 +57,7 @@ DEPENDENCIES:
   - GTMSessionFetcher
 
 SPEC CHECKSUMS:
+  Charts: 236d6ccdd0ce6feae151d89e829a7397381a21fd
   Firebase: 85a581fb04e44f63ae9f4fbc8d6dabf4a4c18653
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
   FirebaseAuth: cc8a1824170adbd351edb7f994490a3fb5c18be6
@@ -64,6 +69,6 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
 
-PODFILE CHECKSUM: 8a676bc67f84a5b811ef84940092a7419cb994d2
+PODFILE CHECKSUM: a5287e58b65497070fd17ad893d375d4c0d8b811
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0
