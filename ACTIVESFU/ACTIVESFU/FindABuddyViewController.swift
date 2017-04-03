@@ -37,7 +37,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     let cell = "cell"
     var userFormatInDatabase = [User]()
-    
+    var myBuddies = [String]()
+    var seenUsers = [String]()
     var suggestedUsers = [User]()
     
     //User's survey results
@@ -46,23 +47,21 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     var myActivity = [String]()
     var myLevel = [String]()
     
-
-    
     var firebaseReference: FIRDatabaseReference!
     var uid = FIRAuth.auth()?.currentUser?.uid
     var ref = FIRDatabase.database().reference()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.register(Cell.self, forCellReuseIdentifier: cell)
+        fetchAllBuddiesInDatabase()
         self.fetchSurveyResults()
-        self.fetchAllBuddiesInDatabase()
-        
+        self.fetchAllUsersInDatabase()
+
     }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -77,43 +76,58 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-
-    //Get all new users
     func fetchAllBuddiesInDatabase() {
+        
+        print("Fetching...")
+        //Look in the user's buddy list
+        ref.child("Users").child(uid!).child("Buddies").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            //enumerate across all buddies in the buddy list
+            for userBuddies in snapshot.children.allObjects as! [FIRDataSnapshot] {
+                
+                //if the value is 1, then the user is blocked
+                if userBuddies.value as? Int == 0 {
+                    
+                    //search through the user list to find the buddy
+                    self.ref.child("Users").observe(.childAdded, with: { (snapshotBuddies) in
+                        
+                        if snapshotBuddies.key == userBuddies.key {
+                            
+                            //add it to the dictionary array
+                            if let dictionary = snapshotBuddies.value as? [String: Any] {
+                                
+                               let buddyID = snapshotBuddies.key
+                                self.myBuddies.append(buddyID)
+                                
+                            }
+                        }
+                    }, withCancel: nil)
+                }
+            }
+        }, withCancel: nil)
+    }
 
+    
+    //Get all new users
+    func fetchAllUsersInDatabase() {
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
             var seenUIDS = [String]()
         
-            for userBuddies in snapshot.children.allObjects as! [FIRDataSnapshot] {
+            for _ in snapshot.children.allObjects as! [FIRDataSnapshot] {
                 
-                            if let dictionary = snapshot.value as? [String: Any] {
+                if let dictionary = snapshot.value as? [String: Any] {
                                 
-                                let singleUserInDatabase = User()
-                                singleUserInDatabase.id = snapshot.key
+                    let singleUserInDatabase = User()
+                    singleUserInDatabase.id = snapshot.key
                                 
-                                print("singleuser.id--------", snapshot.key)
+                    let name = dictionary["user"] as! String
                                 
-                                let name = dictionary["user"] as! String
-                                print("name:", name)
+                    singleUserInDatabase.user = name
                                 
-                                singleUserInDatabase.user = name
-                                
-                                // This crashes: the class properties don't exactly match up with the firebase dictionary keys
-                                
-                               // singleUserInDatabase.setValuesForKeys(dictionary)
-                                
-                                if seenUIDS.contains(singleUserInDatabase.id!) || singleUserInDatabase.id == self.uid{
-                                    print("duplicate or myself----", singleUserInDatabase.id!)
-                                }
-                                else {
-                                    self.userFormatInDatabase.append(singleUserInDatabase)
-                                    seenUIDS.append(singleUserInDatabase.id!)
-                                }
-                                
-                                // This will crash because of background thread, so the dispatch fixes it
-                                DispatchQueue.main.async {
+                    if !seenUIDS.contains(singleUserInDatabase.id!) && !(singleUserInDatabase.id! == self.uid) {
                                     
-                            //self.tableView.reloadData()
+                        self.userFormatInDatabase.append(singleUserInDatabase)
+                        seenUIDS.append(singleUserInDatabase.id! as! String)
                     }
                 }
             }
@@ -151,14 +165,13 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                     self.fetchCommonInterests(interestType: "DaysAvail", interestArray: self.myDays)
                 }
             }
-            
-         self.tableView.reloadData()
+        
         })
     }
     
 
     func fetchCommonInterests(interestType: String, interestArray: [String]) {
-        var seenUsers = [String]()
+
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("\(interestType)").observeSingleEvent(of: .value, with: {
             snapshot in
@@ -180,15 +193,27 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                             suggestedUser.interests.insert(item)
                             suggestedUser.id = userWithInterest
                             
+
                             //Make sure we don't have any duplicates or recommend myself
-                            if seenUsers.contains(suggestedUser.id!) || userWithInterest == self.uid {
+                            if self.seenUsers.contains("\(suggestedUser.id!)") || userWithInterest == self.uid || self.myBuddies.contains("\(suggestedUser.id!)") {
+                                print("Does not meet criteria", suggestedUser.id!)
                                 
                             }
                             else {
+                                
+                                print("-------------------------------")
+                                print("user id", suggestedUser.id!)
+                                print("buddies", self.myBuddies)
+                                print("seen users", self.seenUsers)
+                                print("i am unique", suggestedUser.id!)
+                                print("-----self.myBuddies.contains(suggestedUser.id!)?", self.myBuddies.contains(suggestedUser.id!))
+                                print("------seenUsers.contains(suggestedUser.id!)?", self.seenUsers.contains(suggestedUser.id!))
+                                print("----userWithInterest == self.uid", userWithInterest == self.uid)
+                                print("-------------------------------")
                                 self.suggestedUsers.append(suggestedUser)
-                                seenUsers.append(suggestedUser.id!)
                             }
-                      }
+                             self.seenUsers.append(suggestedUser.id!)
+                        }
                     }
                   }
                 }
@@ -201,7 +226,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     // MARK: UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userFormatInDatabase.count
+        return self.suggestedUsers.count
         
     }
     
@@ -213,7 +238,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         tableCell.textLabel?.textColor = UIColor.white
         tableCell.detailTextLabel?.textColor = UIColor.white
         
-        let userAtRow = userFormatInDatabase[indexPath.row]
+        let userAtRow = self.suggestedUsers[indexPath.row]
         tableCell.textLabel?.text = userAtRow.user!
         tableCell.detailTextLabel?.text = "\(userAtRow.interests.joined(separator: ", "))"
         
@@ -228,7 +253,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let userAtRow = userFormatInDatabase[indexPath.row]
+        let userAtRow = self.suggestedUsers[indexPath.row]
         print("segue here")
         if let profileSegue = self.storyboard?.instantiateViewController(withIdentifier: "publicProfile") as? PublicProfileViewController {
             profileSegue.user = userAtRow

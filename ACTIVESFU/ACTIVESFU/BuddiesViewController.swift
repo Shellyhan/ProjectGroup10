@@ -116,7 +116,6 @@ class BuddiesViewController: UITableViewController{
     
     //MARK: UITableViewController
     
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()

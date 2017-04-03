@@ -8,7 +8,7 @@
 //  match eachother.
 //
 //  Bugs:
-//  User profile is not scaled down
+//  User profile is not scaled down, ends up being oddly zoomed 
 //
 //
 //  Changes:
