@@ -39,14 +39,12 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     let activities = ["Badminton", "Basketball", "Climbing", "Cycling", "Hiking", "Gym", "Tennis", "Yoga", "Other"]
     
     var selectedLocation = "Gym"
-    var selectedPrivacy = "Private"
     var selectedActivity = "Badminton"
     
     
     
     @IBOutlet weak var activityPicker: UIPickerView!
     @IBOutlet weak var timePicker: UIDatePicker!
-    @IBOutlet weak var privacyPicker: UIPickerView!
     @IBOutlet weak var locationPicker: UIPickerView!
     @IBOutlet weak var createEventTitle: UILabel!
     @IBOutlet weak var skipBackButton: UIBarButtonItem!
@@ -154,8 +152,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
             "date": dateIDCreate,
             "time": timeString,
             "location": location,
-            "timeOfDay": timeOfDay,
-            "privacy": selectedPrivacy] as [String : Any]
+            "timeOfDay": timeOfDay] as [String : Any]
         
         let eventUpdates = ["\(EventKey)": eventContent]
         EventRef.updateChildValues(eventUpdates)
@@ -200,8 +197,6 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         }
         
         //set up test fields:
-        self.privacyPicker.dataSource = self
-        self.privacyPicker.delegate = self
         
         self.locationPicker.dataSource = self
         self.locationPicker.delegate = self
@@ -210,8 +205,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         self.activityPicker.delegate = self
         
         locationPicker.tag = 0
-        privacyPicker.tag = 1
-        activityPicker.tag = 2
+        activityPicker.tag = 1
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -238,8 +232,6 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         case 0:
             return locations.count
         case 1:
-            return privacies.count
-        case 2:
             return activities.count
         default:
             return 1
@@ -252,8 +244,6 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         case 0:
             return locations[row]
         case 1:
-            return privacies[row]
-        case 2:
             return activities[row]
         default:
             return ""
@@ -262,21 +252,16 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        let tag = pickerView.tag
         switch (pickerView.tag) {
             
         case 0:
             selectedLocation = locations[row]
             break
         case 1:
-            selectedPrivacy = privacies[row]
-            break
-        case 2:
             selectedActivity = activities[row]
             break
         default:
             selectedLocation = locations[0]
-            selectedPrivacy = privacies[0]
             selectedActivity = activities[0]
             break
         }

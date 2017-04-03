@@ -10,7 +10,7 @@
 //
 //  Bugs:
 //  Make sure suggest users are NOT buddies
-//
+//  Users should dissapear if I swipe no
 //
 //
 //  Changes:

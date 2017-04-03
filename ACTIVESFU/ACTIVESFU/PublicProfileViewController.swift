@@ -86,6 +86,14 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
     }
 
 
+    @IBAction func dislikeButtonPressed(_ sender: Any) {
+        
+    }
+    
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        
+    }
     
     
     override func viewDidLoad() {

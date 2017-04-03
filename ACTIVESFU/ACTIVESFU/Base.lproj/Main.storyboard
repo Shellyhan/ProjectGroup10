@@ -239,11 +239,17 @@
                                 <rect key="frame" x="16" y="605" width="61" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="nope"/>
+                                <connections>
+                                    <action selector="dislikeButtonPressed:" destination="Uax-iu-vmR" eventType="touchUpInside" id="TYe-SC-XWl"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lct-jF-dFE">
                                 <rect key="frame" x="298" y="605" width="61" height="54"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button" image="Like"/>
+                                <connections>
+                                    <action selector="likeButtonPressed:" destination="Uax-iu-vmR" eventType="touchUpInside" id="6Gk-Lm-f1g"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Favourite activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PYO-Gl-kUL">
                                 <rect key="frame" x="30" y="311" width="130" height="21"/>
@@ -409,7 +415,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="twF-6a-PFj" id="IpQ-Sg-2l4">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -663,10 +669,6 @@
                                     <!--2017-03-05 20:48:42 +0000-->
                                 </date>
                             </datePicker>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0bA-SJ-fwF">
-                                <rect key="frame" x="16" y="542" width="333" height="64"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ZY-4o-TqF">
                                 <rect key="frame" x="260" y="211" width="99" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -675,13 +677,6 @@
                                     <action selector="bookFacilityButton:" destination="tS1-Cq-RBn" eventType="touchUpInside" id="47M-of-rZl"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Privacy:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMJ-iz-LOp">
-                                <rect key="frame" x="16" y="526" width="61" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ut-JX-f4k">
                                 <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -745,7 +740,6 @@
                         <outlet property="createEventButtonText" destination="7ut-JX-f4k" id="0gO-0V-vkJ"/>
                         <outlet property="createEventTitle" destination="Pef-fm-PrA" id="6OI-HF-S1C"/>
                         <outlet property="locationPicker" destination="amV-vM-nz3" id="3IY-sr-a3u"/>
-                        <outlet property="privacyPicker" destination="0bA-SJ-fwF" id="yaY-fG-PZI"/>
                         <outlet property="skipBackButton" destination="1WG-kb-kHA" id="xLL-vk-ulh"/>
                         <outlet property="timePicker" destination="TkQ-n6-POy" id="tKR-wH-M3t"/>
                     </connections>
@@ -988,7 +982,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kEa-nQ-6oc" id="jWe-sk-RiP">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
