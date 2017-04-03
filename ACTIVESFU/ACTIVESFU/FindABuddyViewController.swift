@@ -78,6 +78,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     }
     
 
+    //Get all new users
     func fetchAllBuddiesInDatabase() {
 
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
@@ -119,6 +120,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         })
     }
   
+    //Get my survey results, compare with other users
     func fetchSurveyResults(){
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child("\(uid!)").observe(.value, with: {

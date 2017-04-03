@@ -8,12 +8,12 @@
 //  match eachother.
 //
 //  Bugs:
-//  
+//  User profile is not scaled down
 //
 //
 //  Changes:
+//  Shows common interests
 //  
-//
 //
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
@@ -35,20 +35,15 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
     
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dislikeButton: UIButton!
-    
-    //User passed from segue
+
     var user: User!
-    
-    
     
     func setupInformation() {
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
         
         usernameText.textAlignment = .center
-        
-        if let uid = user.id {
-            databaseRef.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+        databaseRef.child("Users").child(user.id!).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dict = snapshot.value as? [String: AnyObject] {
                     self.usernameText.text = dict["user"] as? String
                    
@@ -56,20 +51,48 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
                     
                         self.profileImage.loadImageUsingCacheWithUrlString(urlString: profileImageURL)
                     }
-                }
-            })
-            
-        }
+            }
+        })
     }
+    
+    func fetchSurveyResults(){
+        let databaseRef = FIRDatabase.database().reference()
+        databaseRef.child("Users").child("\(user.id!)").observe(.value, with: {
+            snapshot in
+            
+            for _ in snapshot.children.allObjects {
+                if let snapshotValue = snapshot.value as? NSDictionary {
+                    
+                    let myAvailability = snapshotValue.object(forKey: "DaysAvail") as! NSDictionary
+                    let textForDay = myAvailability.allKeys as! [String]
+                    self.daysText.text = textForDay.joined(separator: ", ")
+                    
+                    let myTimeOfDay = snapshotValue.object(forKey: "TimeOfDay") as! NSDictionary
+                    let textForTime = myTimeOfDay.allKeys as! [String]
+                    self.timeText.text = textForTime.joined(separator: ", ")
+                    
+                    let myFavActivity = snapshotValue.object(forKey: "FavActivity") as! NSDictionary
+                    let textForActivity = myFavActivity.allKeys as! [String]
+                    self.activityText.text = textForActivity.joined(separator: ", ")
+                    
+                    let fitnessLevel = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
+                    let textForFitness = fitnessLevel.allKeys as! [String]
+                    self.experienceText.text = textForFitness.joined(separator: ", ")
+                    
+                }
+            }
+            
+        })
+    }
+
 
     
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        print(usernameText.text!)
         usernameText.delegate = self
         setupInformation()
+        fetchSurveyResults()
     }
     
 
