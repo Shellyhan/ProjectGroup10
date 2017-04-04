@@ -11,7 +11,7 @@
 //  Bugs:
 //  Make sure suggest users are NOT buddies
 //  Users should dissapear if I swipe no
-//  Some new users have no info in table view ??
+//  After clicking like, the user shows in suggested users until the user exits and re-shakes
 //
 //  Changes:
 //  Changed from location based to similar interests
@@ -60,12 +60,12 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         fetchAllBuddiesInDatabase()
         self.fetchSurveyResults()
         self.fetchAllUsersInDatabase()
-
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {
         
@@ -75,6 +75,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
             self.tableView.reloadData()
         }
     }
+
     
     func fetchAllBuddiesInDatabase() {
         
@@ -110,6 +111,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     //Get all new users
     func fetchAllUsersInDatabase() {
+    
         FIRDatabase.database().reference().child("Users").observe(.childAdded, with: { (snapshot) in
             var seenUIDS = [String]()
         
@@ -127,22 +129,22 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                     if !seenUIDS.contains(singleUserInDatabase.id!) && !(singleUserInDatabase.id! == self.uid) {
                                     
                         self.userFormatInDatabase.append(singleUserInDatabase)
-                        seenUIDS.append(singleUserInDatabase.id! as! String)
+                        seenUIDS.append(singleUserInDatabase.id! )
                     }
                 }
             }
         })
+
     }
   
     //Get my survey results, compare with other users
     func fetchSurveyResults(){
+        
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child("\(uid!)").observe(.value, with: {
             snapshot in
             
             for childSnap in snapshot.children.allObjects {
-                
-                let snap = childSnap as! FIRDataSnapshot
                 
                 if let snapshotValue = snapshot.value as? NSDictionary {
                     
@@ -192,27 +194,18 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                             
                             suggestedUser.interests.insert(item)
                             suggestedUser.id = userWithInterest
-                            
 
                             //Make sure we don't have any duplicates or recommend myself
+                            
                             if self.seenUsers.contains("\(suggestedUser.id!)") || userWithInterest == self.uid || self.myBuddies.contains("\(suggestedUser.id!)") {
-                                print("Does not meet criteria", suggestedUser.id!)
+                                
+                                //print("Does not meet criteria", suggestedUser.id!)
                                 
                             }
                             else {
-                                
-                                print("-------------------------------")
-                                print("user id", suggestedUser.id!)
-                                print("buddies", self.myBuddies)
-                                print("seen users", self.seenUsers)
-                                print("i am unique", suggestedUser.id!)
-                                print("-----self.myBuddies.contains(suggestedUser.id!)?", self.myBuddies.contains(suggestedUser.id!))
-                                print("------seenUsers.contains(suggestedUser.id!)?", self.seenUsers.contains(suggestedUser.id!))
-                                print("----userWithInterest == self.uid", userWithInterest == self.uid)
-                                print("-------------------------------")
                                 self.suggestedUsers.append(suggestedUser)
                             }
-                             self.seenUsers.append(suggestedUser.id!)
+                            self.seenUsers.append(suggestedUser.id!)
                         }
                     }
                   }
@@ -231,8 +224,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        
-        //Setup UI
+
         let tableCell = tableView.dequeueReusableCell(withIdentifier: cell, for: indexPath)
         tableCell.backgroundColor = UIColor.clear
         tableCell.textLabel?.textColor = UIColor.white
@@ -254,14 +246,14 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let userAtRow = self.suggestedUsers[indexPath.row]
-        print("segue here")
         if let profileSegue = self.storyboard?.instantiateViewController(withIdentifier: "publicProfile") as? PublicProfileViewController {
             profileSegue.user = userAtRow
+
             let navController = UINavigationController(rootViewController: profileSegue)
             present(navController, animated: true, completion: nil)
         }
     }
-    
+
     
     class Cell: UITableViewCell{
         

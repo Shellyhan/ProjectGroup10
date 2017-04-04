@@ -24,6 +24,7 @@ extension ChatLogController {
             self.blockUserHandler()
         }
         let viewProfileOption = UIAlertAction(title: "View User's Profile", style: .default) { (action) in
+            
             self.dismissView()
             print("Option to view user's profile")
         }

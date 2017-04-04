@@ -13,8 +13,8 @@
 //
 //  Changes:
 //  Shows common interests
-//  
-//
+//  Adds new buddy upon pressing like
+//  Dismisses view upon button click
 //
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
@@ -91,16 +91,26 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
         
     }
     
+    //If the user is liked, create a new buddy in firebase
     
     @IBAction func likeButtonPressed(_ sender: Any) {
-
+        
         let myUID = FIRAuth.auth()?.currentUser?.uid
         let ref = FIRDatabase.database().reference()
         let newBuddyRef = ref.child("Users").child("\(myUID!)").child("Buddies")
-        
         newBuddyRef.updateChildValues(["\(user.id!)": 0])
+        
+        /*
+         for use if find a way to refresh the view after segue
+        if let segue = self.storyboard?.instantiateViewController(withIdentifier: "FindBuddy") as? FindABuddyViewController {
+            segue.usedSegue = true
+            
+            let navController = UINavigationController(rootViewController: segue)
+            present(navController, animated: true, completion: nil)
+        }
+        */
         dismiss(animated: true, completion: nil)
-      
+        
     }
   
     

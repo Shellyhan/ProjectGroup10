@@ -102,7 +102,7 @@
         <!--FindA Buddy View Controller-->
         <scene sceneID="O6D-g5-KhU">
             <objects>
-                <viewController id="NT6-fO-uhz" customClass="FindABuddyViewController" customModule="ACTIVESFU" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FindBuddy" id="NT6-fO-uhz" customClass="FindABuddyViewController" customModule="ACTIVESFU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cDJ-sP-9ke"/>
                         <viewControllerLayoutGuide type="bottom" id="DnV-5E-Acj"/>

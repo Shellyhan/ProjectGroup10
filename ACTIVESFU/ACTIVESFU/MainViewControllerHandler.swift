@@ -30,7 +30,7 @@ extension MainViewController: CLLocationManagerDelegate {
             
             //region data: correspond to hte TestLocation.gpx in project folder!!!!
             let title = "gym"
-            let coordinate = CLLocationCoordinate2DMake(37.703026, -121.759735) //fake location
+            let coordinate = CLLocationCoordinate2DMake(49.279418, -122.922324) //fake location
             let regionRadius = 300.0
             
             //etup region tracking:
