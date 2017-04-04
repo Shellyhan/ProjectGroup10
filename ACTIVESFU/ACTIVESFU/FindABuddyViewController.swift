@@ -62,9 +62,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         self.fetchAllUsersInDatabase()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
     
     
     override func motionBegan(_ motion: UIEventSubtype, with event: UIEvent?) {

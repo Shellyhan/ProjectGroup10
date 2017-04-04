@@ -25,8 +25,12 @@ extension ChatLogController {
         }
         let viewProfileOption = UIAlertAction(title: "View User's Profile", style: .default) { (action) in
             
-            self.dismissView()
-            print("Option to view user's profile")
+            if let profileSegue = self.storyboard?.instantiateViewController(withIdentifier: "publicProfile") as? PublicProfileViewController {
+                profileSegue.hideLikeButtons = 1
+                profileSegue.user = self.user
+                let navController = UINavigationController(rootViewController: profileSegue)
+                self.present(navController, animated: true, completion: nil)
+            }
         }
         let cancelOption = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         

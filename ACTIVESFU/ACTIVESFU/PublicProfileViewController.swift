@@ -36,6 +36,8 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dislikeButton: UIButton!
 
+    var hideLikeButtons = 0
+    
     var user: User!
     
     func setupInformation() {
@@ -84,7 +86,22 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
             
         })
     }
-
+    
+    func doHideLikeButtons() {
+        
+        if hideLikeButtons == 1 {
+            
+            likeButton.isHidden = true
+            dislikeButton.isHidden = true
+            let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(dismissView))
+            navigationItem.leftBarButtonItem = backButton
+        }
+    }
+    func dismissView() {
+        
+        // BuddiesViewController().fetchAllBuddiesInDatabase()
+        dismiss(animated: true, completion: nil)
+    }
 
     @IBAction func dislikeButtonPressed(_ sender: Any) {
          dismiss(animated: true, completion: nil)
@@ -115,12 +132,11 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
   
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         usernameText.delegate = self
+        doHideLikeButtons()
         setupInformation()
         fetchSurveyResults()
     }
-    
-
-    
 }
