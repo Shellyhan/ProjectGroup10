@@ -44,7 +44,6 @@ class QuestionController: UITableViewController {
     var answerArray = Array(repeating: 0, count: 6)
     var didEditProfile = 0
     
-    
     let cellID = "cmpt276"
     let headerId = "headerId"
     
@@ -84,7 +83,6 @@ class QuestionController: UITableViewController {
             }
         }
     }
-    
     
     func userClickedContinue() {
         
@@ -137,7 +135,6 @@ class QuestionController: UITableViewController {
     
     
     //MARK: UITableViewController
-    
     
     
     override func viewDidLoad() {
@@ -269,6 +266,7 @@ class ResultsController: UIViewController {
     }()
     
     func continueToApp() {
+        
         if didResultsEditProfile == 0 {
 
         self.presentingViewController!.presentingViewController!.dismiss(animated: true, completion: nil)
@@ -394,5 +392,3 @@ struct Question {
     var answers: [String]?
     var selectedAnswerIndex: Int?
 }
-
-
