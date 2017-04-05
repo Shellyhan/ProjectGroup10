@@ -24,6 +24,7 @@
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
 import UIKit
+
 import Firebase
 import CoreLocation
 
@@ -31,6 +32,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     
     
     //MARK: Internal
+    
     
     @IBOutlet weak var directionsLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -53,6 +55,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
 
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -73,7 +76,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
 
-    
     func fetchAllBuddiesInDatabase() {
         
         print("Fetching...")
@@ -105,7 +107,6 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
         }, withCancel: nil)
     }
 
-    
     //Get all new users
     func fetchAllUsersInDatabase() {
     
@@ -131,11 +132,10 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                 }
             }
         })
-
     }
   
     //Get my survey results, compare with other users
-    func fetchSurveyResults(){
+    func fetchSurveyResults() {
         
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child("\(uid!)").observe(.value, with: {
@@ -164,10 +164,8 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                     self.fetchCommonInterests(interestType: "DaysAvail", interestArray: self.myDays)
                 }
             }
-        
         })
     }
-    
 
     func fetchCommonInterests(interestType: String, interestArray: [String]) {
 
@@ -179,43 +177,45 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
                 
                 if let snapshotValue = snapshot.value as? NSDictionary {
                     
-                    for item in interestArray{
+                    for item in interestArray {
                         let commonInterest = snapshotValue.object(forKey:"\(item)") as! NSDictionary
                         
                         // for each UID with the interest, add the interest to that user's info
                         for suggestedUser in self.userFormatInDatabase {
-                        for userWithInterest in commonInterest.allKeys as! [String]{
+                            
+                            for userWithInterest in commonInterest.allKeys as! [String] {
                         
                         //ensure that the user has the given interest
-                        if suggestedUser.id! == userWithInterest {
+                                if suggestedUser.id! == userWithInterest {
                             
-                            suggestedUser.interests.insert(item)
-                            suggestedUser.id = userWithInterest
+                                    suggestedUser.interests.insert(item)
+                                    suggestedUser.id = userWithInterest
 
                             //Make sure we don't have any duplicates or recommend myself
                             
-                            if self.seenUsers.contains("\(suggestedUser.id!)") || userWithInterest == self.uid || self.myBuddies.contains("\(suggestedUser.id!)") {
+                                    if self.seenUsers.contains("\(suggestedUser.id!)") || userWithInterest == self.uid || self.myBuddies.contains("\(suggestedUser.id!)") {
                                 
-                                //print("Does not meet criteria", suggestedUser.id!)
+                                        //print("Does not meet criteria", suggestedUser.id!)
                                 
+                                    }
+                                    else {
+                                        
+                                        self.suggestedUsers.append(suggestedUser)
+                                    }
+                                    self.seenUsers.append(suggestedUser.id!)
+                                }
                             }
-                            else {
-                                self.suggestedUsers.append(suggestedUser)
-                            }
-                            self.seenUsers.append(suggestedUser.id!)
                         }
                     }
-                  }
                 }
-              }
-           }
+             }
         })
-  
     }
 
     // MARK: UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return self.suggestedUsers.count
         
     }
@@ -242,6 +242,7 @@ class FindABuddyViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let userAtRow = self.suggestedUsers[indexPath.row]
         if let profileSegue = self.storyboard?.instantiateViewController(withIdentifier: "publicProfile") as? PublicProfileViewController {
             profileSegue.user = userAtRow
