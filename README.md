@@ -1,6 +1,6 @@
 # ACTIVE SFU: CMPT276 Group 10
 
-Version 2.0.
+Version 3.0.
 
 ACTIVE SFU strives to assist in the creation of a healthy campus community where users can build connections and maintain a healthy lifestyle - together. 
 
