@@ -101,22 +101,32 @@ Custom data structure to store chat message details.
 
 2. Initial setup
 - Survey
-- Profile page - basic implementation (photo, name)
-- Edit profile - basic implementation (edit name)
+- Profile page - photo, name, view stats
+- Edit profile - change survey results, edit name and photo
 
 3. Create event
 - Calendar - able to see which days of the month have activities, able to see a list of daily activities and their time and activity type. 
 - Facility rental - have a button to redirect to SFU’s facility rental website.
 - Create event - create a new event and select location, activity, privacy. 
+- Edit event - make changes to your event
+- Delete event - Remove event
 
 4. Joining events
 - Search events by time of day
 - Message the event creator
+- Show recommended events based on user interests
 
 5. Buddies
 - Shake to find suggested friends
 - Chat with friends
+- View common interests with buddies
+- View other user's info
 - View friends list
+- Block buddies
+
+6. Track activities
+- Location tracking to measure fitness progress
+- View how many buddies you have made, your total event hours, and the percentage of your time spent on different activity types
 
 ## Authors
 
