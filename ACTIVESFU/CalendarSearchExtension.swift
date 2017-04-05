@@ -11,7 +11,6 @@ import UIKit
 extension ViewCalendarController {
 
     //MARK: filter and search bar
-    //TODO: implement time of day search
     func filterEventsForSearch(searchText: String, scope: String = "All") {
         
         filteredEvents = events.filter { event in
@@ -40,6 +39,4 @@ extension ViewCalendarController {
         
         filterEventsForSearch(searchText: searchController.searchBar.text!, scope: scope)
     }
-
-
 }
