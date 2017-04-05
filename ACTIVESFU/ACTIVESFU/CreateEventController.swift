@@ -22,6 +22,7 @@
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
 import UIKit
+
 import Firebase
 
 class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
@@ -33,15 +34,13 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     //date passed from edit event:
     var eventToModify = Event()
     
-    //set up pickers for the changing event time
-    let privacies = ["Private", "Public"]
-    let locations = ["Gym", "Aquatics centre", "Field"]
-    let activities = ["Badminton", "Basketball", "Climbing", "Cycling", "Hiking", "Gym", "Tennis", "Yoga", "Other"]
-    
     var selectedLocation = "Gym"
     var selectedActivity = "Badminton"
     
-    
+    //set up pickers for the changing event time
+    let privacies = ["Private", "Public"]
+    let locations = ["Gym", "Aquatics centre", "Field"]
+    let activities = ["Badminton", "Basketball", "Climbing", "Cycling", "Hiking", "Gym", "Tennis", "Yoga", "Other"]  
     
     @IBOutlet weak var activityPicker: UIPickerView!
     @IBOutlet weak var timePicker: UIDatePicker!
@@ -131,15 +130,15 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
         
         let eventHour = dateFormatter.date(from: timeString)!
         
-        if (eventHour >= morning && eventHour < afternoon){
+        if (eventHour >= morning && eventHour < afternoon) {
             
             timeOfDay = "Morning"
         }
-        else if (eventHour >= afternoon && eventHour < evening){
+        else if (eventHour >= afternoon && eventHour < evening) {
             
             timeOfDay = "Afternoon"
         }
-        else if (eventHour >= evening && eventHour < night){
+        else if (eventHour >= evening && eventHour < night) {
             
             timeOfDay = "Evening"
         }
@@ -228,7 +227,8 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch (pickerView.tag){
+        
+        switch (pickerView.tag) {
         case 0:
             return locations.count
         case 1:
@@ -240,7 +240,7 @@ class CreateEventController: UIViewController, UIPickerViewDelegate, UIPickerVie
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
-        switch (pickerView.tag){
+        switch (pickerView.tag) {
         case 0:
             return locations[row]
         case 1:
