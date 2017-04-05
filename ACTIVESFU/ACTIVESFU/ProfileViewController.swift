@@ -25,10 +25,9 @@ import Firebase
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    // Variables
-    let storageRef = FIRStorage.storage().reference()
-    let databaseRef = FIRDatabase.database().reference()
-    let userDetails = User()
+    
+    //MARK: UIViewController
+    
     
     var originalUsername: String?
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -39,12 +38,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var usernameText: UITextField!
     
-    
+    let storageRef = FIRStorage.storage().reference()
+    let databaseRef = FIRDatabase.database().reference()
+    let userDetails = User()
+   
     // Buttons
-
-    //TODO: View stats for the month
-    @IBAction func viewStats(_ sender: UIButton) {
-    }
 
     @IBAction func editSurvey(_ sender: UIButton) {
         
@@ -92,10 +90,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
 
     @IBAction func saveChanges(_ sender: Any) {
+        
         saveChanges()
     }
 
     @IBAction func uploadImage(_ sender: Any) {
+        
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
@@ -105,6 +105,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     // Functions
     func setupProfile() {
+        
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
         
@@ -112,7 +113,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         if let uid = FIRAuth.auth()?.currentUser?.uid{
             databaseRef.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                                                                                        
                 if let dict = snapshot.value as? [String: AnyObject] {
+                    
                     self.usernameText.text = dict["user"] as? String
                     if let profileImageURL = dict["pic"] as? String {
                     
@@ -125,30 +128,35 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     // This function allows you to change the profile image
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]){
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         var selectedImageFromPicker: UIImage?
         
-        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage{
+        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+            
             selectedImageFromPicker = editedImage
-        }else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage{
+        }
+        else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            
             selectedImageFromPicker = originalImage
         }
-        if let selectedImage = selectedImageFromPicker{
+        if let selectedImage = selectedImageFromPicker {
             profileImage.image = selectedImage
         }
         dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
         dismiss(animated: true, completion: nil)
     }
     
-    func saveChanges(){
+    func saveChanges() {
         
         //first check if connection is available
         let connectedRef = FIRDatabase.database().reference(withPath: ".info/connected")
         connectedRef.observe(.value, with: { snapshot in
+                                            
             if let connected = snapshot.value as? Bool, connected {
 
                 self.showActivityIndicator(uiView: self.view)
@@ -156,10 +164,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 let imageName = NSUUID().uuidString
                 let storedImage = self.storageRef.child("profileImages").child("\(imageName).png")
                 
-                if let uploadData = UIImagePNGRepresentation(self.profileImage.image!){
+                if let uploadData = UIImagePNGRepresentation(self.profileImage.image!) {
                     
                     storedImage.put(uploadData, metadata: nil, completion: { (metadata, error) in
-                        if error != nil{
+                        if error != nil {
                             
                             print(error!)
                             return
@@ -196,8 +204,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
         })
     }
-    
-        
+  
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -207,6 +214,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         textField.resignFirstResponder()
         if textField.text == "" {
             usernameText.text = originalUsername
@@ -215,8 +223,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        
         originalUsername = textField.text
         textField.returnKeyType = .done
     }
-
 }
