@@ -19,6 +19,7 @@
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
 import UIKit
+
 import Firebase
 
 class PublicProfileViewController: UIViewController, UINavigationControllerDelegate, UITextFieldDelegate {
@@ -41,28 +42,33 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
     var user: User!
     
     func setupInformation() {
+        
         profileImage.layer.cornerRadius = profileImage.frame.size.width/2
         profileImage.clipsToBounds = true
         
         usernameText.textAlignment = .center
         databaseRef.child("Users").child(user.id!).observeSingleEvent(of: .value, with: { (snapshot) in
+                                                                                         
                 if let dict = snapshot.value as? [String: AnyObject] {
+                    
                     self.usernameText.text = dict["user"] as? String
                    
                     if let profileImageURL = dict["pic"] as? String {
                     
                         self.profileImage.loadImageUsingCacheWithUrlString(urlString: profileImageURL)
                     }
-            }
+                }
         })
     }
     
-    func fetchSurveyResults(){
+    func fetchSurveyResults() {
+        
         let databaseRef = FIRDatabase.database().reference()
         databaseRef.child("Users").child("\(user.id!)").observe(.value, with: {
             snapshot in
             
             for _ in snapshot.children.allObjects {
+                
                 if let snapshotValue = snapshot.value as? NSDictionary {
                     
                     let myAvailability = snapshotValue.object(forKey: "DaysAvail") as! NSDictionary
@@ -80,10 +86,8 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
                     let fitnessLevel = snapshotValue.object(forKey: "FitnessLevel") as! NSDictionary
                     let textForFitness = fitnessLevel.allKeys as! [String]
                     self.experienceText.text = textForFitness.joined(separator: ", ")
-                    
                 }
             }
-            
         })
     }
     
@@ -97,6 +101,7 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
             navigationItem.leftBarButtonItem = backButton
         }
     }
+    
     func dismissView() {
         
         // BuddiesViewController().fetchAllBuddiesInDatabase()
@@ -104,8 +109,8 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
     }
 
     @IBAction func dislikeButtonPressed(_ sender: Any) {
-         dismiss(animated: true, completion: nil)
         
+         dismiss(animated: true, completion: nil)
     }
     
     //If the user is liked, create a new buddy in firebase
@@ -116,18 +121,8 @@ class PublicProfileViewController: UIViewController, UINavigationControllerDeleg
         let ref = FIRDatabase.database().reference()
         let newBuddyRef = ref.child("Users").child("\(myUID!)").child("Buddies")
         newBuddyRef.updateChildValues(["\(user.id!)": 0])
-        
-        /*
-         for use if find a way to refresh the view after segue
-        if let segue = self.storyboard?.instantiateViewController(withIdentifier: "FindBuddy") as? FindABuddyViewController {
-            segue.usedSegue = true
-            
-            let navController = UINavigationController(rootViewController: segue)
-            present(navController, animated: true, completion: nil)
-        }
-        */
+
         dismiss(animated: true, completion: nil)
-        
     }
   
     
