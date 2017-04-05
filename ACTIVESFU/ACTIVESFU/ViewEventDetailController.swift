@@ -16,6 +16,7 @@
 //  Copyright © 2017 CMPT276 Group 10. All rights reserved.
 
 import UIKit
+
 import Firebase
 
 class ViewEventDetailController: UIViewController {
@@ -42,7 +43,6 @@ class ViewEventDetailController: UIViewController {
         
         dismiss(animated: true, completion: nil)
     }
-    
     
     func fetchCreator() {
         
@@ -84,6 +84,7 @@ class ViewEventDetailController: UIViewController {
     }
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
     }
     
@@ -130,7 +131,8 @@ class ViewEventDetailController: UIViewController {
     
     
     //skip back button:
-    func skipBack(alert: UIAlertAction){
+    func skipBack(alert: UIAlertAction) {
+        
         self.backButton(skipBackButton)
     }
     
@@ -141,14 +143,15 @@ class ViewEventDetailController: UIViewController {
         let segueEventCreate = storyboard?.instantiateViewController(withIdentifier: "CreateEvent_ID") as! CreateEventController
         segueEventCreate.eventToModify = uniqueEvent
         present(segueEventCreate, animated: true, completion: nil)
-        
     }
     
     @IBAction func DeleteEvent(_ sender: UIButton) {
         
         FIRDatabase.database().reference().child("Events").child(self.uniqueEvent.eventID!).removeValue(
             completionBlock: { (error, refer) in
+                              
                 if error != nil {
+                    
                     print("error removing")
                 } else {
                     print(refer)
@@ -160,9 +163,12 @@ class ViewEventDetailController: UIViewController {
             
             FIRDatabase.database().reference().child("Participants").child(snapshot.key).child(self.uniqueEvent.eventID!).removeValue(
                 completionBlock: { (error, refer) in
+                                  
                     if error != nil {
+                        
                         print("error removing")
                     } else {
+                        
                         print(refer)
                         print("Child Removed Correctly")
                     }
@@ -174,7 +180,6 @@ class ViewEventDetailController: UIViewController {
         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: skipBack)
         alertController.addAction(defaultAction)
         present(alertController, animated: true, completion: nil)
-        
     }
     
     @IBAction func JoinEvent(_ sender: UIButton) {
@@ -194,18 +199,18 @@ class ViewEventDetailController: UIViewController {
     }
     
     @IBAction func ContactCreator(_ sender: UIButton) {
+        
         print("---------go to chat with \(self.thisCreator.id)")
         showChatControllerForUser(self.thisCreator)
-        
     }
     
     func showChatControllerForUser(_ creatorToPass: User) {
         
         if let chatLogSegue = self.storyboard?.instantiateViewController(withIdentifier: "chatLogID") as? ChatLogController {
+            
             chatLogSegue.user = creatorToPass
             let navController = UINavigationController(rootViewController: chatLogSegue)
             present(navController, animated: true, completion: nil)
         }
-    }
-    
+    } 
 }
