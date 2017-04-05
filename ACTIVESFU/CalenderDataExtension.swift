@@ -28,26 +28,16 @@ extension ViewCalendarController {
             switch self.userPref {
                 case self.options[0]:
                     self.matchingLocation.append(self.locations[0])
-                    print("-----------------1")
                 case self.options[1]:
-                    //self.matchingLocation.append(self.locations[0])
                     self.matchingLocation.append(self.locations[2])
-                    print("-----------------2")
                 case self.options[2]:
-                    self.matchingLocation.append(self.locations[0])
-                    print("-----------------3")
+                    self.matchingLocation.append(self.locations[0]
                 case self.options[3]:
                     self.matchingLocation.append(self.locations[1])
-                    print("-----------------4")
-            //sself.matchingLocation.append(self.locations[2])
                 default:
                     self.matchingLocation = self.locations
             }
-            
-        
-         print("start to fetch event \(self.matchingLocation)")
 
-        
         ref.child("Events").queryOrdered(byChild: "date").observe(.childAdded, with: {(snapshot) in
             
             if let dictionary = snapshot.value as? [String: Any] {
@@ -61,18 +51,12 @@ extension ViewCalendarController {
                 
                 //match the location:
                 if (self.matchingLocation.contains(eventNow.location!)){
-                    print("here is \(eventNow.location!)")
                     self.datesWithRecommedation.append(eventNow.date!)
-                }
-                
+                }                
             }},withCancel: nil)
-            
-            
-        })
-        
+        })       
     }
-
-    
+   
     func fetchTodayEvent() {
         
         //reset events array
@@ -106,26 +90,17 @@ extension ViewCalendarController {
             switch self.userPref {
             case self.options[0]:
                 self.matchingLocation.append(self.locations[0])
-                print("-----------------1")
             case self.options[1]:
-                //self.matchingLocation.append(self.locations[0])
                 self.matchingLocation.append(self.locations[2])
-                print("-----------------2")
             case self.options[2]:
                 self.matchingLocation.append(self.locations[0])
-                print("-----------------3")
             case self.options[3]:
                 self.matchingLocation.append(self.locations[1])
-                print("-----------------4")
-                //sself.matchingLocation.append(self.locations[2])
             default:
                 self.matchingLocation = self.locations
-            }
-            
-        })
-            
-        //["Gym", "Aquatics centre", "Field"] ------- ["Free weight training", "Cardiovascular training", "Yoga", "Sports"]
-        
+            } 
+        })           
+        //["Gym", "Aquatics centre", "Field"] ------- ["Free weight training", "Cardiovascular training", "Yoga", "Sports"]     
     }
 
     
