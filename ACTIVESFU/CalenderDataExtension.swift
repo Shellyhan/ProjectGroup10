@@ -18,7 +18,7 @@ extension ViewCalendarController {
         events = []
         let ref = FIRDatabase.database().reference()
         let userUid = FIRAuth.auth()?.currentUser?.uid
-        //get user reference:
+        //get user's reference:
         self.matchingLocation = []
         
         ref.child("Users").child(userUid!).child("FavActivity").observe(.childAdded, with: { (snapshot) in
@@ -31,13 +31,13 @@ extension ViewCalendarController {
                 case self.options[1]:
                     self.matchingLocation.append(self.locations[2])
                 case self.options[2]:
-                    self.matchingLocation.append(self.locations[0]
+                    self.matchingLocation.append(self.locations[0])
                 case self.options[3]:
                     self.matchingLocation.append(self.locations[1])
                 default:
                     self.matchingLocation = self.locations
             }
-
+        //fetch from db to get the matching events:
         ref.child("Events").queryOrdered(byChild: "date").observe(.childAdded, with: {(snapshot) in
             
             if let dictionary = snapshot.value as? [String: Any] {
@@ -82,7 +82,7 @@ extension ViewCalendarController {
         let userUid = FIRAuth.auth()?.currentUser?.uid
         
         self.matchingLocation = []
-        
+        //matching user's preference:
         ref.child("Users").child(userUid!).child("FavActivity").observe(.childAdded, with: { (snapshot) in
             self.userPref = snapshot.key
             print(self.userPref)
