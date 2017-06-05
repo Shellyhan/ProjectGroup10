@@ -1,6 +1,6 @@
-# ACTIVE SFU: CMPT276 Group 10
+# ACTIVE SFU
 
-Version 3.0.
+Version 3.0. (School Project)
 
 ACTIVE SFU strives to assist in the creation of a healthy campus community where users can build connections and maintain a healthy lifestyle - together. 
 
@@ -130,7 +130,7 @@ Custom data structure to store chat message details.
 
 ## Authors
 
-Bronwyn Biro, Carber Zhang, Nathan Cheung, Ryan Brown, Xue (Shelly) Han.
+Bronwyn Biro, Carber Zhang, Nathan Cheung, Ryan Brown, Shelly (Xue) Han.
 
 
 ## Website 
